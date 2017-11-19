@@ -29,7 +29,7 @@ p > span {
 
     /* Clip Background Image */
 
-    background: url(./img/animated_text_fill.png) repeat-y;
+    background: url(../img/animated_text_fill.png) repeat-y;
     -webkit-background-clip: text;
     background-clip: text;
 
