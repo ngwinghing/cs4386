@@ -1,0 +1,55 @@
+.control {
+    width:1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#gameArea {
+    background-color: antiquewhite;
+    width: 1000px;
+    height: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#timer {
+    margin-left: auto;
+    margin-right: auto;
+    background-color: darkslategrey;
+    width: 600px;
+    height: 30px;
+}
+
+#dollar {
+    float:right;
+    background-color: gold;
+    width: 60px;
+    height: 30px;
+}
+
+.tab {
+    background-color: gold;
+    height:20px;
+    border: none;
+    color: black;
+    padding: 3px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+#panel {
+    background-color: midnightblue;
+    height: 180px;
+}
+
+#panel li {
+    background-color: aliceblue;
+    width: 100px;
+    height: 100px;
+    margin-left: 20px;
+    float: left;
+}

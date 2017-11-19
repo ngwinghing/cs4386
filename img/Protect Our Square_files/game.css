@@ -1,0 +1,22 @@
+#gameArea {
+    background-color: antiquewhite;
+    width: 1000px;
+    height: 400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#timer {
+    margin-left: auto;
+    margin-right: auto;
+    background-color: darkslategrey;
+    width: 600px;
+    height: 30px;
+}
+
+#dollar {
+    float:right;
+    background-color: gold;
+    width: 60px;
+    height: 30px;
+}
