@@ -5,7 +5,7 @@
 }
 
 #gameArea {
-    background-color: antiquewhite;
+    background-color: #AB8F6A;
     width: 1000px;
     height: 400px;
     margin-left: auto;
@@ -42,12 +42,15 @@
 }
 
 #panel {
-    background-color: midnightblue;
+    background-color: #110700;
+    border: 1px solid gold;
+    border-radius: 4px;
     height: 180px;
 }
 
 #panel li {
-    background-color: aliceblue;
+    background-color: #21070A;
+    border: 2px solid gold;
     width: 100px;
     height: 100px;
     margin-left: 20px;
