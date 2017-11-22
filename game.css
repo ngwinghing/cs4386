@@ -1,0 +1,13 @@
+canvas {
+	float: left;
+}
+
+#map {
+	background-image: url("img/bg.jpg");
+}
+
+#toolbar {
+	margin-left: 2%;
+	background-color: black;
+	/*border-top: solid black 5px;*/
+}
