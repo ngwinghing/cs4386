@@ -7,6 +7,22 @@
     <link rel="stylesheet" type="text/css" href="../css/main.css">
     <link rel="stylesheet" type="text/css" href="../css/game.css">
     <link href="https://fonts.googleapis.com/css?family=Enriqueta|Viga" rel="stylesheet">
+
+    <script>
+        function allowDrop(event) {
+            event.preventDefault();
+        }
+
+        function drag(event) {
+            event.dataTransfer.setData("text", event.target.id);
+        }
+
+        function drop(event) {
+            event.preventDefault();
+            var data = event.dataTransfer.getData("text");
+            event.target.appendChild(document.getElementById(data));
+        }
+    </script>
 </head>
 <body>
 <div class="container">
@@ -20,19 +36,18 @@
         </div>
 
         <div id="panel">
-        <div class="tab">Defense</div>
-        <div class="tab">Attack</div>
+        <div class="btn-orange">Defense</div>
+        <div class="btn-inactive">Attack</div>
             <ul>
                 <li>
-                    <div class="span-header">
-                    <span>Water Gun</span>
-                    </div>
+                    <div class="item round blue">
+                    <div class="item-header">Water Gun </div>
                     <img src="../img/water-gun.png"/>
+                        <div class="item-time">
+                            <div class="time-spend"></div>
+                        </div>
+                    </div>
                 </li>
-
-                <li>item</li>
-                <li>item</li>
-                <li>item</li>
             </ul>
         </div>
     </div>
