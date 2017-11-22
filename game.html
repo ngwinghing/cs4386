@@ -17,51 +17,52 @@
 //script should start after all body elements are loaded 
 //document.getElementById('map'): element cannot be got if script tag in places in "head" tag
 <script>
-	canvas=document.getElementById('map');
-	ctx=canvas.getContext && canvas.getContext('2d');
-	grids = []; //= new Array()
-	tools = []; //= new Array()
-	tools_sprite = new Image();
-	setup_timer = 30; 
-	play_timer = 60;
-
-	function grid(number, x, y) {
-		this.index = number;
-		this.x = x;
-		this.y = y;
-		this.occupied = 0; //false
-		this.occupant; //store the img of a tool for player
-	}
-
-	function init() {
-		// give every droppable grid an index
-		for (var i=0; i<150; i++) {
-			grid_x = parseInt(i/10)*80+160;
-			grid_y = (i%10)*80;
-			grids.push(new grid(i, grid_x, grid_y));
-		}
-
-		//for checking the values
-		/*for (var i=0; i<150; i++) {
-			ctx.font="20px Arial";
-			ctx.fillText(grids[i].index, grids[i].x, grids[i].y+20);
-		}*/
-	}
-
-	//addEventListenser to black canvas tools e.g. onclick ondrag ondrop
-	//more info can be found from W3S
-
-	function launchBomb(number){
-
-		grids[number].occupant = false;
-	}
-
-	function launchRod(number) {
-		
-		grids[number].occupant = false;
-	}
 	
-	init();
+canvas=document.getElementById('map');
+ctx=canvas.getContext && canvas.getContext('2d');
+grids = []; //= new Array()
+tools = []; //= new Array()
+tools_sprite = new Image();
+setup_timer = 30; 
+play_timer = 60;
+
+function grid(number, x, y) {
+	this.index = number;
+	this.x = x;
+	this.y = y;
+	this.occupied = 0; //false
+	this.occupant; //store the img of a tool for player
+}
+
+function init() {
+	// give every droppable grid an index
+	for (var i=0; i<150; i++) {
+		grid_x = parseInt(i/10)*80+160;
+		grid_y = (i%10)*80;
+		grids.push(new grid(i, grid_x, grid_y));
+	}
+
+	//for checking the values
+	/*for (var i=0; i<150; i++) {
+		ctx.font="20px Arial";
+		ctx.fillText(grids[i].index, grids[i].x, grids[i].y+20);
+	}*/
+}
+
+//addEventListenser to black canvas tools e.g. onclick ondrag ondrop
+//more info can be found from W3S
+
+function launchBomb(number){
+	grids[number].occupant = false;
+}
+
+function launchRod(number) {
+
+	grids[number].occupant = false;
+}
+	
+init();
+	
 </script>
 
 </body>
