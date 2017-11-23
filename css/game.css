@@ -6,6 +6,11 @@
     min-height: 600px;
 }
 
+canvas {
+    border:1px solid #d3d3d3;
+    background-color: #f1f1f1;
+}
+
 #gameArea {
     background-color: #AB8F6A;
     width: 100%;
@@ -16,6 +21,8 @@
 }
 
 #gameArea img { width: 100%; position: relative; top: 0;}
+
+#map { width: 100%; position: relative; top: 0;}
 
 #time {
     background-color: darkslategrey;
