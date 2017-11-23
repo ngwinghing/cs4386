@@ -31,8 +31,8 @@ function grid(number, x, y) {
 	this.index = number;
 	this.x = x;
 	this.y = y;
-	this.occupied = 0; //false
-	this.occupant; //store the img of a tool for player
+	this.empty=1; //0=false 1=true
+	this.occupant; //string to represent current tool: 1) trap 2) barrier 3)glue 4)umbrella
 }
 
 function init() {
