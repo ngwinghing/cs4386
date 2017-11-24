@@ -4,17 +4,22 @@
 <head>
 <meta charset="UTF-8" />
 <title>Game</title>
-    <link rel="stylesheet" type="text/css" href="../css/main.css">
-    <link rel="stylesheet" type="text/css" href="../css/game.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/game.css">
 
 </head>
 
-<body>
-<div class="con">
-<canvas id="map" width="1440" height="800"></canvas>
-<canvas id="toolbar" width="1440" height="200"></canvas> <!--or combine into 1 canvas is better-->
+<body onload="init()">
+
+<canvas id="map"></canvas>
+
+<!--or combine into 1 canvas is better-->
+
 <!-- <audio></audio> -->
-</div>
+
+<script src="js/canvas.js"></script>
+
+
 
 <script>
 //script should start after all body elements are loaded 
@@ -22,6 +27,10 @@
 	
 canvas=document.getElementById('map');
 ctx=canvas.getContext && canvas.getContext('2d');
+
+map = new Image();
+map.src= "img/tmp_bg.jpg";
+
 grids = []; //= new Array()
 tools = []; //= new Array()
 tools_sprite = new Image();
@@ -42,6 +51,8 @@ function init() {
 		grid_y = (i%10)*80;
 		grids.push(new grid(i, grid_x, grid_y));
 	}
+
+	//ctx.drawImage(map,0,0);
 
 	//for checking the values
 	/*for (var i=0; i<150; i++) {
