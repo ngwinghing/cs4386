@@ -2,7 +2,7 @@
  * Created by ngwinghing on 25/11/2017.
  */
 function init() {
-    var police = new Sprite("img/officer-1.png");
+    var police = new Sprite("img/officer.png");
     // policeArray = [];
     //
     // for (var i = 0; i < 100; i++) {
