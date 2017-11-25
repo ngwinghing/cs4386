@@ -15,8 +15,6 @@
 
 <!--or combine into 1 canvas is better-->
 
-<!-- <audio></audio> -->
-
 <script src="js/canvas.js"></script>
 <script src="js/utility.js"></script>
 <script src="js/sprite.js"></script>
@@ -26,52 +24,88 @@
 
 <script>
 //script should start after all body elements are loaded 
-//document.getElementById('map'): element cannot be got if script tag in places in "head" tag
 
-grids = []; //= new Array()
-tools = []; //= new Array()
-tools_sprite = new Image();
-setup_timer = 30; 
-play_timer = 60;
+//document.getElementById('map') cannot be got if script tag in places in "head" tag
+	canvas=document.getElementById('map');
+	ctx=canvas.getContext && canvas.getContext('2d');
+	toolType = ["trap", "barrier", "glue", "umbrealla"];
+	grids = []; //= new Array()
+	tools = [];
+	polices = [];
+	preparation_timer = 30; //30 seconds
+	game_timer = 30; //30 seconds
+	//gridsAffected = []; for redraw()
 
-function grid(number, x, y) {
-	this.index = number;
-	this.x = x;
-	this.y = y;
-	this.occupant; //string to represent current tool: 1) trap 2) barrier 3)glue 4)umbrella 5)none
-}
-
-function init() {
-	// give every droppable grid an index
-	for (var i=0; i<150; i++) {
-		grid_x = parseInt(i/10)*80+160;
-		grid_y = (i%10)*80;
-		grids.push(new grid(i, grid_x, grid_y));
+	function redraw() { //things that need to update: gridsAffected
+		
 	}
 
-	//ctx.drawImage(map,0,0);
+	function System_Controller() {
+		for (int i=0; i<polices.length)
+			polices[i].action();
 
-	//for checking the values
-	/*for (var i=0; i<150; i++) {
-		ctx.font="20px Arial";
-		ctx.fillText(grids[i].index, grids[i].x, grids[i].y+20);
-	}*/
-}
+		redraw();
 
-//addEventListenser to black canvas tools e.g. onclick ondrag ondrop
-//more info can be found from W3S
+		timer--;		
+	}
 
-function launchBomb(number){
-	grids[number].occupant = false;
-}
+	function grid(gridNumber, x, y) {
+		this.gridNumber = gridNumber;
+		this.x = x;
+		this.y = y;
+		this.occupant; //string to represent current tool: 1) trap 2) barrier 3)glue 4)umbrella 5) police 6)none
+	}
 
-function launchRod(number) {
+	function tool(gridNumber, life) { //assume only one sprite exists
+		this.gridNumber
+		this.life = life;
 
-	grids[number].occupant = false;
-}
+		this.beingAttack = function() {
+			this.life--;
+
+			if (this.life==0)
+				//disppear: unfill 
+				//grids[girdNumber].occupant = "none";
+		}
+	}
+
+	function police(gridNumber) {
+		this.gridNumber = gridNumber;
+
+	}
+
+	function newGame() {
+		police = new Police(); //assume 3 polices 
+		police = new Police();
+		police = new Police();
+
+		setTimeInterval(System_Controller, 500);
+	}
+
+	function init() {
+		// alert("okay");
+
+		for (var i=0; i<160; i++) {
+			grid_x = parseInt(i/10)*80+160;
+			grid_y = (i%10)*80;
+			grids.push(new grid(i, grid_x, grid_y));
+		}
+
+		//initialize traps
+
+		//for checking the values
+		for (var i=0; i<160; i++) {
+			ctx.font="20px Arial";
+			ctx.fillText(grids[i].gridNumber, grids[i].x, grids[i].y+20);
+		}
+
+		//newGame(); to be enabled	
+	}
+
+	//addEventListenser to black canvas tools e.g. onclick ondrag ondrop
+	//more info can be found from W3S
 	
-init();
-	
+	init();
 </script>
 
 </body>
