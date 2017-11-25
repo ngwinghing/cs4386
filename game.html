@@ -4,19 +4,27 @@
 <head>
 <meta charset="UTF-8" />
 <title>Game</title>
-<link rel="stylesheet" href="game.css">
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/game.css">
 
 </head>
 
-<body>
+<body onload="init()">
 
-<canvas id="map" width="1440" height="800"></canvas>
-<canvas id="toolbar" width="200" height="800"></canvas>
+<canvas id="map"></canvas>
 
+<!--or combine into 1 canvas is better-->
+
+<script src="js/canvas.js"></script>
+<script src="js/utility.js"></script>
+<script src="js/sprite.js"></script>
+<script src="js/gameFrame.js"></script>
+<script src="js/interact.js"></script>
 
 
 <script>
 //script should start after all body elements are loaded 
+
 //document.getElementById('map') cannot be got if script tag in places in "head" tag
 	canvas=document.getElementById('map');
 	ctx=canvas.getContext && canvas.getContext('2d');

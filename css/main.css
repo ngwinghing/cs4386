@@ -1,11 +1,9 @@
 body {
     background-color: black;
     font-family: 'Enriqueta', serif;
+    margin: 0;
    /* font-family: 'Viga', sans-serif; */
 
-}
-
-.container {
 }
 
 h1 {

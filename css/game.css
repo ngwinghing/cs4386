@@ -1,10 +1,23 @@
 .control {
-    width:50%;
     margin-left: auto;
     margin-right: auto;
     min-width: 800px;
     min-height: 600px;
 }
+
+canvas {
+    min-width: 800px;
+    min-height: 600px;
+    position: relative;
+    top: 5px;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+#map { }
 
 #gameArea {
     background-color: #AB8F6A;
@@ -15,7 +28,7 @@
     z-index: 0;
 }
 
-#gameArea img { width: 100%; position: relative; top: 0;}
+#gameArea img { width: 100%; position: relative; top: 0; }
 
 #time {
     background-color: darkslategrey;
