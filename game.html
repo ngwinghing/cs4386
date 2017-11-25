@@ -9,7 +9,7 @@
 
 </head>
 
-<body onload="init()">
+<body>
 
 <canvas id="map"></canvas>
 
@@ -18,7 +18,7 @@
 <script src="js/canvas.js"></script>
 <script src="js/utility.js"></script>
 <script src="js/sprite.js"></script>
-<script src="js/gameFrame.js"></script>
+<script src="js/gameFrame.js"></script> <!--contains  init() -->
 <script src="js/interact.js"></script>
 
 
@@ -34,8 +34,7 @@
 	polices = [];
 	preparation_timer = 30; //30 seconds
 	game_timer = 30; //30 seconds
-	//gridsAffected = []; for redraw()
-
+	
 	function redraw() { //things that need to update: gridsAffected
 		
 	}

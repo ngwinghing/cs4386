@@ -18,13 +18,13 @@ function init() {
 
     setInterval(
         function animate() {
-            requestAnimationFrame(animate);
+            //requestAnimationFrame(animate);
 
             c.clearRect(0, 0, innerWidth, innerHeight);
 
             // c.fillRect(100,100, 100, 100);
 
-            timer.draw(9);
+            timer.draw(1);
             c.drawImage(map, 0, mapStartY, mapWidth, mapHeight);
 
             var tilemapX = Math.floor((mouse.x - mapStartX) / tileSize);
