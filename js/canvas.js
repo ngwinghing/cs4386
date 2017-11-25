@@ -1,12 +1,23 @@
 var canvas = document.querySelector('canvas');
 
-canvas.width = window.innerWidth*0.7;
-canvas.height = window.innerHeight;
+canvas.width = 800;
+canvas.height = 600;
+
+var tileSize = 44.4;
+
+var timerHeight = tileSize/1.5;
+var mapStartX = (innerWidth-canvas.width)/2;
+var mapStartY = timerHeight +1 ;
+var mapWidth = canvas.width;
+var mapHeight = mapWidth/1.8;
 
 var c = canvas.getContext('2d');
 
 var map = new Image();
 map.src= "img/tmp_bg.jpg";
+
+var btn = new Image();
+btn.src= "img/btn.png";
 
 
 // c.fillRect(100, 100, 100, 100);
@@ -24,6 +35,11 @@ var mouse = {
     y: undefined
 }
 
+var click = {
+    x: undefined,
+    y: undefined
+}
+
 window.addEventListener('mousemove',
     function(event) {
         mouse.x = event.x;
@@ -31,12 +47,19 @@ window.addEventListener('mousemove',
     }
 )
 
-window.addEventListener('resize', function() {
-    canvas.width = window.innerWidth*0.7;
-    canvas.height = window.innerHeight;
+window.addEventListener('mousedown',
+    function(event) {
+        click.x = event.x;
+        click.y = event.y;
+    }
+)
 
-    init();
-})
+// window.addEventListener('resize', function() {
+//     canvas.width = window.innerWidth*0.7;
+//     canvas.height = window.innerHeight;
+//
+//     init();
+// })
 //
 // function Police(x,y, dx, dy, radius) {
 //     this.x = x;
@@ -90,7 +113,7 @@ function Timer(type) {
     }
 
     this.width = canvas.width;
-    this.height = canvas.width/25;
+    this.height = timerHeight;
 
     this.draw = function(time) {
         this.time = time;
@@ -109,35 +132,3 @@ function Timer(type) {
 
 var timer = new Timer("attack");
 
-function init() {
-    // policeArray = [];
-    //
-    // for (var i = 0; i < 100; i++) {
-    //     var radius = 50;
-    //     var x = Math.random() * (innerWidth - radius * 2) + radius;
-    //     var y = Math.random() * (innerHeight - radius * 2) + radius;
-    //     var dx = (Math.random() - 0.5) * 8;
-    //     var dy = (Math.random() - 0.5) * 8;
-    //     policeArray.push(new Police(x, y, dx, dy, radius));
-    // }
-
-    // var police = new Police(200, 200, 4, 4, 60);
-
-    function animate() {
-        requestAnimationFrame(animate);
-
-        c.clearRect(0, 0, innerWidth, innerHeight);
-
-        // c.fillRect(100,100, 100, 100);
-
-        timer.draw(9);
-        c.drawImage(map,0, timer.height+1, canvas.width, canvas.width/1.8);
-
-        // for (var i = 0; i < policeArray.length; i++) {
-        //     policeArray[i].update();
-        // }
-    }
-    animate();
-}
-
-init();
