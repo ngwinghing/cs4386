@@ -29,7 +29,7 @@ var Sprite = function(fn) {
 
     this.drawAnimated = function (x, y, spriteSheetIndex) {
         if (spriteSheetIndex.length != undefined) {
-            if (this.animationDelay++ >= 10) {
+            if (this.animationDelay++ >= 1000) {
                 this.animationDelay = 0;
                 this.animationIndexCounter++;
                 if (this.animationIndexCounter >= spriteSheetIndex.length) {
