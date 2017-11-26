@@ -52,7 +52,9 @@ function Sewage(gridIndex) {
 	};
 
 	this.beingAttacked = function() {
-		player_tools.pop(this);
+		// var index = player_tools.indexOf(this);
+		// player_tools.splice(index, 1);
+		// this.img.src = "covered_sewage";
 		grids[this.gridIndex].occupied = false;
 		grids[this.gridIndex].occupant = "none";
 	};
@@ -80,7 +82,8 @@ function Barrier(gridIndex) {
 		this.life--;
 
 		if (this.life == 0) {
-			player_tools.pop(this);
+			var index = player_tools.indexOf(this);
+			player_tools.splice(index, 1);
 			grids[this.gridIndex].occupied = false;
 			grids[this.gridIndex].occupant = "none";
 		}
@@ -109,7 +112,8 @@ function Glue(gridIndex) {
 		this.life--;
 
 		if (this.life == 0) {
-			player_tools.pop(this);
+			var index = player_tools.indexOf(this);
+			player_tools.splice(index, 1);
 			grids[this.gridIndex].occupied = false;
 			grids[this.gridIndex].occupant = "none";
 		}
@@ -138,7 +142,8 @@ function Umbrella(gridIndex) {
 	this.img.src = "img/umbrella.png";
 
 	this.beingAttacked = function() {
-		player_tools.pop(this);
+		var index = player_tools.indexOf(this);
+		player_tools.splice(index, 1);
 		grids[this.gridIndex].occupied = false;
 		grids[this.gridIndex].occupant = "none";
 	};
@@ -153,7 +158,7 @@ function Umbrella(gridIndex) {
 
 	grids[gridIndex].occupied = true;
 	grids[gridIndex].occupant = this;
-	console.log(grids[gridIndex].occupant);
+	//console.log(grids[gridIndex].occupant);
 }
 
 
@@ -193,8 +198,8 @@ function Invader(tileY) {
 			this.tileX--;
 		}
 
-		// grids[this.gridIndex].occupied = true;
-		// grids[this.gridIndex].occupant = this;
+		//grids[this.gridIndex].occupied = true;
+		//grids[this.gridIndex].occupant = this;
 		this.currentFrames = [50, 51, 52, 53];
 	}
 
@@ -229,6 +234,10 @@ function Invader(tileY) {
 		grids[this.gridIndex-10].occupant.beingAttacked();
 		invaders.push(new Invader(Math.floor(Math.random()*10)));
 	};
+
+/*	this.toString = function() {
+		return "invader";
+	};*/
 
 	this.draw = function() {
         if (this.tileX >= 2 && this.tileX <= 17) {

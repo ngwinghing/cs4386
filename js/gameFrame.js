@@ -108,9 +108,9 @@ function newGame() {
             var box1 = new Box("umbrella");
             box1.draw();
 
-            for (i=0; i<grids.length; i++) {
-                grids[i].draw();
-            }
+            // for (i=0; i<grids.length; i++) {
+            //     grids[i].draw();
+            // }
 
             if (player_tools.length > 0)
                 for(i=0; i<player_tools.length; i++) {
@@ -123,7 +123,7 @@ function newGame() {
                     invaders[i].draw();
                 }
 
-            if (secondCount == 10 && timer.started == true) //0.5 second
+            if (secondCount == 20 && timer.started == true) //0.5 second
                 for(i=0; i<invaders.length; i++) {
                     if (grids[invaders[i].gridIndex].occupied == true) {
                         if (grids[invaders[i].gridIndex].occupant.toString() == "glue")
