@@ -1,8 +1,14 @@
 /**
  * Created by ngwinghing on 25/11/2017.
  */
-function init() {
-    var police = new Sprite("img/officer.png");
+
+//timer = new Timer("play");
+
+secondCount = 0;
+
+//console.log(random);
+
+function newGame() {
     // policeArray = [];
     //
     // for (var i = 0; i < 100; i++) {
@@ -17,26 +23,48 @@ function init() {
     // var police = new Police(200, 200, 4, 4, 60);
 
     setInterval(
-        function animate() {
+        function() {
             //requestAnimationFrame(animate);
 
-            c.clearRect(0, 0, innerWidth, innerHeight);
+            //c.clearRect(0, 0, innerWidth, innerHeight);
 
             // c.fillRect(100,100, 100, 100);
-
-            timer.draw(1);
-            c.drawImage(map, 0, mapStartY, mapWidth, mapHeight);
-
-            var tilemapX = Math.floor((mouse.x - mapStartX) / tileSize);
-            var tilemapY = Math.floor((mouse.y - mapStartY) / tileSize);
-            console.log(tilemapX, tilemapY);
-
-            if (tilemapX>=2 && tilemapY<=9 && tilemapY>=0) {
-                police.drawAnimated(tilemapX * tileSize,mapStartY + tilemapY * tileSize,[15,16,17,18]); // jump
-                // c.fillStyle = 'rgba(255,0,0,0.3)';
-               // c.fillRect(tilemapX * tileSize, mapStartY + tilemapY * tileSize, tileSize, tileSize);
+            if (secondCount == 0) { //1 second
+                timer.draw();
+                secondCount=20;
             }
 
+            c.drawImage(map, 0, mapStartY, mapWidth, mapHeight);
+
+/*            for (i=0; i<grids.length; i++) {
+                grids[i].draw();
+            }*/
+
+            if (invaders.length > 0)
+                for(i=0; i<invaders.length; i++) {
+                    invaders[i].draw();
+                }            
+
+            if (player_tools.length > 0)
+                for(i=0; i<player_tools.length; i++) {
+                    play_tools[i].draw();
+                }
+
+            if (secondCount == 10 && timer.started == true) //0.5 second
+                for(i=0; i<invaders.length; i++) {
+                    if (grids[invaders[i].gridIndex].occupied == true) {
+                        if (grids[invaders[i].gridIndex].occupant.toString() === "glue")
+                            invaders[i].encounterGlue(grids[invaders[i].gridIndex].occupant);
+
+                        else if (grids[invaders[i].gridIndex].occupant.toString() === "sewage")
+                            invaders[i].encounterSewage(grids[invaders[i].gridIndex].occupant);
+                    }
+
+                    else 
+                        detectFront(invaders[i]);
+                }
+
+            secondCount--;
             // animated
             //police.drawAnimated(100,100,[1,2,3,4]); //stand
             //police.drawAnimated(400,400,[8,9,10,11]); // walk
@@ -56,8 +84,9 @@ function init() {
             // for (var i = 0; i < policeArray.length; i++) {
             //     policeArray[i].update();
             // }
+           
         }
-    ),60;
+    , 50);
 }
 
-init();
+newGame();
