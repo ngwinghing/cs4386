@@ -96,14 +96,14 @@ function newGame() {
 
             c.drawImage(map, 0, mapStartY, mapWidth, mapHeight);
             c.fillStyle = '#1f0804';
-            c.fillRect(0,mapHeight+timerHeight,mapWidth, 3*tileSize);
+            c.fillRect(0,mapHeight+timerHeight,mapWidth, toolBarHeight);
             c.strokeStyle = "#ffd802";
             c.lineWidth= 2;
-            c.strokeRect(0,mapHeight+timerHeight,mapWidth, 3*tileSize);
+            c.strokeRect(0,mapHeight+timerHeight,mapWidth, toolBarHeight);
 
-/*            for (i=0; i<grids.length; i++) {
+            for (i=0; i<grids.length; i++) {
                 grids[i].draw();
-            }*/
+            }
 
             if (invaders.length > 0)
                 for(i=0; i<invaders.length; i++) {
@@ -111,10 +111,10 @@ function newGame() {
                 }            
 
 //need when imgs are available
-/*            if (player_tools.length > 0)
+            if (player_tools.length > 0)
                 for(i=0; i<player_tools.length; i++) {
                     player_tools[i].draw();
-                }*/
+                }
 
             if (secondCount == 10 && timer.started == true) //0.5 second
                 for(i=0; i<invaders.length; i++) {

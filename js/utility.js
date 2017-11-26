@@ -43,10 +43,12 @@ function Sewage(gridIndex) {
 	this.gridIndex = gridIndex;
 	this.tileX = Math.floor(gridIndex/10)+2;
 	this.tileY = gridIndex%10;
-	//this.sprite = ??
+    this.currentFrames = [3];
+
+    this.sprite = new Sprite("img/sewage.png", 5, 4);
 
 	this.open = function() {
-		//change img
+        this.currentFrames = [1];
 	};
 
 	this.beingAttacked = function() {
@@ -60,7 +62,7 @@ function Sewage(gridIndex) {
 	};
 
 	this.draw = function() {
-
+        this.sprite.drawAnimated(this.tileX * tileSize, mapStartY + this.tileY * tileSize, this.currentFrames);
 	};
 
 	grids[gridIndex].occupied = true;
@@ -89,7 +91,7 @@ function Barrier(gridIndex) {
 	};	
 
 	this.draw = function() {
-		c.drawImage(this.img, );
+		//c.drawImage(this.img, );
 	};
 
 	grids[gridIndex].occupied = true;
@@ -119,7 +121,7 @@ function Glue(gridIndex) {
 	};
 
 	this.draw = function() {
-		c.drawImage(this.img, );
+		//c.drawImage(this.img, );
 	};	
 
 	grids[gridIndex].occupied = true;
@@ -132,6 +134,9 @@ function Umbrella(gridIndex) {
 	this.tileY = gridIndex%10;
 	this.life = 1;
 
+    this.img = new Image()
+	this.img.src = "img/umbrella.png";
+
 	this.beingAttacked = function() {
 		player_tools.pop(this);
 		grids[this.gridIndex].occupied = false;
@@ -143,7 +148,7 @@ function Umbrella(gridIndex) {
 	};
 
 	this.draw = function() {
-		c.drawImage(this.img, );
+		c.drawImage(this.img, this.tileX * tileSize, mapStartY + this.tileY * tileSize, 32, 32);
 	};
 
 	grids[gridIndex].occupied = true;
@@ -240,7 +245,7 @@ function Timer(type) {
     if (type == "setup") {
         basicTime = 1; //should be 30
     } else {
-        // prepare
+        // attack
         basicTime = 60;
     }
 

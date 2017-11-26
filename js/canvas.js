@@ -5,7 +5,8 @@ canvas.height = 800;
 
 var tileSize = 44.4;
 
-var timerHeight = tileSize/1.5;
+var timerHeight = 30;
+var toolBarHeight = 150;
 var mapStartX = (innerWidth-canvas.width)/2;
 var mapStartY = timerHeight +1 ;
 var mapWidth = canvas.width;
