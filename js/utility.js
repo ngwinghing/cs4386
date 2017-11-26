@@ -1,6 +1,3 @@
-/**
- * Created by ngwinghing on 25/11/2017.
- */
 
 /*function i2xy(index) {
     var x = index % mapWidth;

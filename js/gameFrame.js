@@ -1,7 +1,3 @@
-/**
- * Created by ngwinghing on 25/11/2017.
- */
-
 //timer = new Timer("play");
 
 secondCount = 0;
@@ -99,6 +95,11 @@ function newGame() {
             }
 
             c.drawImage(map, 0, mapStartY, mapWidth, mapHeight);
+            c.fillStyle = '#1f0804';
+            c.fillRect(0,mapHeight+timerHeight,mapWidth, 3*tileSize);
+            c.strokeStyle = "#ffd802";
+            c.lineWidth= 2;
+            c.strokeRect(0,mapHeight+timerHeight,mapWidth, 3*tileSize);
 
 /*            for (i=0; i<grids.length; i++) {
                 grids[i].draw();
