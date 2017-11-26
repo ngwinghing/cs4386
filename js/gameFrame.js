@@ -94,26 +94,33 @@ function newGame() {
                 secondCount=20;
             }
 
+            /*Draw Map*/
             c.drawImage(map, 0, mapStartY, mapWidth, mapHeight);
+
+            /*Draw Panel*/
             c.fillStyle = '#1f0804';
             c.fillRect(0,mapHeight+timerHeight,mapWidth, toolBarHeight);
             c.strokeStyle = "#ffd802";
             c.lineWidth= 2;
             c.strokeRect(0,mapHeight+timerHeight,mapWidth, toolBarHeight);
 
+            /*Draw Boxes*/
+            var box1 = new Box("umbrella");
+            box1.draw();
+
             for (i=0; i<grids.length; i++) {
                 grids[i].draw();
             }
 
-            if (invaders.length > 0)
-                for(i=0; i<invaders.length; i++) {
-                    invaders[i].draw();
-                }            
-
-//need when imgs are available
             if (player_tools.length > 0)
                 for(i=0; i<player_tools.length; i++) {
                     player_tools[i].draw();
+                }
+
+
+            if (invaders.length > 0)
+                for(i=0; i<invaders.length; i++) {
+                    invaders[i].draw();
                 }
 
             if (secondCount == 10 && timer.started == true) //0.5 second

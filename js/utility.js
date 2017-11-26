@@ -302,6 +302,80 @@ function Timer(type) {
     }
 }
 
+function Box(nameOfTools, value) {
+    var name;
+    var type; // limit / time-base
+	var value;
+    if (nameOfTools == "umbrella") {
+        type = "time";
+        this.name = "Umbrella";
+        this.img = new Image()
+        this.img.src = "img/umbrella.png";
+    } else {
+
+    }
+
+    var timer;
+    this.remainingTime = 3;
+    this.basicTime = 10;
+    this.started = false;
+
+    this.width = 100;
+    this.height = 100;
+
+    this.x = 40;
+    this.y = mapHeight+50;
+
+    var rectX = this.x;
+    var rectY = this.y;
+    var rectWidth = 100;
+    var rectHeight = 100;
+    var cornerRadius = 20;
+
+    this.draw = function() {
+		c.strokeStyle = "#4682b4";
+		c.lineWidth= 1;
+		c.lineJoin = "round";
+		c.lineWidth = cornerRadius;
+		c.strokeRect(rectX+(cornerRadius/2), rectY+(cornerRadius/2), rectWidth-cornerRadius, rectHeight-cornerRadius);
+		c.fillStyle = '#4682b4';
+		c.fillRect(rectX+(cornerRadius/2), rectY+(cornerRadius/2), rectWidth-cornerRadius, rectHeight-cornerRadius);
+
+		c.drawImage(this.img, rectX+20, rectY+10, 60,60);
+
+        c.fillStyle = '#dba520';
+        c.fillRect(rectX, rectY+70,rectWidth, 25);
+
+        c.fillStyle = '#000000';
+        c.font = '18px  Arial';
+        c.fillText(this.name, rectX+12, rectY+88);
+
+        if (type == "time") {
+            if(this.remainingTime != -1) {
+                // basic
+                c.fillStyle = '#2F4F4F';
+                c.fillRect(rectX,rectY+105,this.width, 15);
+
+                // remain time
+                c.fillStyle = '#DC143C';
+                c.fillRect(rectX,rectY+105,(this.width * this.remainingTime/this.basicTime), 15);
+
+                this.started = true;
+                this.remainingTime--;
+            } else {
+
+			}
+		}
+
+		if (lastX<(this.x+100) && lastX>this.x) {
+            if (lastY<(this.y+100) && lastY>this.y) {
+
+            }
+		}
+
+    }
+}
+
 for (var i=0; i<160; i++) {
    	grids.push(new grid(i));
 }
