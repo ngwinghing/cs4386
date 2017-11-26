@@ -26,20 +26,26 @@ Front=3;
 
 function grid(gridIndex) {
 	this.gridIndex = gridIndex;
-	this.occupied = false;
-	this.occupant; player_tool: //1) sewage 2)glue
+	this.x = (Math.floor(gridIndex/10)+2)*tileSize;
+	this.y = gridIndex%10*tileSize;
+	this.occupied = false; //only for player_tools, not police
+	this.occupant = "none"; //player_tool: 1) sewage 2)glue
 
 	this.draw = function() {
 		c.font = "20px Arial";
 		c.fillStyle = "#000000"; 
-		c.fillText(grids[i].gridIndex, grids[i].x, grids[i].y+mapStartY+20);
-	}
+		c.fillText(grids[i].gridIndex, this.x, this.y+mapStartY+20);
+	};
 }
 
-function sewage(tileX, tileY) {
-	this.gridIndex = (tileX-2)*10+tileY;
-	this.tileX = tileX;
-	this.tileY = tileY;
+/*function setGrids()  {
+
+}
+*/
+function Sewage(gridIndex) {
+	this.gridIndex = gridIndex;
+	this.tileX = Math.floor(gridIndex/10)+2;
+	this.tileY = gridIndex%10;
 	//this.sprite = ??
 
 	this.open = function() {
@@ -48,7 +54,8 @@ function sewage(tileX, tileY) {
 
 	this.beingAttacked = function() {
 		player_tools.pop(this);
-		grids[girdNumber].occupied = false;
+		grids[this.gridIndex].occupied = false;
+		grids[this.gridIndex].occupant = "none";
 	};
 
 	this.toString = function() {
@@ -59,13 +66,14 @@ function sewage(tileX, tileY) {
 
 	};
 
-	player_tools.push(this);
+	grids[gridIndex].occupied = true;
+	grids[gridIndex].occupant = this;
 }
 
-function barrier(tileX, tileY) {
-	this.gridIndex = (tileX-2)*10+tileY;
-	this.tileX = tileX;
-	this.tileY = tileY;
+function Barrier(gridIndex) {
+	this.gridIndex = gridIndex;
+	this.tileX = Math.floor(gridIndex/10)+2;
+	this.tileY = gridIndex%10;
 	this.life = 3;
 	//this.img = ??
 
@@ -74,8 +82,8 @@ function barrier(tileX, tileY) {
 
 		if (this.life == 0) {
 			player_tools.pop(this);
-			grids[girdNumber].occupied = false;
-
+			grids[this.gridIndex].occupied = false;
+			grids[this.gridIndex].occupant = "none";
 		}
 	};
 
@@ -89,13 +97,12 @@ function barrier(tileX, tileY) {
 
 	grids[gridIndex].occupied = true;
 	grids[gridIndex].occupant = this;
-	player_tools.push(this);
 }
 
-function glue(tileX, tileY) {
-	this.gridIndex = (tileX-2)*10+tileY;
-	this.tileX = tileX;
-	this.tileY = tileY;
+function Glue(gridIndex) {
+	this.gridIndex = gridIndex;
+	this.tileX = Math.floor(gridIndex/10)+2;
+	this.tileY = gridIndex%10;
 	this.life = 3;
 	//this.img = ??
 
@@ -104,12 +111,13 @@ function glue(tileX, tileY) {
 
 		if (this.life == 0) {
 			player_tools.pop(this);
-			grids[girdNumber].occupied = false;
+			grids[this.gridIndex].occupied = false;
+			grids[this.gridIndex].occupant = "none";
 		}
 
 	};
 
-		this.toString = function() {
+	this.toString = function() {
 		return "glue";
 	};
 
@@ -119,22 +127,18 @@ function glue(tileX, tileY) {
 
 	grids[gridIndex].occupied = true;
 	grids[gridIndex].occupant = this;
-	player_tools.push(this);
 }
 
-function umbrella(tileX, tileY) {
-	this.gridIndex = (tileX-2)*10+tileY;
-	this.tileX = tileX;
-	this.tileY = tileY;
+function Umbrella(gridIndex) {
+	this.gridIndex = gridIndex;
+	this.tileX = Math.floor(gridIndex/10)+2;
+	this.tileY = gridIndex%10;
 	this.life = 1;
 
 	this.beingAttacked = function() {
-		this.life--;
-
-		if (this.life == 0) {
-			player_tools.pop(this);
-			grids[girdNumber].occupied = false;
-		}
+		player_tools.pop(this);
+		grids[this.gridIndex].occupied = false;
+		grids[this.gridIndex].occupant = "none";
 	};
 
 	this.toString = function() {
@@ -147,7 +151,7 @@ function umbrella(tileX, tileY) {
 
 	grids[gridIndex].occupied = true;
 	grids[gridIndex].occupant = this;
-	player_tools.push(this);
+	console.log(grids[gridIndex].occupant);
 }
 
 
@@ -170,31 +174,33 @@ function Invader(tileY) {
 	this.sprite = new Sprite("img/officer.png", 5, 7);
 
 	this.walk = function(direction) {
-		grids[this.gridIndex].occupied = 0;
+		grids[this.gridIndex].occupied = false;
+		
 		if (direction == Up){
 			this.gridIndex--;
 			this.tileY--;
-			//grids[this.PositionNum].occupant="police";
 		}
+
 		else if (direction == Down){
 			this.gridIndex++;
 			this.tileY++;
-			//grids[this.PositionNum].occupant="police";
 		}
+
 		else{ //Front
 			this.gridIndex-=10;
 			this.tileX--;
-			//grids[this.PositionNum].occupant="police";
 		}
 
-		this.currentFrames = [15,16,17,18];
+		// grids[this.gridIndex].occupied = true;
+		// grids[this.gridIndex].occupant = this;
+		this.currentFrames = [50, 51, 52, 53];
 	}
 
 	this.stay = function() {
-
+		//do nothing
 	};
 
-	function useBomb(){
+	this.useBomb = function() {
 		for(i=0;i<2;i++){
 			for(j=0;j<3;j++){
 				grids[this.gridIndex-10*(i+1)-1+j].occupied = true;
@@ -204,33 +210,28 @@ function Invader(tileY) {
 		}
 
 		this.numberOfBomb--;
-	}
+	};
 
-	function useRod(){
-		//get life
-		//life = grids[this.PositionNum-10].occupant.life;
-		grids[this.PositionNum-10].occupant="none";
-		walk(Front);
-	}
+	this.useRod = function (){
+		grids[this.gridIndex-10].occupant.beingAttacked();
+		this.currentFrames = [57,58,59,60];
+	};
 
 	this.encounterGlue = function(glue) {
-		glue.life--;
+		grids[this.gridIndex-10].occupant.beingAttacked();
+		this.currentFrames = [57];
         invaders[i].stay();
 	};
 
 	this.encounterSewage = function(sewage) {
-		player_tools.pop(sewage);
-		invaders.pop(this);
-		grids[girdNumber].occupied = false;
+		grids[this.gridIndex-10].occupant.beingAttacked();
 		invaders.push(new Invader(Math.floor(Math.random()*10)));
 	};
 
 	this.draw = function() {
         if (this.tileX >= 2 && this.tileX <= 17) {
         	if (this.tileY>=0 && this.tileY<=9)
-        	this.sprite.drawAnimated(this.tileX * tileSize, mapStartY + this.tileY * tileSize, this.currentFrames); // jump
-            // c.fillStyle = 'rgba(255,0,0,0.3)';
-            // c.fillRect(tilemapX * tileSize, mapStartY + tilemapY * tileSize, tileSize, tileSize);
+        	this.sprite.drawAnimated(this.tileX * tileSize, mapStartY + this.tileY * tileSize, this.currentFrames);
         }
 
         console.log(this.tileX, this.tileY);
@@ -300,5 +301,5 @@ function Timer(type) {
 }
 
 for (var i=0; i<160; i++) {
-	grids.push(new grid(i));
+   	grids.push(new grid(i));
 }

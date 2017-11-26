@@ -1,4 +1,6 @@
-function topBotAttackOrWalk(invader){
+//move to gameFream.js already
+
+/*function topBotAttackOrWalk(invader){
 	//front has an obstacle
 	if (invader.tileY==0 && !grids[invader.gridIndex+1].occupied &&
 		!grids[invader.gridIndex-10+1].occupied) 
@@ -13,57 +15,53 @@ function topBotAttackOrWalk(invader){
 		invader.useRod();
 }
 	
-function middleAttackOrWalk(invader){
+function middleAttackOrWalk(invader) {
 	//front has an obstacle
 	//both grids occupied, use weapon
-	if (grids[this.PositionNum-10+1].occupied && grids[this.PositionNum-10+1].occupied)
-	{
-		obstacleCount=0;
+	var obstacleCount = 0;
+	if (grids[invader.gridIndex-9].occupied && grids[invader.gridIndex-11].occupied) {
 		for(i=0;i<10;i++)
 			//retrieve front col from top to bottom
-			if (grids[(Math.floor(this.Position/10)*10)+i].occupied) 
+			if (grids[(Math.floor(invader.gridIndex/10)*10)+i].occupied) 
 				obstacleCount++;
+
+		-----------original code-----------
 		//use bomb when there are more than 9 obstacle 
-		if (obstacleCount>=9||this.BombCount>0)
+		if (obstacleCount >= 9 && invader.numberOfBomb > 0)
 			invader.useBomb();
 		//obstacleCount is 3 to 8
 		else invader.useRod();
+		-----------------------------------
+		invader.useRod();
 	}
+
 	//both 1 grid up and downward are empty
-	else if (!grids[this.PositionNum-10+1].occupied && !grids[this.PositionNum-10+1].occupied)
-	{
-		if (this.PositionNum%10>=5) {//more space downwards
-			walk(Down);
-			walk(Front);
-		}
-		else{
-			walk(Up);
-			walk(Front);
-		}
+	else if (!grids[invader.gridIndex-9].occupied && !grids[invader.gridIndex-11].occupied) {
+		if (invader.tileY >= 5) //more space downwards
+			invader.walk(Down);
+
+		else
+			invader.walk(Up);
 	}
 	//1 grid upward is empty
-	else if (!grids[this.PositionNum-10+1].occupied){
-		walk(Up);
-		walk(Front);
-	}
+	else if (grids[invader.gridIndex-9].occupied)
+		invader.walk(Up);
+
 	//1 grid downward is empty
-	else {
-		walk(Down);
-		walk(Front);
-	}
+	else 
+		invader.walk(Down);
 }
 
 function detectFront(invader) {
     //walk if grid in front is empty
-    if (!grids[invaders[i].gridIndex].occupied || grids[invaders[i].gridIndex].occupant === "sewage" || grids[invaders[i].gridIndex] == "glue")
-        invaders[i].walk(Front);
+    if (!grids[invader.gridIndex-10].occupied)
+        invader.walk(Front);
 
-    //check if top or bot row
-    else if (invaders[i].tileY == 0 || invaders[i].tileY == 9)
+    //check if top or bottom row
+    else if (invader.tileY == 0 || invader.tileY == 9)
         topBotAttackOrWalk(invader);
     
-    //middle row
-    else middleAttackOrWalk(invader);		
-}
-
-
+    //middle rows
+    else 
+    	middleAttackOrWalk(invader);		
+}*/
