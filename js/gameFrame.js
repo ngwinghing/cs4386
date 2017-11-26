@@ -1,8 +1,78 @@
 /**
  * Created by ngwinghing on 25/11/2017.
  */
-function init() {
-    var police = new Sprite("img/officer.png");
+
+//timer = new Timer("play");
+
+secondCount = 0;
+
+function topBotAttackOrWalk(invader){
+    //front has an obstacle
+    if (invader.tileY==0 && !grids[invader.gridIndex+1].occupied &&
+        !grids[invader.gridIndex-10+1].occupied) 
+        invader.walk(Down);
+
+    //check if bot row
+    else if (invader.tileY==9 && !grids[invader.gridIndex-1].occupied &&
+        !grids[invader.gridIndex-10-1].occupied)
+        invader.walk(Up);
+    
+    else
+        invader.useRod();
+}
+    
+function middleAttackOrWalk(invader) {
+    //front has an obstacle
+    //both grids occupied, use weapon
+    var obstacleCount = 0;
+    if (grids[invader.gridIndex-9].occupied && grids[invader.gridIndex-11].occupied) {
+        for(i=0;i<10;i++)
+            //retrieve front col from top to bottom
+            if (grids[(Math.floor(invader.gridIndex/10)*10)+i].occupied) 
+                obstacleCount++;
+
+        /*-----------original code-----------
+        //use bomb when there are more than 9 obstacle 
+        if (obstacleCount >= 9 && invader.numberOfBomb > 0)
+            invader.useBomb();
+        //obstacleCount is 3 to 8
+        else invader.useRod();
+        -----------------------------------*/
+        invader.useRod();
+    }
+
+    //both 1 grid up and downward are empty
+    else if (!grids[invader.gridIndex-9].occupied && !grids[invader.gridIndex-11].occupied) {
+        if (invader.tileY >= 5) //more space downwards
+            invader.walk(Down);
+
+        else
+            invader.walk(Up);
+    }
+    //1 grid upward is empty
+    else if (grids[invader.gridIndex-9].occupied)
+        invader.walk(Up);
+
+    //1 grid downward is empty
+    else 
+        invader.walk(Down);
+}
+
+function detectFront(invader) {
+    //walk if grid in front is empty
+    if (!grids[invader.gridIndex-10].occupied)
+        invader.walk(Front);
+
+    //check if top or bottom row
+    else if (invader.tileY == 0 || invader.tileY == 9)
+        topBotAttackOrWalk(invader);
+    
+    //middle rows
+    else 
+        middleAttackOrWalk(invader);        
+}
+
+function newGame() {
     // policeArray = [];
     //
     // for (var i = 0; i < 100; i++) {
@@ -17,26 +87,51 @@ function init() {
     // var police = new Police(200, 200, 4, 4, 60);
 
     setInterval(
-        function animate() {
+        function() {
             //requestAnimationFrame(animate);
 
-            c.clearRect(0, 0, innerWidth, innerHeight);
+            //c.clearRect(0, 0, innerWidth, innerHeight);
 
             // c.fillRect(100,100, 100, 100);
-
-            timer.draw(1);
-            c.drawImage(map, 0, mapStartY, mapWidth, mapHeight);
-
-            var tilemapX = Math.floor((mouse.x - mapStartX) / tileSize);
-            var tilemapY = Math.floor((mouse.y - mapStartY) / tileSize);
-            console.log(tilemapX, tilemapY);
-
-            if (tilemapX>=2 && tilemapY<=9 && tilemapY>=0) {
-                police.drawAnimated(tilemapX * tileSize,mapStartY + tilemapY * tileSize,[15,16,17,18]); // jump
-                // c.fillStyle = 'rgba(255,0,0,0.3)';
-               // c.fillRect(tilemapX * tileSize, mapStartY + tilemapY * tileSize, tileSize, tileSize);
+            if (secondCount == 0) { //1 second
+                timer.draw();
+                secondCount=20;
             }
 
+            c.drawImage(map, 0, mapStartY, mapWidth, mapHeight);
+
+/*            for (i=0; i<grids.length; i++) {
+                grids[i].draw();
+            }*/
+
+            if (invaders.length > 0)
+                for(i=0; i<invaders.length; i++) {
+                    invaders[i].draw();
+                }            
+
+//need when imgs are available
+/*            if (player_tools.length > 0)
+                for(i=0; i<player_tools.length; i++) {
+                    player_tools[i].draw();
+                }*/
+
+            if (secondCount == 10 && timer.started == true) //0.5 second
+                for(i=0; i<invaders.length; i++) {
+                    if (grids[invaders[i].gridIndex].occupied == true) {
+                        if (grids[invaders[i].gridIndex].occupant.toString() == "glue")
+                            invaders[i].encounterGlue(grids[invaders[i].gridIndex].occupant);
+
+                        else if (grids[invaders[i].gridIndex].occupant.toString() == "sewage")
+                            invaders[i].encounterSewage(grids[invaders[i].gridIndex].occupant);
+                    }
+
+                    else 
+                        detectFront(invaders[i]);
+                }
+
+
+
+            secondCount--;
             // animated
             //police.drawAnimated(100,100,[1,2,3,4]); //stand
             //police.drawAnimated(400,400,[8,9,10,11]); // walk
@@ -56,8 +151,9 @@ function init() {
             // for (var i = 0; i < policeArray.length; i++) {
             //     policeArray[i].update();
             // }
+           
         }
-    ),60;
+    , 50);
 }
 
-init();
+newGame();

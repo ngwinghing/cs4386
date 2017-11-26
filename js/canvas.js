@@ -19,7 +19,9 @@ map.src= "img/tmp_bg.jpg";
 var btn = new Image();
 btn.src= "img/btn.png";
 
-
+c.font = "20px Arial";
+c.fillStyle = '#DC143C';
+c.fillRect(0, 0, mapWidth, timerHeight);
 // c.fillRect(100, 100, 100, 100);
 // console.log(canvas);
 //
@@ -103,32 +105,9 @@ window.addEventListener('mousedown',
 //     }
 // }
 
-function Timer(type) {
-    var basicTime;
-    if (type == "attack") {
-        basicTime = 30;
-    } else {
-        // prepare
-        basicTime = 60;
-    }
 
-    this.width = canvas.width;
-    this.height = timerHeight;
-
-    this.draw = function(time) {
-        this.time = time;
-
-        // basic
-        c.fillStyle = '#2F4F4F';
-        c.fillRect(0,0,this.width, this.height);
-
-        // remain time
-        c.fillStyle = '#DC143C';
-        c.fillRect(0,0,(this.width * this.time/basicTime), this.height);
-    }
-}
 
 // var policeArray = [];
 
-var timer = new Timer("attack");
+
 
