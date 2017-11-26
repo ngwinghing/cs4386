@@ -1,7 +1,7 @@
 var canvas = document.querySelector('canvas');
 
 canvas.width = 800;
-canvas.height = 600;
+canvas.height = 800;
 
 var tileSize = 44.4;
 
