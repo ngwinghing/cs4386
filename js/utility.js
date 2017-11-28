@@ -171,82 +171,6 @@ function Umbrella(gridIndex) {
 	};
 }*/
 
-function Invader(tileY) {
-	this.gridIndex = 150+tileY;
-	this.tileX = 17;
-	this.tileY = tileY;
-	this.currentFrames = [1,2,3,4]; //stand
-	this.numberOfBomb = 2;
-
-	this.sprite = new Sprite("img/officer.png", 5, 7);
-
-	this.walk = function(direction) {
-		grids[this.gridIndex].occupied = false;
-
-		if (direction == Up){
-			this.gridIndex--;
-			this.tileY--;
-		}
-
-		else if (direction == Down){
-			this.gridIndex++;
-			this.tileY++;
-		}
-
-		else{ //Front
-			this.gridIndex-=10;
-			this.tileX--;
-		}
-
-		//grids[this.gridIndex].occupied = true;
-		//grids[this.gridIndex].occupant = this;
-		this.currentFrames = [50, 51, 52, 53];
-	}
-
-	this.stay = function() {
-		//do nothing
-	};
-
-	this.useBomb = function() {
-		for(i=0;i<2;i++){
-			for(j=0;j<3;j++){
-				grids[this.gridIndex-10*(i+1)-1+j].occupied = true;
-
-				//grids[this.gridIndex-10*(i+1)-1+j].occupant="none";
-			}
-		}
-
-		this.numberOfBomb--;
-	};
-
-	this.useRod = function (){
-		grids[this.gridIndex-10].occupant.beingAttacked();
-		this.currentFrames = [57,58,59,60];
-	};
-
-	this.encounterGlue = function(glue) {
-		grids[this.gridIndex-10].occupant.beingAttacked();
-		this.currentFrames = [57];
-        invaders[i].stay();
-	};
-
-	this.encounterSewage = function(sewage) {
-		grids[this.gridIndex-10].occupant.beingAttacked();
-		invaders.push(new Invader(Math.floor(Math.random()*10)));
-	};
-
-/*	this.toString = function() {
-		return "invader";
-	};*/
-
-	this.draw = function() {
-        if (this.tileX >= 2 && this.tileX <= 17) {
-        	if (this.tileY>=0 && this.tileY<=9)
-        	this.sprite.drawAnimated(this.tileX * tileSize, mapStartY + this.tileY * tileSize, this.currentFrames);
-        }
-	};
-}
-
 function Timer(type) {
     var basicTime;
     if (type == "setup") {
@@ -281,7 +205,7 @@ function Timer(type) {
         else if (secondStage == true) {
         	timer = new Timer("play");
         	// genarate invaders
-			generateNewPolice(3)
+			generateNewPolice(3);
 
         	secondStage = false;
         }
