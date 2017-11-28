@@ -1,7 +1,10 @@
 var isDragging = false;
-var draggingObject;
+var draggingObject= "";
 var lastX = 0;
 var lastY = 0;
+var upX = 0;
+var upY = 0;
+var upObject;
 
 var mouse = { //current mouse coordinates
     x: undefined,
@@ -23,6 +26,12 @@ function handleMouseUp(e){
     mouse.y=e.y;
     // clear the drag flag
     isDragging=false;
+    if (draggingObject!="") {
+        upX=e.x;
+        upY=e.y;
+        upObject= draggingObject;
+        draggingObject = "";
+    }
     console.log("up" + isDragging);
 }
 

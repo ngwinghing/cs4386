@@ -27,12 +27,48 @@ function grid(gridIndex) {
 	this.y = gridIndex%10*tileSize;
 	this.occupied = false; //only for player_tools, not police
 	this.occupant = "none"; //player_tool: 1) sewage 2)glue
+	this.active = false;
 
 	this.draw = function() {
 		c.font = "20px Arial";
 		c.fillStyle = "#000000";
-		c.fillText(grids[i].gridIndex, this.x, this.y+mapStartY+20);
+		c.fillText(this.gridIndex, this.x, this.y+mapStartY+20);
+
+		if (mouse.x<(this.x+tileSize+mapStartX) && mouse.x>this.x+mapStartX) {
+            if (mouse.y<(this.y+tileSize+mapStartY) && mouse.y>this.y+mapStartY) {
+                if (isDragging) {
+                	if (this.occupied == false)
+                    if (draggingObject!="") {
+                        c.fillStyle = "rgba(255, 255, 255, 0.5)";
+                        c.fillRect(this.x, this.y+mapStartY, tileSize,tileSize);
+                    }
+                }
+            }
+        }
+
+        if (upX<(this.x+tileSize+mapStartX) && upX>this.x+mapStartX) {
+            if (upY < (this.y + tileSize + mapStartY) && upY > this.y + mapStartY) {
+            	if (upObject!="") {
+            		if (this.occupied == false) {
+                        this.occupant = upObject;
+                        this.occupied = true;
+                        upObject = "";
+                    }
+				}
+            }
+        }
+
+        if (this.occupant !="none") {
+            if (this.occupant == "Umbrella")
+                player_tools.push(new Umbrella(this.gridIndex));
+            else if (this.occupant == "Glue")
+                player_tools.push(new Glue(this.gridIndex));
+        }
 	};
+}
+
+for (var i=0; i<160; i++) {
+    grids.push(new grid(i));
 }
 
 /*function setGrids()  {
@@ -106,7 +142,8 @@ function Glue(gridIndex) {
 	this.tileX = Math.floor(gridIndex/10)+2;
 	this.tileY = gridIndex%10;
 	this.life = 3;
-	//this.img = ??
+    this.img = new Image()
+    this.img.src = "img/glue.png";
 
 	this.beingAttacked = function() {
 		this.life--;
@@ -125,7 +162,7 @@ function Glue(gridIndex) {
 	};
 
 	this.draw = function() {
-		//c.drawImage(this.img, );
+        c.drawImage(this.img, this.tileX * tileSize, mapStartY + this.tileY * tileSize, 32, 32);
 	};
 
 	grids[gridIndex].occupied = true;
@@ -210,8 +247,4 @@ function Timer(type) {
         	secondStage = false;
         }
     }
-}
-
-for (var i=0; i<160; i++) {
-   	grids.push(new grid(i));
 }

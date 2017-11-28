@@ -15,6 +15,13 @@ function newGame() {
             /*Draw Map*/
             c.drawImage(map, 0, mapStartY, mapWidth, mapHeight);
 
+            /*Draw Tools*/
+            if (player_tools.length > 0) {
+                for (i = 0; i < player_tools.length; i++) {
+                    player_tools[i].draw();
+                }
+            }
+
             /*Draw Panel*/
             c.fillStyle = '#1f0804';
             c.fillRect(0,mapHeight+timerHeight,mapWidth, toolBarHeight);
@@ -25,19 +32,14 @@ function newGame() {
             /*Draw Boxes*/
             drawAllBoxes();
 
-            if (isDragging) {
-                drawDragging();
-            }
-
+            /*Draw Active Grid*/
             for (i=0; i<grids.length; i++) {
                 grids[i].draw();
             }
 
-            if (player_tools.length > 0)
-                for(i=0; i<player_tools.length; i++) {
-                    player_tools[i].draw();
-                }
-
+            if (isDragging) {
+                drawDragging();
+            }
             /*Draw Invaders*/
             drawAllInvaders();
 
