@@ -30,10 +30,11 @@ function grid(gridIndex) {
 	this.active = false;
 
 	this.draw = function() {
-		c.font = "20px Arial";
+		/*c.font = "20px Arial";
 		c.fillStyle = "#000000";
-		c.fillText(this.gridIndex, this.x, this.y+mapStartY+20);
+		c.fillText(this.gridIndex, this.x, this.y+mapStartY+20);*/
 
+		/*Draw active grid background*/
 		if (mouse.x<(this.x+tileSize+mapStartX) && mouse.x>this.x+mapStartX) {
             if (mouse.y<(this.y+tileSize+mapStartY) && mouse.y>this.y+mapStartY) {
                 if (isDragging) {
@@ -46,23 +47,23 @@ function grid(gridIndex) {
             }
         }
 
+		/*if dragged on*/
         if (upX<(this.x+tileSize+mapStartX) && upX>this.x+mapStartX) {
             if (upY < (this.y + tileSize + mapStartY) && upY > this.y + mapStartY) {
             	if (upObject!="") {
             		if (this.occupied == false) {
                         this.occupant = upObject;
+                        if (this.occupant == "Umbrella")
+                            player_tools.push(new Umbrella(this.gridIndex));
+                        else if (this.occupant == "Glue")
+                            player_tools.push(new Glue(this.gridIndex));
+                        else if (this.occupant == "Barrier")
+                            player_tools.push(new Barrier(this.gridIndex));
                         this.occupied = true;
                         upObject = "";
                     }
 				}
             }
-        }
-
-        if (this.occupant !="none") {
-            if (this.occupant == "Umbrella")
-                player_tools.push(new Umbrella(this.gridIndex));
-            else if (this.occupant == "Glue")
-                player_tools.push(new Glue(this.gridIndex));
         }
 	};
 }
@@ -83,6 +84,10 @@ function Sewage(gridIndex) {
 
     this.sprite = new Sprite("img/sewage.png", 5, 4);
 
+
+    grids[gridIndex].occupied = true;
+    grids[gridIndex].occupant = this;
+
 	this.open = function() {
         this.currentFrames = [1];
 	};
@@ -100,11 +105,8 @@ function Sewage(gridIndex) {
 	};
 
 	this.draw = function() {
-        this.sprite.drawAnimated(this.tileX * tileSize, mapStartY + this.tileY * tileSize, this.currentFrames);
+        this.sprite.drawAnimated(this.tileX * tileSize+5, mapStartY + this.tileY * tileSize+5, this.currentFrames);
 	};
-
-	grids[gridIndex].occupied = true;
-	grids[gridIndex].occupant = this;
 }
 
 function Barrier(gridIndex) {
@@ -112,7 +114,11 @@ function Barrier(gridIndex) {
 	this.tileX = Math.floor(gridIndex/10)+2;
 	this.tileY = gridIndex%10;
 	this.life = 3;
-	//this.img = ??
+    this.img = new Image()
+    this.img.src = "img/barrier.png";
+
+    grids[gridIndex].occupied = true;
+    grids[gridIndex].occupant = this;
 
 	this.beingAttacked = function() {
 		this.life--;
@@ -130,11 +136,8 @@ function Barrier(gridIndex) {
 	};
 
 	this.draw = function() {
-		//c.drawImage(this.img, );
+        c.drawImage(this.img, this.tileX * tileSize, mapStartY+5 + this.tileY * tileSize+5, 32, 32);
 	};
-
-	grids[gridIndex].occupied = true;
-	grids[gridIndex].occupant = this;
 }
 
 function Glue(gridIndex) {
@@ -144,6 +147,9 @@ function Glue(gridIndex) {
 	this.life = 3;
     this.img = new Image()
     this.img.src = "img/glue.png";
+
+    grids[gridIndex].occupied = true;
+    grids[gridIndex].occupant = this;
 
 	this.beingAttacked = function() {
 		this.life--;
@@ -162,11 +168,8 @@ function Glue(gridIndex) {
 	};
 
 	this.draw = function() {
-        c.drawImage(this.img, this.tileX * tileSize, mapStartY + this.tileY * tileSize, 32, 32);
+        c.drawImage(this.img, this.tileX * tileSize+5, mapStartY + this.tileY * tileSize+5, 32, 32);
 	};
-
-	grids[gridIndex].occupied = true;
-	grids[gridIndex].occupant = this;
 }
 
 function Umbrella(gridIndex) {
@@ -177,6 +180,10 @@ function Umbrella(gridIndex) {
 
     this.img = new Image()
 	this.img.src = "img/umbrella.png";
+
+    grids[gridIndex].occupied = true;
+    grids[gridIndex].occupant = this;
+    //console.log(grids[gridIndex].occupant);
 
 	this.beingAttacked = function() {
 		var index = player_tools.indexOf(this);
@@ -190,12 +197,8 @@ function Umbrella(gridIndex) {
 	};
 
 	this.draw = function() {
-		c.drawImage(this.img, this.tileX * tileSize, mapStartY + this.tileY * tileSize, 32, 32);
+		c.drawImage(this.img, this.tileX * tileSize, mapStartY+5 + this.tileY * tileSize+5, 32, 32);
 	};
-
-	grids[gridIndex].occupied = true;
-	grids[gridIndex].occupant = this;
-	//console.log(grids[gridIndex].occupant);
 }
 
 
@@ -242,7 +245,7 @@ function Timer(type) {
         else if (secondStage == true) {
         	timer = new Timer("play");
         	// genarate invaders
-			generateNewPolice(3);
+			generateNewPolice(1);
 
         	secondStage = false;
         }

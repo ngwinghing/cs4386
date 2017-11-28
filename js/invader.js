@@ -25,8 +25,8 @@ function Invader(tileY) {
             this.tileX--;
         }
 
-        //grids[this.gridIndex].occupied = true;
-        //grids[this.gridIndex].occupant = this;
+        grids[this.gridIndex-1].occupied = true;
+        grids[this.gridIndex-1].occupant = "invader";
         this.currentFrames = [50, 51, 52, 53];
     }
 
