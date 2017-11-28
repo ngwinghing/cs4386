@@ -12,12 +12,19 @@
 <body>
 
 <canvas id="map"></canvas>
+<audio id="soundBackground" src="" style="display: none;"></audio>
+<audio id="soundEffect" src="" style="display: none;"></audio>
+
 
 <script src="js/canvas.js"></script>
+<script src="js/sound.js"></script>
+<script src="js/mouse.js"></script>
+<script src="js/toolbar.js"></script>
 <script src="js/sprite.js"></script>
-<script src="js/utility.js"></script> <!-- for constructors & tools -->
-<script src="js/invade.js"></script>
-<script src="js/interact.js"></script> <!-- for AI? -->
+<script src="js/utility.js"></script>
+<script src="js/invader.js"></script>
+<!-- for constructors & tools -->
+<script src="js/gameStartEndAnimation.js"></script>
 <script src="js/gameFrame.js"></script> <!--contains  init() -->
 
 <script>
@@ -31,7 +38,16 @@
 	player_tools.push(new Umbrella(77));
 	player_tools.push(new Umbrella(78));
 	player_tools.push(new Umbrella(79));
-	player_tools.push(new Sewage(4));
+	player_tools.push(new Sewage(40));
+	player_tools.push(new Sewage(41));
+	player_tools.push(new Sewage(42));
+	player_tools.push(new Sewage(43));
+	player_tools.push(new Sewage(44));
+	player_tools.push(new Sewage(45));
+	player_tools.push(new Sewage(46));
+	player_tools.push(new Sewage(47));
+	player_tools.push(new Sewage(48));
+	player_tools.push(new Sewage(49));
 </script>
 
 </body>
