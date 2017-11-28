@@ -311,28 +311,25 @@ function Timer(type) {
     }
 }
 
-function Box(nameOfTools, value) {
+function Box(nameOfTools, value, boxNumber) {
     var name;
     var type; // limit / time-base
-	var value;
     if (nameOfTools == "umbrella") {
         type = "time";
         this.name = "Umbrella";
         this.img = new Image()
         this.img.src = "img/umbrella.png";
     } else {
-
+        type = "limit";
+        this.name = "Glue";
+        this.img = new Image()
+        this.img.src = "img/glue.png";
     }
-
-    var timer;
-    this.remainingTime = 3;
-    this.basicTime = 10;
-    this.started = false;
 
     this.width = 100;
     this.height = 100;
 
-    this.x = 40;
+    this.x = 40 * (boxNumber) + 90*(boxNumber -1);
     this.y = mapHeight+50;
 
     var rectX = this.x;
@@ -341,13 +338,28 @@ function Box(nameOfTools, value) {
     var rectHeight = 100;
     var cornerRadius = 20;
 
+    var backgroundColor = "#4682b4";
+
+    if (type == "time") {
+        var timer;
+        this.remainingTime = value;
+        this.basicTime = 10;
+        this.started = false;
+    } else {
+        var remainingValue = value;
+        var centerX = rectX + 90;
+        var centerY = rectY + 100;
+        var radius = 18;
+        backgroundColor = "#84211d";
+    }
+
     this.draw = function() {
-		c.strokeStyle = "#4682b4";
+		c.strokeStyle = backgroundColor;
 		c.lineWidth= 1;
 		c.lineJoin = "round";
 		c.lineWidth = cornerRadius;
 		c.strokeRect(rectX+(cornerRadius/2), rectY+(cornerRadius/2), rectWidth-cornerRadius, rectHeight-cornerRadius);
-		c.fillStyle = '#4682b4';
+		c.fillStyle = backgroundColor;
 		c.fillRect(rectX+(cornerRadius/2), rectY+(cornerRadius/2), rectWidth-cornerRadius, rectHeight-cornerRadius);
 
 		c.drawImage(this.img, rectX+20, rectY+10, 60,60);
@@ -375,6 +387,24 @@ function Box(nameOfTools, value) {
 
 			}
 		}
+
+        if (type == "limit") {
+            if(remainingValue != -1) {
+                c.beginPath();
+                c.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+                c.fillStyle = '#ffd700';
+                c.fill();
+                c.lineWidth = 4;
+                c.strokeStyle = '#84211d';
+                c.stroke();
+
+                c.fillStyle = '#000000';
+                c.font = '18px  Arial';
+                c.fillText(remainingValue, centerX-5, centerY+5);
+            } else {
+
+            }
+        }
 
 		if (lastX<(this.x+100) && lastX>this.x) {
             if (lastY<(this.y+100) && lastY>this.y) {

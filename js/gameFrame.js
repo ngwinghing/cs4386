@@ -105,8 +105,14 @@ function newGame() {
             c.strokeRect(0,mapHeight+timerHeight,mapWidth, toolBarHeight);
 
             /*Draw Boxes*/
-            var box1 = new Box("umbrella");
+            var box1 = new Box("umbrella", 3, 1);
             box1.draw();
+
+            var box2 = new Box("glue", 9, 2);
+            box2.draw();
+
+            var box3 = new Box("glue", 1, 3);
+            box3.draw();
 
             // for (i=0; i<grids.length; i++) {
             //     grids[i].draw();
