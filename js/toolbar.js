@@ -104,9 +104,14 @@ function Box(nameOfTools, value, boxNumber) {
 
         if (lastX<(this.x+rectWidth) && lastX>this.x) {
             if (lastY<(this.y+rectHeight) && lastY>this.y) {
-            c.drawImage(this.img, mouse.x, mouse.y);
+                if (isDragging) {
+                    //draggingObject = this.name;
+                    console.log("On Area " + this.name);
+                }
             }
         }
+
+
 
         // isPointInPath(10, 10) isDragging
         // mouse dragging within box
@@ -116,11 +121,23 @@ function Box(nameOfTools, value, boxNumber) {
         //     }
         // }
     }
+    this.drawDragging = function () {
+        c.drawImage(this.img, mouse.x, mouse.y, 40,40);
+    }
 }
 
 function drawAllBoxes() {
     for (var i = 0; i < boxes.length; i++) {
         var box = boxes[i]
         box.draw();
+    }
+}
+
+function drawDragging() {
+    for (var i = 0; i < boxes.length; i++) {
+        var box = boxes[i];
+        if (draggingObject == box.name) {
+            box.drawDragging();
+        }
     }
 }
