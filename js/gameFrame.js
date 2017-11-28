@@ -41,7 +41,10 @@ function newGame() {
             /*Draw Invaders*/
             drawAllInvaders();
 
-            if (secondCount == 20 && timer.started == true) { //1 second
+            if (checkIfAnyInvadersArrived())
+                c.fillRect(100,100,100,100);
+
+            else if (secondCount == 20 && timer.started == true) { //1 second
                 for (i = 0; i < invaders.length; i++) {
                     if (grids[invaders[i].gridIndex].occupied == true) {
                         if (grids[invaders[i].gridIndex].occupant.toString() == "glue")

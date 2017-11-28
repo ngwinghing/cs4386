@@ -151,11 +151,6 @@ function middleAttackOrWalk(invader) {
 }
 
 function detectFront(invader) {
-    console.log("grids[invader.gridIndex] " + grids[invader.gridIndex]);
-    if (grids[invader.gridIndex]<20) {
-        console.log("Win!");
-        return;
-    }
     //walk if grid in front is empty
     if (!grids[invader.gridIndex-10].occupied)
         invader.walk(Front);
@@ -174,5 +169,14 @@ function drawAllInvaders() {
         var invader = invaders[i]
         invader.draw();
     }
+}
+
+function checkIfAnyInvadersArrived() {
+    for (var i = 0; i < invaders.length; i++) {
+        var invader = invaders[i]
+        if (invader.gridIndex <10)
+            return true;
+    }
+    return false;
 }
 
