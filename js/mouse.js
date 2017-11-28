@@ -18,7 +18,6 @@ function handleMouseDown(e){
     isDragging=true;
     lastX = mouse.x;
     lastY = mouse.y;
-    console.log("handleMouseDown " + isDragging +" "+lastX +" "+lastY);
 }
 
 function handleMouseUp(e){
@@ -32,7 +31,6 @@ function handleMouseUp(e){
         upObject= draggingObject;
         draggingObject = "";
     }
-    console.log("up" + isDragging);
 }
 
 function handleMouseOut(e){
@@ -40,7 +38,6 @@ function handleMouseOut(e){
     mouse.y=e.y;
     // user has left the canvas, so clear the drag flag
     isDragging=false;
-    console.log("out");
 }
 
 function handleMouseMove(e){
@@ -49,20 +46,6 @@ function handleMouseMove(e){
     }
     mouse.x=e.x;
     mouse.y=e.y;
-    // if the drag flag is set, clear the canvas and draw the image
-
-    // mousemove stuff here
-/*    for (var i = 0; i < ships.length; i++) {
-        var ship = ships[i];
-        drawShip(ship);
-        if (ctx.isPointInPath(lastX, lastY)) {
-            ship.x += (mouseX - lastX);
-            ship.y += (mouseY - lastY);
-            ship.right = ship.x + ship.width;
-            ship.bottom = ship.y + ship.height;
-        }
-    }*/
-    console.log("move " + isDragging + draggingObject);
 }
 
 window.addEventListener('mousedown', function(e){handleMouseDown(e);})
