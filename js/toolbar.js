@@ -102,11 +102,10 @@ function Box(nameOfTools, value, boxNumber) {
             }
         }
 
-        if (lastX<(this.x+100) && lastX>this.x) {
-            if (lastY<(this.y+100) && lastY>this.y) {
-            c.fillRect(100,100,100, 100);
-            //c.drawImage(this.img, mouse.x, mouse.y);
-        }
+        if (lastX<(this.x+rectWidth) && lastX>this.x) {
+            if (lastY<(this.y+rectHeight) && lastY>this.y) {
+            c.drawImage(this.img, mouse.x, mouse.y);
+            }
         }
 
         // isPointInPath(10, 10) isDragging
