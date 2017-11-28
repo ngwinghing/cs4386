@@ -1,4 +1,5 @@
 secondCount = 0;
+
 function newGame() {
     setInterval(
         function() {
