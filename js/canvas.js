@@ -23,3 +23,6 @@ btn.src= "img/btn.png";
 c.font = "20px Arial";
 c.fillStyle = '#DC143C';
 c.fillRect(0, 0, mapWidth, timerHeight);
+
+var soundEffect = document.getElementById("soundEffect");;
+var soundClick = "click.mp3";

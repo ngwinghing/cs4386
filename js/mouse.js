@@ -18,6 +18,7 @@ function handleMouseDown(e){
     isDragging=true;
     lastX = mouse.x;
     lastY = mouse.y;
+    soundPlay("click");
 }
 
 function handleMouseUp(e){
