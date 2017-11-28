@@ -5,18 +5,18 @@ secondCount = 0;
 function topBotAttackOrWalk(invader){
     //front has an obstacle
     if (invader.tileY==0 && !grids[invader.gridIndex+1].occupied &&
-        !grids[invader.gridIndex-10+1].occupied) 
+        !grids[invader.gridIndex-10+1].occupied)
         invader.walk(Down);
 
     //check if bot row
     else if (invader.tileY==9 && !grids[invader.gridIndex-1].occupied &&
         !grids[invader.gridIndex-10-1].occupied)
         invader.walk(Up);
-    
+
     else
         invader.useRod();
 }
-    
+
 function middleAttackOrWalk(invader) {
     //front has an obstacle
     //both grids occupied, use weapon
@@ -24,11 +24,11 @@ function middleAttackOrWalk(invader) {
     if (grids[invader.gridIndex-9].occupied && grids[invader.gridIndex-11].occupied) {
         for(i=0;i<10;i++)
             //retrieve front col from top to bottom
-            if (grids[(Math.floor(invader.gridIndex/10)*10)+i].occupied) 
+            if (grids[(Math.floor(invader.gridIndex/10)*10)+i].occupied)
                 obstacleCount++;
 
         /*-----------original code-----------
-        //use bomb when there are more than 9 obstacle 
+        //use bomb when there are more than 9 obstacle
         if (obstacleCount >= 9 && invader.numberOfBomb > 0)
             invader.useBomb();
         //obstacleCount is 3 to 8
@@ -50,7 +50,7 @@ function middleAttackOrWalk(invader) {
         invader.walk(Up);
 
     //1 grid downward is empty
-    else 
+    else
         invader.walk(Down);
 }
 
@@ -62,10 +62,10 @@ function detectFront(invader) {
     //check if top or bottom row
     else if (invader.tileY == 0 || invader.tileY == 9)
         topBotAttackOrWalk(invader);
-    
+
     //middle rows
-    else 
-        middleAttackOrWalk(invader);        
+    else
+        middleAttackOrWalk(invader);
 }
 
 function newGame() {
@@ -105,14 +105,7 @@ function newGame() {
             c.strokeRect(0,mapHeight+timerHeight,mapWidth, toolBarHeight);
 
             /*Draw Boxes*/
-            var box1 = new Box("umbrella", 3, 1);
-            box1.draw();
-
-            var box2 = new Box("glue", 9, 2);
-            box2.draw();
-
-            var box3 = new Box("glue", 1, 3);
-            box3.draw();
+            drawAllBoxes();
 
             // for (i=0; i<grids.length; i++) {
             //     grids[i].draw();
@@ -139,7 +132,7 @@ function newGame() {
                             invaders[i].encounterSewage(grids[invaders[i].gridIndex].occupant);
                     }
 
-                    else 
+                    else
                         detectFront(invaders[i]);
                 }
 
@@ -165,7 +158,7 @@ function newGame() {
             // for (var i = 0; i < policeArray.length; i++) {
             //     policeArray[i].update();
             // }
-           
+
         }
     , 50);
 }

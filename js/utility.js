@@ -15,7 +15,7 @@ player_tools = [];
 invaders = [];
 secondStage = true;
 
-timer = new Timer("setup"); 
+timer = new Timer("setup");
 
 Up=1;
 Down=2;
@@ -30,7 +30,7 @@ function grid(gridIndex) {
 
 	this.draw = function() {
 		c.font = "20px Arial";
-		c.fillStyle = "#000000"; 
+		c.fillStyle = "#000000";
 		c.fillText(grids[i].gridIndex, this.x, this.y+mapStartY+20);
 	};
 }
@@ -91,7 +91,7 @@ function Barrier(gridIndex) {
 
 	this.toString = function() {
 		return "barrier";
-	};	
+	};
 
 	this.draw = function() {
 		//c.drawImage(this.img, );
@@ -126,7 +126,7 @@ function Glue(gridIndex) {
 
 	this.draw = function() {
 		//c.drawImage(this.img, );
-	};	
+	};
 
 	grids[gridIndex].occupied = true;
 	grids[gridIndex].occupant = this;
@@ -182,7 +182,7 @@ function Invader(tileY) {
 
 	this.walk = function(direction) {
 		grids[this.gridIndex].occupied = false;
-		
+
 		if (direction == Up){
 			this.gridIndex--;
 			this.tileY--;
@@ -291,12 +291,12 @@ function Timer(type) {
         	do {
         		random2 = Math.floor(Math.random()*10);
         	} while (random2 == random1)
-        		
+
 
         	do {
         		random3 = Math.floor(Math.random()*10);
         	} while (random3 == random1 || random3 == random2)
-        		
+
         	invaders.push(new Invader(random1));
         	invaders.push(new Invader(random2));
         	invaders.push(new Invader(random3));
@@ -308,110 +308,6 @@ function Timer(type) {
 
         	secondStage = false;
         }
-    }
-}
-
-function Box(nameOfTools, value, boxNumber) {
-    var name;
-    var type; // limit / time-base
-    if (nameOfTools == "umbrella") {
-        type = "time";
-        this.name = "Umbrella";
-        this.img = new Image()
-        this.img.src = "img/umbrella.png";
-    } else {
-        type = "limit";
-        this.name = "Glue";
-        this.img = new Image()
-        this.img.src = "img/glue.png";
-    }
-
-    this.width = 100;
-    this.height = 100;
-
-    this.x = 40 * (boxNumber) + 90*(boxNumber -1);
-    this.y = mapHeight+50;
-
-    var rectX = this.x;
-    var rectY = this.y;
-    var rectWidth = 100;
-    var rectHeight = 100;
-    var cornerRadius = 20;
-
-    var backgroundColor = "#4682b4";
-
-    if (type == "time") {
-        var timer;
-        this.remainingTime = value;
-        this.basicTime = 10;
-        this.started = false;
-    } else {
-        var remainingValue = value;
-        var centerX = rectX + 90;
-        var centerY = rectY + 100;
-        var radius = 18;
-        backgroundColor = "#84211d";
-    }
-
-    this.draw = function() {
-		c.strokeStyle = backgroundColor;
-		c.lineWidth= 1;
-		c.lineJoin = "round";
-		c.lineWidth = cornerRadius;
-		c.strokeRect(rectX+(cornerRadius/2), rectY+(cornerRadius/2), rectWidth-cornerRadius, rectHeight-cornerRadius);
-		c.fillStyle = backgroundColor;
-		c.fillRect(rectX+(cornerRadius/2), rectY+(cornerRadius/2), rectWidth-cornerRadius, rectHeight-cornerRadius);
-
-		c.drawImage(this.img, rectX+20, rectY+10, 60,60);
-
-        c.fillStyle = '#dba520';
-        c.fillRect(rectX, rectY+70,rectWidth, 25);
-
-        c.fillStyle = '#000000';
-        c.font = '18px  Arial';
-        c.fillText(this.name, rectX+12, rectY+88);
-
-        if (type == "time") {
-            if(this.remainingTime != -1) {
-                // basic
-                c.fillStyle = '#2F4F4F';
-                c.fillRect(rectX,rectY+105,this.width, 15);
-
-                // remain time
-                c.fillStyle = '#DC143C';
-                c.fillRect(rectX,rectY+105,(this.width * this.remainingTime/this.basicTime), 15);
-
-                this.started = true;
-                this.remainingTime--;
-            } else {
-
-			}
-		}
-
-        if (type == "limit") {
-            if(remainingValue != -1) {
-                c.beginPath();
-                c.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
-                c.fillStyle = '#ffd700';
-                c.fill();
-                c.lineWidth = 4;
-                c.strokeStyle = '#84211d';
-                c.stroke();
-
-                c.fillStyle = '#000000';
-                c.font = '18px  Arial';
-                c.fillText(remainingValue, centerX-5, centerY+5);
-            } else {
-
-            }
-        }
-
-		if (lastX<(this.x+100) && lastX>this.x) {
-            if (lastY<(this.y+100) && lastY>this.y) {
-
-            }
-		}
-
     }
 }
 
