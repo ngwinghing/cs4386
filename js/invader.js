@@ -157,6 +157,9 @@ function detectFront(invader) {
     if (!grids[invader.gridIndex-10].occupied)
         invader.walk(Front);
 
+    else if (grids[invader.gridIndex-10].occupied && !grids[invader.gridIndex-10].occupant.detectable)
+        invader.walk(Front);
+
     //check if top or bottom row
     else if (invader.tileY == 0 || invader.tileY == 9)
         topBotAttackOrWalk(invader);

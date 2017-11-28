@@ -115,6 +115,7 @@ function Barrier(gridIndex) {
 	this.tileX = Math.floor(gridIndex/10)+2;
 	this.tileY = gridIndex%10;
 	this.life = 3;
+	this.detectable = true;
 
     this.img = new Image()
     this.img.src = "img/barrier.png";
