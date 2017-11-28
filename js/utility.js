@@ -244,8 +244,6 @@ function Invader(tileY) {
         	if (this.tileY>=0 && this.tileY<=9)
         	this.sprite.drawAnimated(this.tileX * tileSize, mapStartY + this.tileY * tileSize, this.currentFrames);
         }
-
-        console.log(this.tileX, this.tileY);
 	};
 }
 
@@ -278,33 +276,12 @@ function Timer(type) {
             c.fillText(this.remainingTime, 5, 22);
 
             this.started = true;
-            this.remainingTime--;
         }
 
         else if (secondStage == true) {
         	timer = new Timer("play");
-
-        	random1 = Math.floor(Math.random()*10);
-        	random2 = random1;
-        	random3 = random1;
-
-        	do {
-        		random2 = Math.floor(Math.random()*10);
-        	} while (random2 == random1)
-
-
-        	do {
-        		random3 = Math.floor(Math.random()*10);
-        	} while (random3 == random1 || random3 == random2)
-
-        	invaders.push(new Invader(random1));
-        	invaders.push(new Invader(random2));
-        	invaders.push(new Invader(random3));
-        	console.log(random1);
-        	console.log(random2);
-        	console.log(random3);
-
-        	timer = new Timer("play");
+        	// genarate invaders
+			generateNewPolice(3)
 
         	secondStage = false;
         }
