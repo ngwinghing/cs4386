@@ -108,10 +108,15 @@ function Box(nameOfTools, value, boxNumber) {
         }
 
         if (lastX-mapStartX<(this.x+rectWidth) && lastX-mapStartX>this.x) {
+            if (lastY - mapStartY < (this.y + rectHeight) && lastY - mapStartY > this.y) {
+                soundPlay("click");
+            }
+        }
+
+        if (lastX-mapStartX<(this.x+rectWidth) && lastX-mapStartX>this.x) {
             if (lastY-mapStartY<(this.y+rectHeight) && lastY-mapStartY>this.y) {
                 if (isDragging) {
                     draggingObject = this.name;
-                    console.log("On Area " + this.name);
                 }
             }
         }

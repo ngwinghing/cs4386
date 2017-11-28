@@ -20,9 +20,8 @@ map.src= "img/tmp_bg.jpg";
 var btn = new Image();
 btn.src= "img/btn.png";
 
-c.font = "20px Arial";
-c.fillStyle = '#DC143C';
-c.fillRect(0, 0, mapWidth, timerHeight);
+var start_1 = new Image();
+start_1.src= "img/start_1.jpg";
 
 var soundEffect = document.getElementById("soundEffect");;
-var soundClick = "click.mp3";
+var soundClick = "./mp3/click.mp3";
