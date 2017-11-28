@@ -102,27 +102,17 @@ function Box(nameOfTools, value, boxNumber) {
             }
         }
 
-        if (lastX<(this.x+rectWidth) && lastX>this.x) {
-            if (lastY<(this.y+rectHeight) && lastY>this.y) {
+        if (lastX-mapStartX<(this.x+rectWidth) && lastX-mapStartX>this.x) {
+            if (lastY-mapStartY<(this.y+rectHeight) && lastY-mapStartY>this.y) {
                 if (isDragging) {
-                    //draggingObject = this.name;
+                    draggingObject = this.name;
                     console.log("On Area " + this.name);
                 }
             }
         }
-
-
-
-        // isPointInPath(10, 10) isDragging
-        // mouse dragging within box
-        // if (lastX<(this.x+100) && lastX>this.x) {
-        //     if (lastY<(this.y+100) && lastY>this.y) {
-        //
-        //     }
-        // }
     }
     this.drawDragging = function () {
-        c.drawImage(this.img, mouse.x, mouse.y, 40,40);
+        c.drawImage(this.img, mouse.x-mapStartX-10, mouse.y-mapStartY-5, 40,40);
     }
 }
 

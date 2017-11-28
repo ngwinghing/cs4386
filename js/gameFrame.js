@@ -1,5 +1,5 @@
 secondCount = 0;
-
+gameEnd = false;
 function newGame() {
     setInterval(
         function() {
@@ -41,9 +41,10 @@ function newGame() {
             /*Draw Invaders*/
             drawAllInvaders();
 
-            if (checkIfAnyInvadersArrived())
-                c.fillRect(100,100,100,100);
-
+            if (checkIfAnyInvadersArrived()) {
+                c.fillRect(100, 100, 100, 100);
+                gameEnd = true;
+            }
             else if (secondCount == 20 && timer.started == true) { //1 second
                 for (i = 0; i < invaders.length; i++) {
                     if (grids[invaders[i].gridIndex].occupied == true) {
@@ -58,7 +59,8 @@ function newGame() {
                 }
             }
 
-            secondCount--;
+            if (!gameEnd)
+                secondCount--;
             // animated
             //police.drawAnimated(100,100,[1,2,3,4]); //stand
             //police.drawAnimated(400,400,[8,9,10,11]); // walk

@@ -53,7 +53,7 @@ function handleMouseMove(e){
             ship.bottom = ship.y + ship.height;
         }
     }*/
-    console.log("move " + isDragging);
+    console.log("move " + isDragging + draggingObject);
 }
 
 window.addEventListener('mousedown', function(e){handleMouseDown(e);})
