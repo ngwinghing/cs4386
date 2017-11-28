@@ -1,11 +1,12 @@
 var canvas = document.querySelector('canvas');
 
 canvas.width = 800;
-canvas.height = 600;
+canvas.height = 800;
 
 var tileSize = 44.4;
 
-var timerHeight = tileSize/1.5;
+var timerHeight = 30;
+var toolBarHeight = 150;
 var mapStartX = (innerWidth-canvas.width)/2;
 var mapStartY = timerHeight +1 ;
 var mapWidth = canvas.width;
@@ -19,6 +20,19 @@ map.src= "img/tmp_bg.jpg";
 var btn = new Image();
 btn.src= "img/btn.png";
 
+c.font = "20px Arial";
+c.fillStyle = '#DC143C';
+c.fillRect(0, 0, mapWidth, timerHeight);
+
+var canvasOffset = canvas.offset();
+var offsetX = canvasOffset.left;
+var offsetY = canvasOffset.top;
+
+var mouseIsDown = false;
+var lastX = 0;
+var lastY = 0;
+
+var box = [];
 
 // c.fillRect(100, 100, 100, 100);
 // console.log(canvas);
@@ -53,6 +67,59 @@ window.addEventListener('mousedown',
         click.y = event.y;
     }
 )
+
+// function handleMouseDown(e) {
+//     mouseX = parseInt(e.clientX - offsetX);
+//     mouseY = parseInt(e.clientY - offsetY);
+//
+//     // mousedown stuff here
+//     lastX = mouseX;
+//     lastY = mouseY;
+//     mouseIsDown = true;
+//
+// }
+//
+// function handleMouseUp(e) {
+//     mouseX = parseInt(e.clientX - offsetX);
+//     mouseY = parseInt(e.clientY - offsetY);
+//
+//     // mouseup stuff here
+//     mouseIsDown = false;
+// }
+//
+// function handleMouseMove(e) {
+//     if (!mouseIsDown) {
+//         return;
+//     }
+//
+//     mouseX = parseInt(e.clientX - offsetX);
+//     mouseY = parseInt(e.clientY - offsetY);
+//
+//     // mousemove stuff here
+//     for (var i = 0; i < ships.length; i++) {
+//         var ship = ships[i];
+//         drawShip(ship);
+//         if (ctx.isPointInPath(lastX, lastY)) {
+//             ship.x += (mouseX - lastX);
+//             ship.y += (mouseY - lastY);
+//             ship.right = ship.x + ship.width;
+//             ship.bottom = ship.y + ship.height;
+//         }
+//     }
+//     lastX = mouseX;
+//     lastY = mouseY;
+//     drawAllShips();
+// }
+//
+// $("#canvas").mousedown(function (e) {
+//     handleMouseDown(e);
+// });
+// $("#canvas").mousemove(function (e) {
+//     handleMouseMove(e);
+// });
+// $("#canvas").mouseup(function (e) {
+//     handleMouseUp(e);
+// });
 
 // window.addEventListener('resize', function() {
 //     canvas.width = window.innerWidth*0.7;
@@ -103,32 +170,9 @@ window.addEventListener('mousedown',
 //     }
 // }
 
-function Timer(type) {
-    var basicTime;
-    if (type == "attack") {
-        basicTime = 30;
-    } else {
-        // prepare
-        basicTime = 60;
-    }
 
-    this.width = canvas.width;
-    this.height = timerHeight;
-
-    this.draw = function(time) {
-        this.time = time;
-
-        // basic
-        c.fillStyle = '#2F4F4F';
-        c.fillRect(0,0,this.width, this.height);
-
-        // remain time
-        c.fillStyle = '#DC143C';
-        c.fillRect(0,0,(this.width * this.time/basicTime), this.height);
-    }
-}
 
 // var policeArray = [];
 
-var timer = new Timer("attack");
+
 
