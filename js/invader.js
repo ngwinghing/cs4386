@@ -52,14 +52,15 @@ function Invader(tileY) {
     };
 
     this.encounterGlue = function(glue) {
-        grids[this.gridIndex-10].occupant.beingAttacked();
+        glue.beingAttacked();
         this.currentFrames = [57];
         invaders[i].stay();
     };
 
     this.encounterSewage = function(sewage) {
-        grids[this.gridIndex-10].occupant.beingAttacked();
-        invaders.push(new Invader(Math.floor(Math.random()*10)));
+        sewage.beingAttacked();
+        var index = invaders.indexOf(this);
+        invaders.splice(index, 1, new Invader(this.tileY));
     };
 
     /*	this.toString = function() {
@@ -154,6 +155,10 @@ function detectFront(invader) {
     //walk if grid in front is empty
     if (!grids[invader.gridIndex-10].occupied)
         invader.walk(Front);
+
+    else if  (grids[invader.gridIndex-10].occupied)
+        if (!grids[invader.gridIndex-10].occupant.detectable)
+            invader.walk(Front);
 
     //check if top or bottom row
     else if (invader.tileY == 0 || invader.tileY == 9)
