@@ -1,7 +1,3 @@
-/**
- * Created by ngwinghing on 25/11/2017.
- */
-
 var Sprite = function(fn) {
     this.image = null;
     this.is_pattern = false;
