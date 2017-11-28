@@ -70,7 +70,7 @@ function Box(nameOfTools, value, boxNumber) {
 
         c.fillStyle = '#000000';
         c.font = '18px  Arial';
-        c.fillText(this.name, rectX+12, rectY+88);
+        c.fillText(this.name, rectX+45, rectY+88);
 
         if (this.type == "time") {
             if(this.remainingTime != -1) {
@@ -107,11 +107,12 @@ function Box(nameOfTools, value, boxNumber) {
             }
         }
 
-        if (lastX-mapStartX<(this.x+rectWidth) && lastX-mapStartX>this.x) {
-            if (lastY - mapStartY < (this.y + rectHeight) && lastY - mapStartY > this.y) {
+        if (downX-mapStartX<(this.x+rectWidth) && downX-mapStartX>this.x)
+            if (downY-mapStartY<(this.y+rectHeight) && downY-mapStartY>this.y) {
+                downX = 0;
+                downY = 0;
                 soundPlay("click");
             }
-        }
 
         if (lastX-mapStartX<(this.x+rectWidth) && lastX-mapStartX>this.x) {
             if (lastY-mapStartY<(this.y+rectHeight) && lastY-mapStartY>this.y) {

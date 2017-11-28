@@ -241,7 +241,7 @@ function Timer(type) {
             c.fillRect(0,0,(this.width * this.remainingTime/basicTime), this.height);
 
             c.fillStyle = '#000000';
-            c.fillText(this.remainingTime, 5, 22);
+            c.fillText(this.remainingTime, 15, 22);
 
             this.started = true;
         }
