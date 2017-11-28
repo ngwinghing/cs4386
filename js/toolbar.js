@@ -1,6 +1,6 @@
 var boxes = [];
 
-var box1 = new Box("umbrella", 3, 1);
+var box1 = new Box("umbrella", 5, 1);
 boxes.push(box1);
 
 var box2 = new Box("glue", 9, 2);
@@ -39,8 +39,7 @@ function Box(nameOfTools, value, boxNumber) {
     var backgroundColor = "#4682b4";
 
     if (this.type == "time") {
-        this.timer;
-        this.remainingTime = value;
+        this.remainingTime = 3;
         this.basicTime = 10;
     } else {
         var remainingValue = value;
@@ -78,8 +77,8 @@ function Box(nameOfTools, value, boxNumber) {
                 c.fillStyle = '#DC143C';
                 c.fillRect(rectX,rectY+105,(this.width * this.remainingTime/this.basicTime), 15);
 
-                this.started = true;
-                this.remainingTime--;
+               // this.started = true;
+               // this.remainingTime--;
             } else {
 
             }
