@@ -1,4 +1,5 @@
 var isDragging = false;
+var draggingObject;
 var lastX = 0;
 var lastY = 0;
 
@@ -12,7 +13,9 @@ function handleMouseDown(e){
     mouse.y=e.y;
     // set the drag flag
     isDragging=true;
-    console.log("handleMouseDown");
+    lastX = mouse.x;
+    lastY = mouse.y;
+    console.log("handleMouseDown " + isDragging +" "+lastX +" "+lastY);
 }
 
 function handleMouseUp(e){
@@ -20,7 +23,7 @@ function handleMouseUp(e){
     mouse.y=e.y;
     // clear the drag flag
     isDragging=false;
-    console.log("up");
+    console.log("up" + isDragging);
 }
 
 function handleMouseOut(e){
@@ -32,7 +35,7 @@ function handleMouseOut(e){
 }
 
 function handleMouseMove(e){
-    if (isDragging) {
+    if (!isDragging) {
         return;
     }
     mouse.x=e.x;
@@ -50,9 +53,7 @@ function handleMouseMove(e){
             ship.bottom = ship.y + ship.height;
         }
     }*/
-    lastX = mouse.x;
-    lastY = mouse.y;
-    console.log("move");
+    console.log("move " + isDragging);
 }
 
 window.addEventListener('mousedown', function(e){handleMouseDown(e);})
