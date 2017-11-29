@@ -13,7 +13,7 @@ function Timer() {
     this.draw = function () {
         if (this.remainingTime == -1) { //use all time
             changeMode();
-            this.remainingTime = basicTime;
+            //this.remainingTime = basicTime;
         }
         // basic
         c.fillStyle = '#2F4F4F';
@@ -33,9 +33,11 @@ function changeMode() {
     if (timerMode == "setup") {
         timerMode = "attack";
         timer.basicTime = 40;
+        timer.remainingTime = timer.basicTime;
     } else {
         timerMode = "setup";
         timer.basicTime = 10;
+        timer.remainingTime = timer.basicTime;
     }
 }
 
