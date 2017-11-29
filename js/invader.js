@@ -29,7 +29,6 @@ function Invader(tileY) {
         grids[this.gridIndex].occupied = true;
         grids[this.gridIndex].invaderExists = true;
         this.currentFrames = [50, 51, 52, 53];
-        console.log("walk to" + this.gridIndex);
     }
 
     this.stay = function() {

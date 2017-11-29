@@ -3,7 +3,7 @@ var boxes = [];
 var box1 = new Box("umbrella", 2, 1);
 boxes.push(box1);
 
-var box2 = new Box("glue", 4, 2);
+var box2 = new Box("glue", 6, 2);
 boxes.push(box2);
 
 var box3 = new Box("sewage", 5, 3);
@@ -57,7 +57,6 @@ function Box(nameOfTools, value, boxNumber) {
 
     var backgroundColor = "#4682b4";
 
-    this.timeCounter = this.coolingTime/0.05;
     this.ableToDrag = true;
 
     if (this.type == "time") {
@@ -93,15 +92,10 @@ function Box(nameOfTools, value, boxNumber) {
             if (this.remainingTime !=0) {
                 this.ableToDrag = false;
                 //timer start and count 2s
-                if (this.timeCounter != -1)
-                    this.timeCounter--;
-                else {
-                    this.remainingTime--;
-                }
+                this.remainingTime--;
             }
              else {
                 this.ableToDrag = true;
-                this.timeCounter = this.coolingTime/0.05;
             }
             // basic
             c.fillStyle = '#2F4F4F';
@@ -109,16 +103,13 @@ function Box(nameOfTools, value, boxNumber) {
 
             // remain time
             c.fillStyle = '#DC143C';
-            c.fillRect(rectX, rectY + 105, (this.width * (this.remainingTime / this.basicTime)), 15);
+            c.fillRect(rectX, rectY + 105, Math.floor(this.width * (this.remainingTime / (this.basicTime*20))), 15);
 
-            // this.started = true;
-            // this.remainingTime--;
         }
 
         if (this.type == "limit") {
             if (this.remainingValue > 0) {
                 this.ableToDrag = true;
-                //this.remainingValue--;
             } else {
                 this.ableToDrag = false;
             }
@@ -134,6 +125,7 @@ function Box(nameOfTools, value, boxNumber) {
             c.font = '18px  Arial';
             c.fillText(this.remainingValue, centerX - 5, centerY + 5);
         }
+
         if (this.ableToDrag) {
             if (downX - mapStartX < (this.x + rectWidth) && downX - mapStartX > this.x)
                 if (downY - mapStartY < (this.y + rectHeight) && downY - mapStartY > this.y) {
@@ -157,7 +149,7 @@ function Box(nameOfTools, value, boxNumber) {
 
         if (used == this.name) {
             if (this.type == "time"){
-                this.remainingTime = this.coolingTime;
+                this.remainingTime = 20* this.coolingTime;;
             } else{
                 this.remainingValue--;
             }
