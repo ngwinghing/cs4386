@@ -3,11 +3,14 @@ var boxes = [];
 var box1 = new Box("umbrella", 2, 1);
 boxes.push(box1);
 
-var box2 = new Box("glue", 10, 2);
+var box2 = new Box("sewage", 5, 2);
 boxes.push(box2);
 
-var box3 = new Box("barrier", 10, 3);
+var box3 = new Box("glue", 10, 3);
 boxes.push(box3);
+
+var box4 = new Box("barrier", 10, 4);
+boxes.push(box4);
 
 var used = "";
 function Box(nameOfTools, value, boxNumber) {
@@ -26,6 +29,12 @@ function Box(nameOfTools, value, boxNumber) {
         this.img = new Image()
         this.img.src = "img/barrier.png";
         this.limit=value;
+    } else if (nameOfTools == "sewage") {
+        this.type = "time";
+        this.name = "Sewage";
+        this.img = new Image()
+        this.img.src = "img/sewage_1.png";
+        this.coolingTime= value;
     } else {
         this.type = "limit";
         this.name = "Glue";
@@ -170,14 +179,17 @@ function drawAllBoxes() {
 function resetAllBoxes() {
     boxes = [];
 
-    box1 = new Box("umbrella", 2, 1);
+    var box1 = new Box("umbrella", 2, 1);
     boxes.push(box1);
 
-    box2 = new Box("glue", 10, 2);
+    var box2 = new Box("sewage", 5, 2);
     boxes.push(box2);
 
-    box3 = new Box("barrier", 10, 3);
+    var box3 = new Box("glue", 10, 3);
     boxes.push(box3);
+
+    var box4 = new Box("barrier", 10, 4);
+    boxes.push(box4);
 }
 
 function drawDragging() {

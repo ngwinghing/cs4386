@@ -96,6 +96,8 @@ function grid(gridIndex) {
                             player_tools.push(new Glue(this.gridIndex));
                         else if (this.occupant == "Barrier")
                             player_tools.push(new Barrier(this.gridIndex));
+                        else if (this.occupant == "Sewage")
+                            player_tools.push(new Sewage(this.gridIndex));
                         this.occupied = true;
                         upObject = "";
                         upX=0;
