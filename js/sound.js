@@ -1,10 +1,17 @@
+function setHalfVolume(value) {
+    soundBackground.volume = value;
+}
 
 function soundPlay(type) {
-    if (type == "click")
+    if (type == "click") {
         soundEffect.src = soundClick;
-    else if (type == "pre_bg")
+        soundEffect.play();
+    }
+    else if (type == "pre_bg") {
         soundBackground.src = soundPreBg;
-    else if (type == "attack_bg")
+    }
+    else if (type == "attack_bg") {
+        setHalfVolume(0.3);
         soundBackground.src = soundAttackBg;
-    soundEffect.play();
+}
 }

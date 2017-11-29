@@ -34,10 +34,12 @@ function changeMode() {
         timerMode = "attack";
         timer.basicTime = 40;
         timer.remainingTime = timer.basicTime;
+        soundPlay("attack_bg");
     } else {
         timerMode = "setup";
         timer.basicTime = 10;
         timer.remainingTime = timer.basicTime;
+        soundPlay("pre_bg");
     }
 }
 
@@ -45,4 +47,5 @@ function resetMode() {
     timerMode = "setup";
     timer.basicTime = 10;
     timer.remainingTime=10;
+    soundPlay("pre_bg");
 }
