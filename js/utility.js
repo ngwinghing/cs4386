@@ -25,8 +25,12 @@ function grid(gridIndex) {
 	this.gridIndex = gridIndex;
 	this.x = (Math.floor(gridIndex/10)+2)*tileSize;
 	this.y = gridIndex%10*tileSize;
-	this.occupied = false; //only for player_tools, not police
-	this.occupant = "none"; //player_tool: 1) sewage 2)glue
+	this.occupied = false; //for both player_tools & police
+
+	/*must have 2 separate variable to check if they are overlapped in gameFrame.js*/
+	this.occupant = "none"; //only for player_tool
+	this.invaderExists = false; //only for invader: whether invader exists
+
 	this.active = false;
 
 	this.draw = function() {
@@ -89,14 +93,12 @@ function Sewage(gridIndex) {
     grids[gridIndex].occupied = true;
     grids[gridIndex].occupant = this;
 
-	this.open = function() {
+/*	this.open = function() {
         this.currentFrames = [1];
-	};
+	};*/
 
 	this.beingAttacked = function() {
-		// var index = player_tools.indexOf(this);
-		// player_tools.splice(index, 1);
-		// this.img.src = "covered_sewage";
+		this.currentFrames = [1];
 		grids[this.gridIndex].occupied = false;
 		grids[this.gridIndex].occupant = "none";
 	};
@@ -177,6 +179,7 @@ function Glue(gridIndex) {
 }
 
 function Umbrella(gridIndex) {
+	console.log(grids[gridIndex].occupied);
 	this.gridIndex = gridIndex;
 	this.tileX = Math.floor(gridIndex/10)+2;
 	this.tileY = gridIndex%10;
@@ -188,7 +191,7 @@ function Umbrella(gridIndex) {
 
     grids[gridIndex].occupied = true;
     grids[gridIndex].occupant = this;
-    //console.log(grids[gridIndex].occupant);
+    console.log(grids[gridIndex].occupant);
 
 	this.beingAttacked = function() {
 		var index = player_tools.indexOf(this);

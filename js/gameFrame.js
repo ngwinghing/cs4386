@@ -50,19 +50,24 @@ function newGame() {
                     c.fillRect(100, 100, 100, 100);
                     gameEnd = true;
                 }
+
                 else if (secondCount == 20 && timer.started == true) { //1 second
                     for (i = 0; i < invaders.length; i++) {
-                        if (grids[invaders[i].gridIndex].occupied == true) {
-                            if (grids[invaders[i].gridIndex].occupant.toString() == "glue")
-                                invaders[i].encounterGlue(grids[invaders[i].gridIndex].occupant);
+                        var currentGrid = grids[invaders[i].gridIndex];
+                        //if (currentGrid.occupied == true) {
+                            if (currentGrid.occupant.toString() == "glue")
+                                invaders[i].encounterGlue(currentGrid.occupant);
 
-                            else if (grids[invaders[i].gridIndex].occupant.toString() == "sewage")
-                                invaders[i].encounterSewage(grids[invaders[i].gridIndex].occupant);
-                        } 
+                            else if (currentGrid.occupant.toString() == "sewage")
+                                invaders[i].encounterSewage(currentGrid.occupant);
 
-                        else {
+                            // else if (currentGrid.invaderExists == true)
+                            //     detectFront(invaders[i]);
+                        //} 
+
+                        else 
                             detectFront(invaders[i]);
-                        }
+                        
                     }
                 }
 
