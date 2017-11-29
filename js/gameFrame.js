@@ -223,6 +223,7 @@ function newGame() {
             if (gameEnd)
                 frameRate = 50;
         }
+        }
     , frameRate);
 }
 
