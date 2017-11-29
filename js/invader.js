@@ -54,7 +54,7 @@ function Invader(tileY) {
     this.encounterGlue = function(glue) {
         glue.beingAttacked();
         this.currentFrames = [98,99,100,101];
-        invaders[i].stay();
+        this.stay();
     };
 
     this.encounterSewage = function(sewage) {
@@ -118,7 +118,8 @@ function middleAttackOrWalk(invader) {
     //front has an obstacle
     //both grids occupied, use weapon
     var obstacleCount = 0;
-    if (grids[invader.gridIndex-9].occupied && grids[invader.gridIndex-11].occupied) {
+    if (grids[invader.gridIndex-9].occupied && grids[invader.gridIndex-11].occupied ||
+        grids[invader.gridIndex-1].occupied && grids[invader.gridIndex+1].occupied) {
         for(i=0;i<10;i++)
             //retrieve front col from top to bottom
             if (grids[(Math.floor(invader.gridIndex/10)*10)+i].occupied)
@@ -128,7 +129,7 @@ function middleAttackOrWalk(invader) {
          //use bomb when there are more than 9 obstacle
          if (obstacleCount >= 9 && invader.numberOfBomb > 0)
          invader.useBomb();
-         //obstacleCount is 3 to 8
+         //obstacleCount is 1 to 8
          else invader.useRod();
          -----------------------------------*/
         invader.useRod();
@@ -136,17 +137,17 @@ function middleAttackOrWalk(invader) {
 
     //both 1 grid up and downward are empty
     else if (!grids[invader.gridIndex-9].occupied && !grids[invader.gridIndex-11].occupied) {
-        if (invader.tileY >= 5) //more space downwards
+        if (invader.tileY >= 5 || !grids[invader.gridIndex+1].occupied) //more space downwards and path is available
             invader.walk(Down);
 
         else
             invader.walk(Up);
     }
-    //1 grid upward is empty
-    else if (grids[invader.gridIndex-9].occupied)
+    //1 grid downward is empty
+    else if (!grids[invader.gridIndex-11].occupied && !grids[invader.gridIndex+1].occupied)
         invader.walk(Up);
 
-    //1 grid downward is empty
+    //1 grid upward is empty
     else
         invader.walk(Down);
 }
@@ -156,9 +157,8 @@ function detectFront(invader) {
     if (!grids[invader.gridIndex-10].occupied)
         invader.walk(Front);
 
-    else if  (grids[invader.gridIndex-10].occupied)
-        if (!grids[invader.gridIndex-10].occupant.detectable)
-            invader.walk(Front);
+    else if (grids[invader.gridIndex-10].occupied && !grids[invader.gridIndex-10].occupant.detectable)
+        invader.walk(Front);
 
     //check if top or bottom row
     else if (invader.tileY == 0 || invader.tileY == 9)

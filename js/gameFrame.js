@@ -185,7 +185,6 @@ function newGame() {
                                     invaders[i].encounterSewage(grids[invaders[i].gridIndex].occupant);
                             } else {
                                 detectFront(invaders[i]);
-                            }
                         }
                     }
                 }
