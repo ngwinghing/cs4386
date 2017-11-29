@@ -36,12 +36,8 @@ function Invader(tileY) {
     };
 
     this.useBomb = function() {
-        for(i=0;i<2;i++){
-            for(j=0;j<3;j++){
-                grids[this.gridIndex-10*(i+1)-1+j].occupied = true;
-            }
-        }
-
+        invaders_bombs.push(new Bomb(this.gridIndex-10));
+                    console.log("launchBomb");
         this.numberOfBomb--;
     };
 
@@ -119,21 +115,33 @@ function middleAttackOrWalk(invader) {
     //front has an obstacle
     //both grids occupied, use weapon
     var obstacleCount = 0;
-    if (grids[invader.gridIndex-9].occupied && grids[invader.gridIndex-11].occupied ||
-        grids[invader.gridIndex-1].occupied && grids[invader.gridIndex+1].occupied) {
+    var occupiedGirdCount = 0;
+
+    if (grids[invader.gridIndex-9].occupied) occupiedGirdCount++;
+    if (grids[invader.gridIndex-11].occupied) occupiedGirdCount++;
+    if (grids[invader.gridIndex+1].occupied) occupiedGirdCount++;
+    if (grids[invader.gridIndex-1].occupied) occupiedGirdCount++;
+
+    if (occupiedGirdCount > 1) {
         for(i=0;i<10;i++)
             //retrieve front col from top to bottom
-            if (grids[(Math.floor(invader.gridIndex/10)*10)+i].occupied)
+            if (grids[(Math.floor(invader.gridIndex/10)*10-10)+i].occupied) {
                 obstacleCount++;
+                console.log("obsCount: "+obstacleCount);
+            }
 
-        /*-----------original code-----------
+
+        //-----------original code-----------
          //use bomb when there are more than 9 obstacle
-         if (obstacleCount >= 9 && invader.numberOfBomb > 0)
-         invader.useBomb();
+        if (obstacleCount > 5 && invader.numberOfBomb > 0) {
+            invader.useBomb();
+        }
+
          //obstacleCount is 1 to 8
-         else invader.useRod();
-         -----------------------------------*/
-        invader.useRod();
+        else
+            invader.useRod();
+         //-----------------------------------
+        //invader.useRod();
     }
 
     else if (!grids[invader.gridIndex-9].occupied && !grids[invader.gridIndex-11].occupied) {
@@ -154,10 +162,10 @@ function middleAttackOrWalk(invader) {
 
     else if (!grids[invader.gridIndex+1].occupied && !grids[invader.gridIndex-1].occupied) {
         if (!grids[invader.gridIndex-9].occupied)
-            invader.walk(Up);
+            invader.walk(Down);
 
         else if (!grids[invader.gridIndex-11].occupied)
-            invader.walk(Down);
+            invader.walk(Up);
     }
 
 /*    //1 grid downward is empty
@@ -175,8 +183,9 @@ function detectFront(invader) {
     if (!frontGrid.occupied)
         invader.walk(Front);
 
-    else if (frontGrid.occupied && !frontGrid.occupant.detectable)
-        invader.walk(Front);
+    else if (frontGrid.occupied)
+        if (!frontGrid.occupant.detectable)
+            invader.walk(Front);
 
     //check if top or bottom row
     else if (invader.tileY == 0 || invader.tileY == 9)
