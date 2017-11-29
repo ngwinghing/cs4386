@@ -1,3 +1,13 @@
+var frameRate = 50; // 0.05s
+
+function playFaster() {
+    //2x
+    if (frameRate ==50) {
+        frameRate = 25;
+    }
+    else
+        frameRate =50;
+}
 
 function newGame() {
     var secondCount = 20;
@@ -39,15 +49,110 @@ function newGame() {
                 var textLine=mapHeight+50;
                 c.textAlign = 'center';
                 c.fillStyle = '#ffd700';
-                c.fillRect(mapWidth-100, textLine,100,50);
+                c.fillRect(mapWidth-100, textLine,100,40);
 
                 var sample_text = "Level "+gameLevel;
                 var text = sample_text.split("").join("");
-                textLine+=30;
+                textLine+=25;
                 c.font = 'lighter italic 15pt Calibri';
                 c.textAlign = 'center';
                 c.fillStyle = '#000';
                 c.fillText(text, mapWidth-50, textLine);
+
+                if (timerMode == "setup") {
+                    /*Draw fast attack*/
+                    var centerX = mapWidth - 50;
+                    var centerY = textLine + 60;
+                    var radius = 35;
+
+                    c.beginPath();
+                    c.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+                    c.fillStyle = '#2FAB0C';
+                    c.fill();
+                    c.lineWidth = 2;
+                    c.strokeStyle = '#003300';
+                    c.stroke();
+
+                    if (mouse.x<(centerX+radius*2) && mouse.x>(centerX-radius)) {
+                        if (mouse.y<(centerY+radius*2) && mouse.y>(centerY-radius)) {
+
+                            if (upX<(centerX+radius*2) && upX>(centerX-radius)){
+                                if (upY<(centerY+radius*2) && upY>(centerY-radius)) {
+                                    upX = 0;
+                                    upY = 0;
+                                    changeMode();
+                                    soundPlay("click");
+                                }
+                            }
+                            c.beginPath();
+                            c.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+                            c.fillStyle = '#74dc54';
+                            c.fill();
+                            c.lineWidth = 2;
+                            c.strokeStyle = '#003300';
+                            c.stroke();
+                        }
+                    }
+
+                    c.beginPath();
+                    c.moveTo(centerX - 5, centerY - 15);
+                    c.lineTo(centerX - 5, centerY + 5);
+                    c.lineTo(centerX + 5, centerY - 5);
+                    c.fillStyle = '#000';
+                    c.fill();
+                    c.font = 'lighter italic 8pt Calibri';
+                    c.textAlign = 'center';
+                    c.fillStyle = '#000';
+                    c.fillText("Attack", centerX, centerY + 15);
+                } else {
+                    /*Draw faster move*/
+                    var centerX = mapWidth - 50;
+                    var centerY = textLine + 60;
+                    var radius = 35;
+
+                    c.beginPath();
+                    c.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+                    c.fillStyle = '#C60048';
+                    c.fill();
+                    c.lineWidth = 2;
+                    c.strokeStyle = '#c60048';
+                    c.stroke();
+
+                    if (mouse.x<(centerX+radius*2) && mouse.x>(centerX-radius)) {
+                        if (mouse.y<(centerY+radius*2) && mouse.y>(centerY-radius)) {
+
+                            if (upX<(centerX+radius*2) && upX>(centerX-radius)){
+                                if (upY<(centerY+radius*2) && upY>(centerY-radius)) {
+                                    upX = 0;
+                                    upY = 0;
+                                    //replay = true;
+                                    playFaster();
+                                    soundPlay("click");
+                                }
+                            }
+                            c.beginPath();
+                            c.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
+                            c.fillStyle = '#f69ea1';
+                            c.fill();
+                            c.lineWidth = 2;
+                            c.strokeStyle = '#c60048';
+                            c.stroke();
+                        }
+                    }
+
+                    c.beginPath();
+                    c.moveTo(centerX - 5, centerY - 15);
+                    c.lineTo(centerX - 5, centerY + 5);
+                    c.lineTo(centerX + 5, centerY - 5);
+                    c.fillStyle = '#000';
+                    c.fill();
+                    c.font = 'lighter italic 8pt Calibri';
+                    c.textAlign = 'center';
+                    c.fillStyle = '#000';
+                    c.fillText("Rate", centerX, centerY + 15);
+                    var rateNow = 50/frameRate;
+                    c.fillText(rateNow+"x", centerX, centerY + 25);
+                }
 
                 if(!gameEnd)
                 /*Draw Boxes*/
@@ -114,8 +219,12 @@ function newGame() {
                     //startNewGame();
                 }
             }
+
+            //check if fast end
+            if (gameEnd)
+                frameRate = 50;
         }
-    , 50);
+    , frameRate);
 }
 
 newGame();
