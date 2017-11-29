@@ -156,7 +156,7 @@ function middleAttackOrWalk(invader) {
             invader.walk(Up);
 
         else if (!grids[invader.gridIndex-11].occupied)
-            invader.walk(Dwon);
+            invader.walk(Down);
     }
 
 /*    //1 grid downward is empty
