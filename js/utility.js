@@ -24,6 +24,7 @@ function emptyGame() {
       }
     }
     resetMode();
+    resetAllBoxes();
    player_tools = [];
    invaders = [];
     generateRandomTool("umbrella",Math.floor(Math.random()*(10-gameLevel))+1);
