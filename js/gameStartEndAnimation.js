@@ -1,7 +1,7 @@
 gameStart = false;
 gameEnd = false;
 win = false;
-firstStart = false;
+firstStart = true;
 
 var welcome = true;
 var replay = false;
@@ -173,8 +173,8 @@ function gameEndAnimation() {
             if (mouse.y<(textLine+50) && mouse.y>textLine) {
                 if (lastX<(mapStartX+middle+75) && lastX>(mapStartX+middle-175)){
                     if (lastY<(textLine+50) && lastY>textLine) {
-                        replay = true;
-                        soundPlay("click");
+                        //replay = true;
+                        //soundPlay("click");
                     }
                 }
                 c.textAlign = 'center';
@@ -218,10 +218,12 @@ function gameEndAnimation() {
         textLine-=30;
         if (mouse.x<(mapStartX+middle+75) && mouse.x>(mapStartX+middle-175)) {
             if (mouse.y<(textLine+50) && mouse.y>textLine) {
+
                 if (upX<(mapStartX+middle+75) && upX>(mapStartX+middle-175)){
                     if (upY<(textLine+50) && upY>textLine) {
                         replay = true;
                         soundPlay("click");
+                        console.log("Win Click");
                     }
                 }
                 c.textAlign = 'center';

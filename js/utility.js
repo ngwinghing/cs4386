@@ -15,20 +15,12 @@ player_tools = [];
 invaders = [];
 gameLevel = 1;
 
-var init = false;
+function emptyGame() {
 
-/*function emptyGame() {
-    init = false;
-    if (grids.length>0)
-    for (var i=0; i<grids.length; i++)
-        grids[i].pop();
-    if (invaders.length>0)
-    for (var i=0; i<invaders.length; i++)
-        invaders[i].pop();
-    if (player_tools.length>0)
-    for (var i=0; i<player_tools.length; i++)
-        player_tools[i].pop();
-}*/
+   grids =[];
+   player_tools = [];
+   invaders = [];
+}
 
 function startNewGame() {
     //emptyGame();
@@ -39,7 +31,12 @@ function startNewGame() {
     // new police
     //console.log("Generate new");
     generateNewPolice(1);
-    firstStart = true;
+    firstStart = false;
+}
+
+function startNextLv() {
+    emptyGame();
+    generateNewPolice(2);
 }
 
 function retryThisLv() {
@@ -243,3 +240,35 @@ function Umbrella(gridIndex) {
 
 	};
 }*/
+
+function generateRandomTool(toolName,quantity) {
+    var random;
+    var previous=[];
+    for (var i=0; i<grids.length;i++) {
+        if (grids[i].occupied)
+            previous.push(i);
+    }
+    var exist = false;
+
+    for (var i = 0; i<quantity; i++) {
+        do {
+            exist = false;
+            random = Math.floor(Math.random() * (grids.length-20));
+            console.log(random);
+            if (previous.length >0) {
+                for (var j = 0; j < previous.length; j++) {
+                    var pointer = previous[j];
+                    if (random === pointer) {
+                        exist = true;
+                    }
+                }
+            }
+        } while (exist);
+        previous.push(random);
+        if (toolName == "umbrella")
+            player_tools.push(new Umbrella(random));
+        else if (toolName == "sewage")
+            player_tools.push(new Sewage(random));
+
+    }
+}

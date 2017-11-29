@@ -7,7 +7,7 @@ function newGame() {
             if (welcome) {
                 gameStartAnimation();
             } else {
-                if (firstStart == false)
+                if (firstStart == true)
                     startNewGame();
 
                 /*Draw Timer*/
@@ -83,6 +83,9 @@ function newGame() {
                     //replay
                     if (win==true) {
                         // next lv
+                        startNextLv();
+                        replay = false;
+                        gameEnd = false;
                     } else {
                         // retry this lv
                     }

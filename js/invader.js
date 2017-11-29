@@ -53,7 +53,7 @@ function Invader(tileY) {
 
     this.encounterGlue = function(glue) {
         glue.beingAttacked();
-        this.currentFrames = [105,106,107,108];
+        this.currentFrames = [98,99,100,101];
         invaders[i].stay();
     };
 
