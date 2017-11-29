@@ -9,6 +9,7 @@ boxes.push(box2);
 var box3 = new Box("barrier", 10, 3);
 boxes.push(box3);
 
+var used = "";
 function Box(nameOfTools, value, boxNumber) {
     this.name;
     this.type; // limit / time-base
@@ -48,7 +49,6 @@ function Box(nameOfTools, value, boxNumber) {
     var backgroundColor = "#4682b4";
 
     this.timeCounter = this.coolingTime/0.05;
-    var used = false;
     this.ableToDrag = true;
 
     if (this.type == "time") {
@@ -81,20 +81,20 @@ function Box(nameOfTools, value, boxNumber) {
         c.fillText(this.name, rectX + 45, rectY + 88);
 
         //console.log("this remaining " +this.name+this.remainingTime );
+        console.log("time counter: " +this.name +""+this.timeCounter);
         if (this.type == "time") {
             if (this.remainingTime !=0) {
                 this.ableToDrag = false;
-                if (used == true) {
-                    //timer start and count 2s
-                    if (this.timeCounter != -1)
-                        this.timeCounter--;
-                    else {
-                        used == false;
-                        this.remainingTime--;
-                    }
+                //timer start and count 2s
+                if (this.timeCounter != -1)
+                    this.timeCounter--;
+                else {
+                    this.remainingTime--;
                 }
-            } else {
+            }
+             else {
                 this.ableToDrag = true;
+                this.timeCounter = this.coolingTime/0.05;
             }
             // basic
             c.fillStyle = '#2F4F4F';
@@ -109,10 +109,11 @@ function Box(nameOfTools, value, boxNumber) {
         }
 
         if (this.type == "limit") {
-            if (this.remainingValue != 0) {
+            if (this.remainingValue > 0) {
                 this.ableToDrag = true;
                 //this.remainingValue--;
             } else {
+                this.ableToDrag = false;
             }
             c.beginPath();
             c.arc(centerX, centerY, radius, 0, 2 * Math.PI, false);
@@ -142,23 +143,18 @@ function Box(nameOfTools, value, boxNumber) {
                 }
             }
 
-            if (upX - mapStartX < (this.x + rectWidth) && upX - mapStartX > this.x) {
-                if (upY - mapStartY < (this.y + rectHeight) && upY - mapStartY > this.y) {
-                    used = true;
-                }
-            }
         } else {
             c.fillStyle = "rgba(255, 255, 255, 0.5)";
             c.fillRect(this.x, this.y, this.width,this.height);
         }
 
-        if (used == true) {
+        if (used == this.name) {
             if (this.type == "time"){
                 this.remainingTime = this.coolingTime;
             } else{
                 this.remainingValue--;
             }
-            used = false;
+            used = "";
         }
     }
     this.drawDragging = function () {
