@@ -196,12 +196,6 @@ function newGame() {
                                 detectFront(invaders[i]);
                         }
                     }
-
-                    if (invaders_bombs.length > 0) {
-                        for (var i = 0; i<invaders_bombs.length; i++) {
-                            invaders_bombs[i].draw();
-                        }
-                    }
                 }
                     if (!gameEnd) {
                         secondCount--;

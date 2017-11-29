@@ -36,8 +36,7 @@ function Invader(tileY) {
     };
 
     this.useBomb = function() {
-        invaders_bombs.push(new Bomb(this.gridIndex-10));
-                    console.log("launchBomb");
+       var bomb = new Bomb(this.gridIndex-10);
         this.numberOfBomb--;
     };
 
