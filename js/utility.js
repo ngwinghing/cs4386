@@ -249,7 +249,7 @@ function Bomb(gridIndex) { //invaders_bombs
 	this.area = [gridIndex-11, gridIndex-10, gridIndex-9, gridIndex-1, gridIndex, gridIndex+1];
 	this.drawArea = [[this.tileX-1, this.tileY-1], [this.tileX-1, this.tileY], [this.tileX-1, this.tileY+1], [this.tileX, this.tileY-1], [this.tileX, this.tileY], [this.tileX, this.tileY+1]];
 	this.img = new Image();
-	this.img.src = "img/umbrella.png";
+	this.img.src = "img/bomb.png";
 
 	for (var i=0; i<6; i++) {
 		c.drawImage(this.img, this.drawArea[i][0] * tileSize, mapStartY+5 + this.drawArea[i][1] * tileSize+5, 32, 32);
