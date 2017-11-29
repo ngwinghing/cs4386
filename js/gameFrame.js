@@ -14,7 +14,9 @@ function newGame() {
     setInterval(
         function() {
             c.clearRect(0, 0, innerWidth, innerHeight);
-            if (welcome) {
+            if (howToPlay == true) {
+                gameHowToPlayAnimation();
+            } else if (welcome) {
                 gameStartAnimation();
             } else {
                 if (firstStart == true)

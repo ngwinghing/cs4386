@@ -44,18 +44,21 @@ function Invader(tileY) {
     this.useRod = function (){
         grids[this.gridIndex-10].occupant.beingAttacked();
         this.currentFrames = [57,58,59,60];
+        soundPlay("crashing");
     };
 
     this.encounterGlue = function(glue) {
         glue.beingAttacked();
         this.currentFrames = [98,99,100,101];
         this.stay();
+        soundPlay("glue_stuck");
     };
 
     this.encounterSewage = function(sewage) {
         sewage.beingAttacked();
         var index = invaders.indexOf(this);
         invaders.splice(index, 1, new Invader(this.tileY));
+        soundPlay("falling_sewage");
     };
 
     this.toString = function() {
@@ -79,7 +82,6 @@ function generateNewPolice(numberOfPolice){
         do {
             exist = false;
             random = Math.floor(Math.random() * 10);
-            console.log(random);
             if (previous.length >0) {
                 for (var j = 0; j < previous.length; j++) {
                     var pointer = previous[j];
@@ -127,16 +129,16 @@ function middleAttackOrWalk(invader) {
                 obstacleCount++;
                 console.log("obsCount: "+obstacleCount);
             }
-            
+
 
         //-----------original code-----------
          //use bomb when there are more than 9 obstacle
         if (obstacleCount > 5 && invader.numberOfBomb > 0) {
             invader.useBomb();
         }
-            
+
          //obstacleCount is 1 to 8
-        else 
+        else
             invader.useRod();
          //-----------------------------------
         //invader.useRod();

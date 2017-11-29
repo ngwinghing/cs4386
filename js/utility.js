@@ -89,6 +89,7 @@ function grid(gridIndex) {
             if (upY < (this.y + tileSize + mapStartY) && upY > this.y + mapStartY) {
             	if (upObject!="") {
             		if (this.occupied == false) {
+            		    used=upObject;
                         this.occupant = upObject;
                         if (this.occupant == "Umbrella")
                             player_tools.push(new Umbrella(this.gridIndex));
@@ -96,6 +97,8 @@ function grid(gridIndex) {
                             player_tools.push(new Glue(this.gridIndex));
                         else if (this.occupant == "Barrier")
                             player_tools.push(new Barrier(this.gridIndex));
+                        else if (this.occupant == "Sewage")
+                            player_tools.push(new Sewage(this.gridIndex));
                         this.occupied = true;
                         upObject = "";
                         upX=0;
@@ -261,7 +264,7 @@ function Bomb(gridIndex) { //invaders_bombs
 				player_tools.splice(index, 1);
 				grids[this.area[i]].occupied = false;
 				grids[this.area[i]].occupant = "none";
-			}	
+			}
 		}
 	}
 
@@ -292,7 +295,6 @@ function generateRandomTool(toolName,quantity) {
         do {
             exist = false;
             random = Math.floor(Math.random() * (grids.length-20));
-            // console.log(random);
             if (previous.length >0) {
                 for (var j = 0; j < previous.length; j++) {
                     var pointer = previous[j];
