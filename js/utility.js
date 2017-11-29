@@ -14,7 +14,6 @@ grids = [];
 player_tools = [];
 invaders = [];
 invaders_bombs = [];
-gameLevel = 1;
 
 function emptyGame() {
    for (var i =0; i< grids.length; i++) {

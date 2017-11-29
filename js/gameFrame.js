@@ -26,7 +26,6 @@ function newGame() {
                 timer.draw();
                 if (secondCount == 0) { //1 second
                     timer.remainingTime--;
-                    console.log("rem ", timer.remainingTime);
                     secondCount = 20;
                 }
 

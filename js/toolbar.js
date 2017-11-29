@@ -1,9 +1,11 @@
+gameLevel = 1;
+
 var boxes = [];
 
 var box1 = new Box("umbrella", 2, 1);
 boxes.push(box1);
 
-var box2 = new Box("glue", 6, 2);
+var box2 = new Box("glue", 4, 2);
 boxes.push(box2);
 
 var box3 = new Box("sewage", 5, 3);
@@ -11,6 +13,22 @@ boxes.push(box3);
 
 var box4 = new Box("barrier", 10, 4);
 boxes.push(box4);
+
+function resetAllBoxes() {
+    boxes = [];
+    var random1 = Math.floor(((Math.random()*gameLevel+Math.random()*gameLevel+Math.random()*gameLevel))/2);
+    var box1 = new Box("umbrella", 2, 1);
+    boxes.push(box1);
+
+    var box2 = new Box("glue", 4, 2);
+    boxes.push(box2);
+
+    var box3 = new Box("sewage", random1+5, 3);
+    boxes.push(box3);
+
+    var box4 = new Box("barrier", random1+10, 4);
+    boxes.push(box4);
+}
 
 var used = "";
 function Box(nameOfTools, value, boxNumber) {
@@ -166,22 +184,6 @@ function drawAllBoxes() {
         var box = boxes[i]
         box.draw();
     }
-}
-
-function resetAllBoxes() {
-    boxes = [];
-
-    var box1 = new Box("umbrella", 2, 1);
-    boxes.push(box1);
-
-    var box2 = new Box("glue", 4, 2);
-    boxes.push(box2);
-
-    var box3 = new Box("sewage", 5, 3);
-    boxes.push(box3);
-
-    var box4 = new Box("barrier", 10, 4);
-    boxes.push(box4);
 }
 
 function drawDragging() {
