@@ -54,7 +54,7 @@ function Invader(tileY) {
     this.encounterGlue = function(glue) {
         glue.beingAttacked();
         this.currentFrames = [57];
-        invaders[i].stay();
+        this.stay();
     };
 
     this.encounterSewage = function(sewage) {

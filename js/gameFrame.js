@@ -58,7 +58,9 @@ function newGame() {
 
                             else if (grids[invaders[i].gridIndex].occupant.toString() == "sewage")
                                 invaders[i].encounterSewage(grids[invaders[i].gridIndex].occupant);
-                        } else {
+                        } 
+
+                        else {
                             detectFront(invaders[i]);
                         }
                     }
