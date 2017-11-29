@@ -73,11 +73,11 @@ function newGame() {
                     c.strokeStyle = '#003300';
                     c.stroke();
 
-                    if (mouse.x<(centerX+radius*2) && mouse.x>(centerX-radius)) {
-                        if (mouse.y<(centerY+radius*2) && mouse.y>(centerY-radius)) {
+                    if (mouse.x<(centerX+radius*2+mapStartX) && mouse.x>(centerX-radius)+mapStartX) {
+                        if (mouse.y<(centerY+radius*2+mapStartY) && mouse.y>(centerY-radius)+mapStartY) {
 
-                            if (upX<(centerX+radius*2) && upX>(centerX-radius)){
-                                if (upY<(centerY+radius*2) && upY>(centerY-radius)) {
+                            if (upX<(centerX+radius*2+mapStartX) && upX>(centerX-radius)+mapStartX){
+                                if (upY<(centerY+radius*2+mapStartY) && upY>(centerY-radius)+mapStartY) {
                                     upX = 0;
                                     upY = 0;
                                     changeMode();
@@ -118,11 +118,11 @@ function newGame() {
                     c.strokeStyle = '#c60048';
                     c.stroke();
 
-                    if (mouse.x<(centerX+radius*2) && mouse.x>(centerX-radius)) {
-                        if (mouse.y<(centerY+radius*2) && mouse.y>(centerY-radius)) {
+                    if (mouse.x<(centerX+radius*2+mapStartX) && mouse.x>(centerX-radius)+mapStartX) {
+                        if (mouse.y<(centerY+radius*2+mapStartY) && mouse.y>(centerY-radius)+mapStartY) {
 
-                            if (upX<(centerX+radius*2) && upX>(centerX-radius)){
-                                if (upY<(centerY+radius*2) && upY>(centerY-radius)) {
+                            if (upX<(centerX+radius*2+mapStartX) && upX>(centerX-radius)+mapStartX){
+                                if (upY<(centerY+radius*2+mapStartY) && upY>(centerY-radius)+mapStartY) {
                                     upX = 0;
                                     upY = 0;
                                     //replay = true;
