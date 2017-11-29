@@ -88,6 +88,7 @@ function grid(gridIndex) {
             if (upY < (this.y + tileSize + mapStartY) && upY > this.y + mapStartY) {
             	if (upObject!="") {
             		if (this.occupied == false) {
+            		    used=upObject;
                         this.occupant = upObject;
                         if (this.occupant == "Umbrella")
                             player_tools.push(new Umbrella(this.gridIndex));
