@@ -2,9 +2,9 @@ var timer = new Timer();
 
 var timerMode = "setup";
 function Timer() {
-    var basicTime = 10;
+    this.basicTime = 10;
 
-    this.remainingTime = basicTime;
+    this.remainingTime = this.basicTime;
     this.started = false;
 
     this.width = canvas.width;
@@ -20,7 +20,7 @@ function Timer() {
 
         // remain time
         c.fillStyle = '#DC143C';
-        c.fillRect(0, 0, (this.width * this.remainingTime / basicTime), this.height);
+        c.fillRect(0, 0, Math.floor(this.width * (this.remainingTime / this.basicTime)), this.height);
 
         c.fillStyle = '#000000';
         c.fillText(timerMode + ": " + this.remainingTime, 40, 22);
