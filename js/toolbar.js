@@ -80,7 +80,7 @@ function Box(nameOfTools, value, boxNumber) {
         c.font = '18px  Arial';
         c.fillText(this.name, rectX + 45, rectY + 88);
 
-        console.log("this remaining " +this.remainingTime );
+        //console.log("this remaining " +this.name+this.remainingTime );
         if (this.type == "time") {
             if (this.remainingTime !=0) {
                 this.ableToDrag = false;
@@ -94,9 +94,7 @@ function Box(nameOfTools, value, boxNumber) {
                     }
                 }
             } else {
-                //reset
-                this.remainingTime = 10;
-                this.basicTime = 10;
+                this.ableToDrag = true;
             }
             // basic
             c.fillStyle = '#2F4F4F';
@@ -104,7 +102,7 @@ function Box(nameOfTools, value, boxNumber) {
 
             // remain time
             c.fillStyle = '#DC143C';
-            c.fillRect(rectX, rectY + 105, (this.width * this.remainingTime / this.basicTime), 15);
+            c.fillRect(rectX, rectY + 105, (this.width * (this.remainingTime / this.basicTime)), 15);
 
             // this.started = true;
             // this.remainingTime--;

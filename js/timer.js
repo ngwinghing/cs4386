@@ -13,7 +13,6 @@ function Timer() {
     this.draw = function () {
         if (this.remainingTime == -1) { //use all time
             changeMode();
-            //this.remainingTime = basicTime;
         }
         // basic
         c.fillStyle = '#2F4F4F';
@@ -25,8 +24,6 @@ function Timer() {
 
         c.fillStyle = '#000000';
         c.fillText(timerMode + ": " + this.remainingTime, 40, 22);
-
-        this.started = true;
     }
 }
 function changeMode() {

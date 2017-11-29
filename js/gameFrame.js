@@ -46,18 +46,18 @@ function newGame() {
                 c.strokeRect(0, mapHeight + timerHeight, mapWidth, toolBarHeight);
 
                 /*Draw Level*/
-                var textLine=mapHeight+50;
+                var textLine = mapHeight + 50;
                 c.textAlign = 'center';
                 c.fillStyle = '#ffd700';
-                c.fillRect(mapWidth-100, textLine,100,40);
+                c.fillRect(mapWidth - 100, textLine, 100, 40);
 
-                var sample_text = "Level "+gameLevel;
+                var sample_text = "Level " + gameLevel;
                 var text = sample_text.split("").join("");
-                textLine+=25;
+                textLine += 25;
                 c.font = 'lighter italic 15pt Calibri';
                 c.textAlign = 'center';
                 c.fillStyle = '#000';
-                c.fillText(text, mapWidth-50, textLine);
+                c.fillText(text, mapWidth - 50, textLine);
 
                 if (timerMode == "setup") {
                     /*Draw fast attack*/
@@ -73,11 +73,11 @@ function newGame() {
                     c.strokeStyle = '#003300';
                     c.stroke();
 
-                    if (mouse.x<(centerX+radius*2+mapStartX) && mouse.x>(centerX-radius)+mapStartX) {
-                        if (mouse.y<(centerY+radius*2+mapStartY) && mouse.y>(centerY-radius)+mapStartY) {
+                    if (mouse.x < (centerX + radius * 2 + mapStartX) && mouse.x > (centerX - radius) + mapStartX) {
+                        if (mouse.y < (centerY + radius * 2 + mapStartY) && mouse.y > (centerY - radius) + mapStartY) {
 
-                            if (upX<(centerX+radius*2+mapStartX) && upX>(centerX-radius)+mapStartX){
-                                if (upY<(centerY+radius*2+mapStartY) && upY>(centerY-radius)+mapStartY) {
+                            if (upX < (centerX + radius * 2 + mapStartX) && upX > (centerX - radius) + mapStartX) {
+                                if (upY < (centerY + radius * 2 + mapStartY) && upY > (centerY - radius) + mapStartY) {
                                     upX = 0;
                                     upY = 0;
                                     changeMode();
@@ -118,11 +118,11 @@ function newGame() {
                     c.strokeStyle = '#c60048';
                     c.stroke();
 
-                    if (mouse.x<(centerX+radius*2+mapStartX) && mouse.x>(centerX-radius)+mapStartX) {
-                        if (mouse.y<(centerY+radius*2+mapStartY) && mouse.y>(centerY-radius)+mapStartY) {
+                    if (mouse.x < (centerX + radius * 2 + mapStartX) && mouse.x > (centerX - radius) + mapStartX) {
+                        if (mouse.y < (centerY + radius * 2 + mapStartY) && mouse.y > (centerY - radius) + mapStartY) {
 
-                            if (upX<(centerX+radius*2+mapStartX) && upX>(centerX-radius)+mapStartX){
-                                if (upY<(centerY+radius*2+mapStartY) && upY>(centerY-radius)+mapStartY) {
+                            if (upX < (centerX + radius * 2 + mapStartX) && upX > (centerX - radius) + mapStartX) {
+                                if (upY < (centerY + radius * 2 + mapStartY) && upY > (centerY - radius) + mapStartY) {
                                     upX = 0;
                                     upY = 0;
                                     //replay = true;
@@ -150,13 +150,13 @@ function newGame() {
                     c.textAlign = 'center';
                     c.fillStyle = '#000';
                     c.fillText("Rate", centerX, centerY + 15);
-                    var rateNow = 50/frameRate;
-                    c.fillText(rateNow+"x", centerX, centerY + 25);
+                    var rateNow = 50 / frameRate;
+                    c.fillText(rateNow + "x", centerX, centerY + 25);
                 }
 
-                if(!gameEnd)
+                if (!gameEnd)
                 /*Draw Boxes*/
-                drawAllBoxes();
+                    drawAllBoxes();
 
                 /*Draw Active Grid*/
                 for (i = 0; i < grids.length; i++) {
@@ -191,35 +191,36 @@ function newGame() {
 
                             else
                                 detectFront(invaders[i]);
+                        }
                     }
                 }
-               if (!gameEnd)
-                    secondCount--;
-            }
-            if (timer.remainingTime==-1 && timerMode=="attack") {
+                    if (!gameEnd) {
+                        secondCount--;
+                    }
+            if (timer.remainingTime == -1 && timerMode == "attack") {
                 if (!checkIfAnyInvadersArrived())
-                    win=true;
+                    win = true;
                 gameEnd = true;
             }
             if (gameEnd) {
                 gameEndAnimation();
                 // determined to replay
-                if (replay==true) {
+                if (replay == true) {
                     //replay
-                    if (win==true) {
+                    if (win == true) {
                         // next lv
                         startNextLv();
                         replay = false;
-                        win= false;
+                        win = false;
                         gameEnd = false;
                     } else {
                         // retry this lv
                         retryThisLv();
                         replay = false;
-                        win= false;
+                        win = false;
                         gameEnd = false;
                     }
-                   // win=false;
+                    // win=false;
                     //startNewGame();
                 }
             }
@@ -227,9 +228,9 @@ function newGame() {
             //check if fast end
             if (gameEnd)
                 frameRate = 50;
-        }
-        }
+        }}
     , frameRate);
+
 }
 
 newGame();

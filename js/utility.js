@@ -97,6 +97,8 @@ function grid(gridIndex) {
                             player_tools.push(new Barrier(this.gridIndex));
                         this.occupied = true;
                         upObject = "";
+                        upX=0;
+                        upY=0;
                     }
 				}
             }
