@@ -1,29 +1,20 @@
-var init = false;
-function startNewGame() {
-    timerMode = "setup";
-    // new pre time
-    // new grid
-    //clean police
-    // new police
-    generateNewPolice(1);
-    init = true;
-}
+
 function newGame() {
-    var secondCount = 0;
+    var secondCount = 20;
     setInterval(
         function() {
             c.clearRect(0, 0, innerWidth, innerHeight);
-            if (!gameStart) {
+            if (welcome) {
                 gameStartAnimation();
-            }
-            else {
-                if (init == false)
+            } else {
+                if (firstStart == false)
                     startNewGame();
 
                 /*Draw Timer*/
                 timer.draw();
                 if (secondCount == 0) { //1 second
                     timer.remainingTime--;
+                    console.log("rem ", timer.remainingTime);
                     secondCount = 20;
                 }
 
@@ -56,13 +47,14 @@ function newGame() {
                 if (isDragging) {
                     drawDragging();
                 }
+
                 /*Draw Invaders*/
                 drawAllInvaders();
 
                 if (checkIfAnyInvadersArrived()) {
                     gameEnd = true;
                 }
-                else if (secondCount == 20 && timer.started == true) { //1 second
+                else if (secondCount == 0 && timer.started == true) { //1 second
                     for (i = 0; i < invaders.length; i++) {
                         if (grids[invaders[i].gridIndex].occupied == true) {
                             if (grids[invaders[i].gridIndex].occupant.toString() == "glue")
@@ -76,7 +68,7 @@ function newGame() {
                     }
                 }
 
-                if (!gameEnd)
+               if (!gameEnd)
                     secondCount--;
             }
             if (timer.remainingTime==-1 && timerMode=="attack") {
@@ -87,12 +79,15 @@ function newGame() {
             if (gameEnd) {
                 gameEndAnimation();
                 // determined to replay
-                if (gameStart==true) {
+                if (replay==true) {
                     //replay
-                    gameEnd=false;
-                    win=false;
-                    init = false;
-                    startNewGame();
+                    if (win==true) {
+                        // next lv
+                    } else {
+                        // retry this lv
+                    }
+                   // win=false;
+                    //startNewGame();
                 }
             }
         }

@@ -1,6 +1,10 @@
 gameStart = false;
 gameEnd = false;
 win = false;
+firstStart = false;
+
+var welcome = true;
+var replay = false;
 
 var gra1= 0;
 var gra2= 0.6;
@@ -112,7 +116,7 @@ function gameStartAnimation() {
         if (mouse.y<(textLine+50) && mouse.y>textLine) {
             if (lastX<(mapStartX+middle+75) && lastX>(mapStartX+middle-175)){
                 if (lastY<(textLine+50) && lastY>textLine) {
-                    gameStart=true;
+                    welcome=false;
                     soundPlay("click");
                 }
             }
@@ -140,7 +144,7 @@ function gameEndAnimation() {
     c.fillStyle = "rgba(255, 255, 255, 0.8)";
     c.fillRect(0, 0, canvas.height, canvas.height);
 
-    if (win==false) {
+    if (win==false) { //lose
         var sample_text = "— You are Arrested —";
         var text = sample_text.split("").join("  ");
         var textLine = 300;
@@ -169,7 +173,7 @@ function gameEndAnimation() {
             if (mouse.y<(textLine+50) && mouse.y>textLine) {
                 if (lastX<(mapStartX+middle+75) && lastX>(mapStartX+middle-175)){
                     if (lastY<(textLine+50) && lastY>textLine) {
-                        gameStart=true;
+                        replay = true;
                         soundPlay("click");
                     }
                 }
@@ -186,7 +190,9 @@ function gameEndAnimation() {
                 c.fillText(text, middle, textLine);
             }
         }
-    } else {
+    }
+    else {
+        //win
         var sample_text = "— You are Free —";
         var text = sample_text.split("").join("  ");
         var textLine = 300;
@@ -214,7 +220,7 @@ function gameEndAnimation() {
             if (mouse.y<(textLine+50) && mouse.y>textLine) {
                 if (upX<(mapStartX+middle+75) && upX>(mapStartX+middle-175)){
                     if (upY<(textLine+50) && upY>textLine) {
-                        gameStart=true;
+                        replay = true;
                         soundPlay("click");
                     }
                 }

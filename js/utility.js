@@ -15,6 +15,37 @@ player_tools = [];
 invaders = [];
 gameLevel = 1;
 
+var init = false;
+
+/*function emptyGame() {
+    init = false;
+    if (grids.length>0)
+    for (var i=0; i<grids.length; i++)
+        grids[i].pop();
+    if (invaders.length>0)
+    for (var i=0; i<invaders.length; i++)
+        invaders[i].pop();
+    if (player_tools.length>0)
+    for (var i=0; i<player_tools.length; i++)
+        player_tools[i].pop();
+}*/
+
+function startNewGame() {
+    //emptyGame();
+    //timerMode = "setup";
+    // new pre time
+    // new grid
+    //clean police
+    // new police
+    //console.log("Generate new");
+    generateNewPolice(1);
+    firstStart = true;
+}
+
+function retryThisLv() {
+
+}
+
 Up=1;
 Down=2;
 Front=3;

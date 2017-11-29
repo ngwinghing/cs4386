@@ -2,13 +2,16 @@ var timer = new Timer();
 
 var timerMode = "setup";
 function Timer() {
-    var basicTime;
+    var basicTime = 2;
 
-    if (timerMode == "setup") {
-        basicTime = 1; //should be 30
-    } else {
-        // attack
-        basicTime = 20;
+    function changeMode() {
+        if (timerMode == "setup") {
+            timerMode = "attack";
+            basicTime = 5;
+        } else {
+            timerMode = "setup";
+            basicTime = 2;
+        }
     }
 
     this.remainingTime = basicTime;
@@ -18,7 +21,10 @@ function Timer() {
     this.height = timerHeight;
 
     this.draw = function() {
-        if(this.remainingTime != -1) {
+        if(this.remainingTime == -1) { //use all time
+            changeMode();
+            this.remainingTime = basicTime;
+        }
             // basic
             c.fillStyle = '#2F4F4F';
             c.fillRect(0,0,this.width, this.height);
@@ -28,18 +34,8 @@ function Timer() {
             c.fillRect(0,0,(this.width * this.remainingTime/basicTime), this.height);
 
             c.fillStyle = '#000000';
-            c.fillText(this.remainingTime, 15, 22);
+            c.fillText(timerMode+": "+this.remainingTime, 40, 22);
 
             this.started = true;
-        }
-
-        else {
-            if (timerMode == "setup") {
-                timerMode = "attack";
-                startNewGame();
-            } else {
-                timerMode = "setup";
-            }
-        }
     }
 }
