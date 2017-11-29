@@ -253,14 +253,9 @@ function Bomb(gridIndex) { //invaders_bombs
 	this.tileY = gridIndex%10;
 	this.area = [gridIndex-11, gridIndex-10, gridIndex-9, gridIndex-1, gridIndex, gridIndex+1];
 	this.drawArea = [[this.tileX-1, this.tileY-1], [this.tileX-1, this.tileY], [this.tileX-1, this.tileY+1], [this.tileX, this.tileY-1], [this.tileX, this.tileY], [this.tileX, this.tileY+1]];
-<<<<<<< HEAD
 	
 	c.drawImage(bomb_img, this.drawArea[4][0] * tileSize+5, mapStartY + this.drawArea[4][1] * tileSize+5, 32, 32);
-=======
-	this.img = new Image();
-	this.img.src = "img/bomb.png";
 
->>>>>>> 1bee35161552397778c2e1ac1cfda574c35556f3
 	for (var i=0; i<6; i++) {
 		c.drawImage(explode_img, this.drawArea[i][0] * tileSize+5, mapStartY + this.drawArea[i][1] * tileSize+5, 32, 32);
 	}
