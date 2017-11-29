@@ -231,7 +231,6 @@ function gameEndAnimation() {
                         upY = 0;
                         replay = true;
                         soundPlay("click");
-                        console.log("Lose Click");
                     }
                 }
                 c.textAlign = 'center';
@@ -282,7 +281,6 @@ function gameEndAnimation() {
                         upY = 0;
                         replay = true;
                         soundPlay("click");
-                        console.log("Win Click");
                     }
                 }
                 c.textAlign = 'center';

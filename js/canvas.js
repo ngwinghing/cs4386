@@ -27,3 +27,6 @@ var soundEffect = document.getElementById("soundEffect");;
 var soundClick = "./mp3/click.mp3";
 var soundPreBg = "./mp3/pretime_background.mp3";
 var soundAttackBg = "./mp3/attack_background.mp3";
+var soundCrashing = "./mp3/crashing.mp3";
+var soundFallingSewage = "./mp3/falling_sewage.mp3";
+var soundGlue_stuck = "./mp3/glue_stuck.mp3";
