@@ -17,11 +17,10 @@ var c = canvas.getContext('2d');
 var map = new Image();
 map.src= "img/tmp_bg.jpg";
 
-var btn = new Image();
-btn.src= "img/btn.png";
-
-var start_1 = new Image();
-start_1.src= "img/start_1.jpg";
+//soundBackground
+var soundBackground = document.getElementById("soundBackground");;
 
 var soundEffect = document.getElementById("soundEffect");;
 var soundClick = "./mp3/click.mp3";
+var soundPreBg = "./mp3/pretime_background.mp3";
+var soundAttackBg = "./mp3/attack_background.mp3";

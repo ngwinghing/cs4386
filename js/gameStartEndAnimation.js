@@ -1,5 +1,10 @@
 gameStart = false;
 gameEnd = false;
+win = false;
+firstStart = true;
+
+var welcome = true;
+var replay = false;
 
 var gra1= 0;
 var gra2= 0.6;
@@ -111,7 +116,9 @@ function gameStartAnimation() {
         if (mouse.y<(textLine+50) && mouse.y>textLine) {
             if (lastX<(mapStartX+middle+75) && lastX>(mapStartX+middle-175)){
                 if (lastY<(textLine+50) && lastY>textLine) {
-                    gameStart=true;
+                    upX=0;
+                    upY=0;
+                    welcome=false;
                     soundPlay("click");
                 }
             }
@@ -133,4 +140,113 @@ function gameStartAnimation() {
 
 
 function gameEndAnimation() {
+    var middle = 400;
+
+    /*Draw rgba*/
+    c.fillStyle = "rgba(255, 255, 255, 0.8)";
+    c.fillRect(0, 0, canvas.height, canvas.height);
+
+    if (win==false) { //lose
+        var sample_text = "— You are Arrested —";
+        var text = sample_text.split("").join("  ");
+        var textLine = 300;
+        c.font = 'lighter italic 15pt Calibri';
+        c.textAlign = 'center';
+        c.fillStyle = '#c60048';
+        c.fillText(text, middle, textLine);
+
+        // retry level btn
+
+        textLine+=60;
+        c.textAlign = 'center';
+        c.fillStyle = '#ffd700';
+        c.fillRect(middle-75, textLine,150,50);
+
+        var sample_text = "Retry";
+        var text = sample_text.split("").join(" ");
+        textLine+=30;
+        c.font = 'lighter italic 15pt Calibri';
+        c.textAlign = 'center';
+        c.fillStyle = '#000';
+        c.fillText(text, middle, textLine);
+
+        textLine-=30;
+        if (mouse.x<(mapStartX+middle+75) && mouse.x>(mapStartX+middle-175)) {
+            if (mouse.y<(textLine+50) && mouse.y>textLine) {
+
+                if (upX<(mapStartX+middle+75) && upX>(mapStartX+middle-175)){
+                    if (upY<(textLine+50) && upY>textLine) {
+                        upX = 0;
+                        upY = 0;
+                        replay = true;
+                        soundPlay("click");
+                        console.log("Lose Click");
+                    }
+                }
+                c.textAlign = 'center';
+                c.fillStyle = '#c60048';
+                c.fillRect(middle-75, textLine,150,50);
+
+                var sample_text = "Retry";
+                var text = sample_text.split("").join(" ");
+                textLine+=30;
+                c.font = 'lighter italic 15pt Calibri';
+                c.textAlign = 'center';
+                c.fillStyle = '#fff';
+                c.fillText(text, middle, textLine);
+            }
+        }
+    }
+    else {
+        //win
+        var sample_text = "— You are Free —";
+        var text = sample_text.split("").join("  ");
+        var textLine = 300;
+        c.font = 'lighter italic 15pt Calibri';
+        c.textAlign = 'center';
+        c.fillStyle = '#2fab0c';
+        c.fillText(text, middle, textLine);
+
+        // replay or next level btn
+        textLine+=60;
+        c.textAlign = 'center';
+        c.fillStyle = '#2fab0c';
+        c.fillRect(middle-75, textLine,150,50);
+
+        var sample_text = "Next";
+        var text = sample_text.split("").join(" ");
+        textLine+=30;
+        c.font = 'lighter italic 15pt Calibri';
+        c.textAlign = 'center';
+        c.fillStyle = '#000';
+        c.fillText(text, middle, textLine);
+
+        textLine-=30;
+        if (mouse.x<(mapStartX+middle+75) && mouse.x>(mapStartX+middle-175)) {
+            if (mouse.y<(textLine+50) && mouse.y>textLine) {
+
+                if (upX<(mapStartX+middle+75) && upX>(mapStartX+middle-175)){
+                    if (upY<(textLine+50) && upY>textLine) {
+                        upX = 0;
+                        upY = 0;
+                        replay = true;
+                        soundPlay("click");
+                        console.log("Win Click");
+                    }
+                }
+                c.textAlign = 'center';
+                c.fillStyle = '#ffd700';
+                c.fillRect(middle-75, textLine,150,50);
+
+                var sample_text = "Next";
+                var text = sample_text.split("").join(" ");
+                textLine+=30;
+                c.font = 'lighter italic 15pt Calibri';
+                c.textAlign = 'center';
+                c.fillStyle = '#fff';
+                c.fillText(text, middle, textLine);
+            }
+        }
+    }
+
 }

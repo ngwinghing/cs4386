@@ -53,7 +53,7 @@ function Invader(tileY) {
 
     this.encounterGlue = function(glue) {
         glue.beingAttacked();
-        this.currentFrames = [50];
+        this.currentFrames = [98,99,100,101];
         this.stay();
     };
 
@@ -139,7 +139,7 @@ function middleAttackOrWalk(invader) {
         if (invader.tileY > 4) { //more space downwards and path is available
             if (!grids[invader.gridIndex-1].occupied)
                 invader.walk(Up);
-            else 
+            else
                 invader.walk(Down);
         }
 
@@ -152,7 +152,7 @@ function middleAttackOrWalk(invader) {
     }
 
     else if (!grids[invader.gridIndex+1].occupied && !grids[invader.gridIndex-1].occupied) {
-        if (!grids[invader.gridIndex-9].occupied) 
+        if (!grids[invader.gridIndex-9].occupied)
             invader.walk(Up);
 
         else if (!grids[invader.gridIndex-11].occupied)
@@ -194,10 +194,12 @@ function drawAllInvaders() {
 }
 
 function checkIfAnyInvadersArrived() {
+    if (invaders.length >0) {
     for (var i = 0; i < invaders.length; i++) {
         var invader = invaders[i]
         if (invader.gridIndex <10)
             return true;
+    }
     }
     return false;
 }

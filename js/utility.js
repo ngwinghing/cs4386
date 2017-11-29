@@ -13,9 +13,41 @@ function xy2i (x, y, mapWidth) {
 grids = [];
 player_tools = [];
 invaders = [];
-secondStage = true;
+gameLevel = 1;
 
-timer = new Timer("setup");
+function emptyGame() {
+   for (var i =0; i< grids.length; i++) {
+      var grid = grids[i];
+      if (grid.occupied) {
+          grid.occupied = false;
+          grid.occupant = "none";
+      }
+    }
+    resetMode();
+    resetAllBoxes();
+   player_tools = [];
+   invaders = [];
+    generateRandomTool("umbrella",Math.floor(Math.random()*(10-gameLevel))+1);
+    generateRandomTool("sewage",Math.floor(Math.random()*(10-gameLevel))+1);
+}
+
+function startNewGame() {
+    generateRandomTool("umbrella",Math.floor(Math.random()*(10-gameLevel))+1);
+    generateRandomTool("sewage",Math.floor(Math.random()*(10-gameLevel))+1);
+    generateNewPolice(gameLevel);
+    firstStart = false;
+}
+
+function startNextLv() {
+    emptyGame();
+    gameLevel++;
+    generateNewPolice(gameLevel);
+}
+
+function retryThisLv() {
+    emptyGame();
+    generateNewPolice(gameLevel);
+}
 
 Up=1;
 Down=2;
@@ -65,6 +97,8 @@ function grid(gridIndex) {
                             player_tools.push(new Barrier(this.gridIndex));
                         this.occupied = true;
                         upObject = "";
+                        upX=0;
+                        upY=0;
                     }
 				}
             }
@@ -219,43 +253,34 @@ function Umbrella(gridIndex) {
 	};
 }*/
 
-function Timer(type) {
-    var basicTime;
-    if (type == "setup") {
-        basicTime = 1; //should be 30
-    } else {
-        // attack
-        basicTime = 60;
+function generateRandomTool(toolName,quantity) {
+    var random;
+    var previous=[];
+    for (var i=0; i<grids.length;i++) {
+        if (grids[i].occupied)
+            previous.push(i);
     }
+    var exist = false;
 
-    this.remainingTime = basicTime;
-    this.started = false;
+    for (var i = 0; i<quantity; i++) {
+        do {
+            exist = false;
+            random = Math.floor(Math.random() * (grids.length-20));
+            console.log(random);
+            if (previous.length >0) {
+                for (var j = 0; j < previous.length; j++) {
+                    var pointer = previous[j];
+                    if (random === pointer) {
+                        exist = true;
+                    }
+                }
+            }
+        } while (exist);
+        previous.push(random);
+        if (toolName == "umbrella")
+            player_tools.push(new Umbrella(random));
+        else if (toolName == "sewage")
+            player_tools.push(new Sewage(random));
 
-    this.width = canvas.width;
-    this.height = timerHeight;
-
-    this.draw = function() {
-        if(this.remainingTime != -1) {
-            // basic
-            c.fillStyle = '#2F4F4F';
-            c.fillRect(0,0,this.width, this.height);
-
-            // remain time
-            c.fillStyle = '#DC143C';
-            c.fillRect(0,0,(this.width * this.remainingTime/basicTime), this.height);
-
-            c.fillStyle = '#000000';
-            c.fillText(this.remainingTime, 15, 22);
-
-            this.started = true;
-        }
-
-        else if (secondStage == true) {
-        	timer = new Timer("play");
-        	// genarate invaders
-			generateNewPolice(1);
-
-        	secondStage = false;
-        }
     }
 }
