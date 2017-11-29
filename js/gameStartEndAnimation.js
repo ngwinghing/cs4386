@@ -4,6 +4,7 @@ win = false;
 firstStart = true;
 
 var welcome = true;
+var howToPlay = false;
 var replay = false;
 
 var gra1= 0;
@@ -133,11 +134,61 @@ function gameStartAnimation() {
             c.textAlign = 'center';
             c.fillStyle = '#fff';
             c.fillText(text, middle, textLine);
+            textLine-=30;
         }
     }
     // intro
+    textLine+=60;
+
+    var sample_text = "How To Play";
+    var text = sample_text.split("").join("");
+    textLine+=30;
+    c.font = 'lighter italic 15pt Calibri';
+    c.textAlign = 'center';
+    c.fillStyle = '#fff';
+    c.fillText(text, middle, textLine);
+
+    textLine-=30;
+    if (mouse.x<(mapStartX+middle+75) && mouse.x>(mapStartX+middle-175)) {
+        if (mouse.y<(textLine+30) && mouse.y>textLine) {
+            if (upX<(mapStartX+middle+55) && upX>(mapStartX+middle-145)){
+                if (upY<(textLine+30) && upY>textLine) {
+                    upX=0;
+                    upY=0;
+                    howToPlay=true;
+                    soundPlay("click");
+                }
+            }
+            c.textAlign = 'center';
+            c.fillStyle = '#000';
+            c.fillRect(middle-75, textLine,150,50);
+
+            var sample_text = "How To Play";
+            var text = sample_text.split("").join("");
+            textLine+=30;
+            c.font = 'Bold italic 15pt Calibri';
+            c.textAlign = 'center';
+            c.fillStyle = '#fff';
+            c.fillText(text, middle, textLine);
+        }
+    }
 }
 
+function gameHowToPlayAnimation() {
+    c.drawImage(howToPlayImg,0,0,canvas.width, canvas.width/1.44);
+    if (mouse.x<(mapStartX+canvas.width) && mouse.x>(mapStartX)) {
+        if (mouse.y < canvas.height && mouse.y > 0) {
+            if (upX < (mapStartX+canvas.width) && upX > (mapStartX)) {
+                if (upY < canvas.height && upY > 0) {
+                    upX = 0;
+                    upY = 0;
+                    howToPlay = false;
+                    soundPlay("click");
+                }
+            }
+        }
+    }
+}
 
 function gameEndAnimation() {
     var middle = 400;

@@ -56,3 +56,7 @@ window.addEventListener('mousedown', function(e){handleMouseDown(e);})
 window.addEventListener('mousemove', function(e){handleMouseMove(e);})
 window.addEventListener('mouseup', function(e){handleMouseUp(e);})
 window.addEventListener('mouseout', function(e){handleMouseOut(e)})
+
+window.addEventListener('resize', function() {
+    mapStartX = (innerWidth-canvas.width)/2;
+})
