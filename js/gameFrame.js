@@ -175,6 +175,7 @@ function newGame() {
                         win = false;
                         gameEnd = true;
                     }
+
                     else if (secondCount == 1) { //1 second
                         for (i = 0; i < invaders.length; i++) {
                             var currentGrid = grids[invaders[i].gridIndex];
@@ -191,6 +192,12 @@ function newGame() {
 
                             else
                                 detectFront(invaders[i]);
+                        }
+                    }
+
+                    if (invaders_bombs.length > 0) {
+                        for (var i = 0; i<invaders_bombs.length; i++) {
+                            invaders_bombs[i].draw();
                         }
                     }
                 }

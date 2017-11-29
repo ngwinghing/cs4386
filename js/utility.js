@@ -13,6 +13,7 @@ function xy2i (x, y, mapWidth) {
 grids = [];
 player_tools = [];
 invaders = [];
+invaders_bombs = [];
 gameLevel = 1;
 
 function emptyGame() {
@@ -110,10 +111,6 @@ for (var i=0; i<160; i++) {
     grids.push(new grid(i));
 }
 
-/*function setGrids()  {
-
-}
-*/
 function Sewage(gridIndex) {
 	this.gridIndex = gridIndex;
 	this.tileX = Math.floor(gridIndex/10)+2;
@@ -213,7 +210,6 @@ function Glue(gridIndex) {
 }
 
 function Umbrella(gridIndex) {
-	console.log(grids[gridIndex].occupied);
 	this.gridIndex = gridIndex;
 	this.tileX = Math.floor(gridIndex/10)+2;
 	this.tileY = gridIndex%10;
@@ -225,7 +221,6 @@ function Umbrella(gridIndex) {
 
     grids[gridIndex].occupied = true;
     grids[gridIndex].occupant = this;
-    console.log(grids[gridIndex].occupant);
 
 	this.beingAttacked = function() {
 		var index = player_tools.indexOf(this);
@@ -244,14 +239,45 @@ function Umbrella(gridIndex) {
 }
 
 
-/*function bomb(gridIndex) {
-	//this.frames = [??];
+function Bomb(gridIndex) { //invaders_bombs
+	this.gridIndex = gridIndex;
+	this.tileX = Math.floor(gridIndex/10)+2;
+	this.tileY = gridIndex%10;
+	this.sprite = new Sprite("img/officer.png", 5, 7);
+	//this.currentFrames = [single value];
+	this.currentFrames = [134];
 	this.area = [gridIndex-11, gridIndex-10, gridIndex-9, gridIndex-1, gridIndex, gridIndex+1];
 
+	invaders_bombs.push(this);
+
+	this.explode = function() {
+		//this.currentFrames = [several value];
+		this.currentFrames = [134, 135, 136, 137];
+		for(var i=0; i<6; i++) {
+			var affected_player_tool = grids[this.area[i]].occupant;
+
+			if (affected_player_tool.toString() != "none") {
+				var index = player_tools.indexOf(affected_player_tool);
+				player_tools.splice(index, 1);
+				grids[this.area[i]].occupied = false;
+				grids[this.area[i]].occupant = "none";
+			}	
+		}
+	}
+
+	this.toString = function() {
+		return "bomb";
+	};
+
+
 	this.draw = function() {
+		//this.sprite.drawAnimated((this.tileX-1) * tileSize, mapStartY + (this.tileY-1) * tileSize, this.currentFrames);
+        for (var i=0; i<6; i++) {
+        	this.sprite.drawAnimated(grids[this.area[i]].tileX * tileSize, mapStartY + grids[this.area[i]].tileY * tileSize, this.currentFrames);
+    	}
 
 	};
-}*/
+}
 
 function generateRandomTool(toolName,quantity) {
     var random;
@@ -266,7 +292,7 @@ function generateRandomTool(toolName,quantity) {
         do {
             exist = false;
             random = Math.floor(Math.random() * (grids.length-20));
-            console.log(random);
+            // console.log(random);
             if (previous.length >0) {
                 for (var j = 0; j < previous.length; j++) {
                     var pointer = previous[j];
