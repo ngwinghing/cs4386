@@ -135,21 +135,37 @@ function middleAttackOrWalk(invader) {
         invader.useRod();
     }
 
-    //both 1 grid up and downward are empty
     else if (!grids[invader.gridIndex-9].occupied && !grids[invader.gridIndex-11].occupied) {
-        if (invader.tileY >= 5 || !grids[invader.gridIndex+1].occupied) //more space downwards and path is available
-            invader.walk(Down);
+        if (invader.tileY > 4) { //more space downwards and path is available
+            if (!grids[invader.gridIndex-1].occupied)
+                invader.walk(Up);
+            else 
+                invader.walk(Down);
+        }
 
-        else
-            invader.walk(Up);
+        else {
+            if (!grids[invader.gridIndex+1].occupied)
+                invader.walk(Down);
+            else
+                invader.walk(Up);
+        }
     }
-    //1 grid downward is empty
+
+    else if (!grids[invader.gridIndex+1].occupied && !grids[invader.gridIndex-1].occupied) {
+        if (!grids[invader.gridIndex-9].occupied) 
+            invader.walk(Up);
+
+        else if (!grids[invader.gridIndex-11].occupied)
+            invader.walk(Dwon);
+    }
+
+/*    //1 grid downward is empty
     else if (!grids[invader.gridIndex-11].occupied && !grids[invader.gridIndex+1].occupied)
         invader.walk(Up);
 
     //1 grid upward is empty
     else
-        invader.walk(Down);
+        invader.walk(Down);*/
 }
 
 function detectFront(invader) {
