@@ -9,6 +9,7 @@ function Invader(tileY) {
 
     this.walk = function(direction) {
         grids[this.gridIndex].occupied = false;
+        grids[this.gridIndex].invaderExists = false;
 
         if (direction == Up){
             this.gridIndex--;
@@ -25,9 +26,10 @@ function Invader(tileY) {
             this.tileX--;
         }
 
-        grids[this.gridIndex-1].occupied = true;
-        grids[this.gridIndex-1].occupant = "invader";
+        grids[this.gridIndex].occupied = true;
+        grids[this.gridIndex].invaderExists = true;
         this.currentFrames = [50, 51, 52, 53];
+        console.log("walk to" + this.gridIndex);
     }
 
     this.stay = function() {
@@ -38,8 +40,6 @@ function Invader(tileY) {
         for(i=0;i<2;i++){
             for(j=0;j<3;j++){
                 grids[this.gridIndex-10*(i+1)-1+j].occupied = true;
-
-                //grids[this.gridIndex-10*(i+1)-1+j].occupant="none";
             }
         }
 
@@ -63,9 +63,9 @@ function Invader(tileY) {
         invaders.splice(index, 1, new Invader(this.tileY));
     };
 
-    /*	this.toString = function() {
-     return "invader";
-     };*/
+    this.toString = function() {
+        return "invader";
+    };
 
     this.draw = function() {
         if (this.tileX >= 2 && this.tileX <= 17) {
@@ -135,29 +135,46 @@ function middleAttackOrWalk(invader) {
         invader.useRod();
     }
 
-    //both 1 grid up and downward are empty
     else if (!grids[invader.gridIndex-9].occupied && !grids[invader.gridIndex-11].occupied) {
-        if (invader.tileY >= 5 || !grids[invader.gridIndex+1].occupied) //more space downwards and path is available
-            invader.walk(Down);
+        if (invader.tileY > 4) { //more space downwards and path is available
+            if (!grids[invader.gridIndex-1].occupied)
+                invader.walk(Up);
+            else
+                invader.walk(Down);
+        }
 
-        else
-            invader.walk(Up);
+        else {
+            if (!grids[invader.gridIndex+1].occupied)
+                invader.walk(Down);
+            else
+                invader.walk(Up);
+        }
     }
-    //1 grid downward is empty
+
+    else if (!grids[invader.gridIndex+1].occupied && !grids[invader.gridIndex-1].occupied) {
+        if (!grids[invader.gridIndex-9].occupied)
+            invader.walk(Up);
+
+        else if (!grids[invader.gridIndex-11].occupied)
+            invader.walk(Dwon);
+    }
+
+/*    //1 grid downward is empty
     else if (!grids[invader.gridIndex-11].occupied && !grids[invader.gridIndex+1].occupied)
         invader.walk(Up);
 
     //1 grid upward is empty
     else
-        invader.walk(Down);
+        invader.walk(Down);*/
 }
 
 function detectFront(invader) {
     //walk if grid in front is empty
-    if (!grids[invader.gridIndex-10].occupied)
+    var frontGrid = grids[invader.gridIndex-10];
+    if (!frontGrid.occupied)
         invader.walk(Front);
 
-    else if (grids[invader.gridIndex-10].occupied && !grids[invader.gridIndex-10].occupant.detectable)
+    else if (frontGrid.occupied && !frontGrid.occupant.detectable)
         invader.walk(Front);
 
     //check if top or bottom row
