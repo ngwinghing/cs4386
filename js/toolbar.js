@@ -80,8 +80,6 @@ function Box(nameOfTools, value, boxNumber) {
         c.font = '18px  Arial';
         c.fillText(this.name, rectX + 45, rectY + 88);
 
-        //console.log("this remaining " +this.name+this.remainingTime );
-        console.log("time counter: " +this.name +""+this.timeCounter);
         if (this.type == "time") {
             if (this.remainingTime !=0) {
                 this.ableToDrag = false;

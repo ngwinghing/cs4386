@@ -214,7 +214,6 @@ function Glue(gridIndex) {
 }
 
 function Umbrella(gridIndex) {
-	console.log(grids[gridIndex].occupied);
 	this.gridIndex = gridIndex;
 	this.tileX = Math.floor(gridIndex/10)+2;
 	this.tileY = gridIndex%10;
@@ -226,7 +225,6 @@ function Umbrella(gridIndex) {
 
     grids[gridIndex].occupied = true;
     grids[gridIndex].occupant = this;
-    console.log(grids[gridIndex].occupant);
 
 	this.beingAttacked = function() {
 		var index = player_tools.indexOf(this);
@@ -267,7 +265,6 @@ function generateRandomTool(toolName,quantity) {
         do {
             exist = false;
             random = Math.floor(Math.random() * (grids.length-20));
-            console.log(random);
             if (previous.length >0) {
                 for (var j = 0; j < previous.length; j++) {
                     var pointer = previous[j];
