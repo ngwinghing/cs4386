@@ -15,6 +15,10 @@ player_tools = [];
 invaders = [];
 invaders_bombs = [];
 gameLevel = 1;
+bomb_img = new Image();
+bomb_img.src = "img/bomb.png";
+explode_img = new Image();
+explode_img.src = "img/explode.png";
 
 function emptyGame() {
    for (var i =0; i< grids.length; i++) {
@@ -219,7 +223,7 @@ function Umbrella(gridIndex) {
 	this.life = 1;
 	this.detectable = true;
 
-    this.img = new Image()
+    this.img = new Image();
 	this.img.src = "img/umbrella.png";
 
     grids[gridIndex].occupied = true;
@@ -237,23 +241,24 @@ function Umbrella(gridIndex) {
 	};
 
 	this.draw = function() {
-		c.drawImage(this.img, this.tileX * tileSize, mapStartY+5 + this.tileY * tileSize+5, 32, 32);
+		c.drawImage(this.img, this.tileX * tileSize, mapStartY + this.tileY * tileSize+5, 32, 32);
 	};
 }
 
 
 function Bomb(gridIndex) { //invaders_bombs
+
 	this.gridIndex = gridIndex;
 	this.tileX = Math.floor(gridIndex/10)+2;
 	this.tileY = gridIndex%10;
 	this.area = [gridIndex-11, gridIndex-10, gridIndex-9, gridIndex-1, gridIndex, gridIndex+1];
 	this.drawArea = [[this.tileX-1, this.tileY-1], [this.tileX-1, this.tileY], [this.tileX-1, this.tileY+1], [this.tileX, this.tileY-1], [this.tileX, this.tileY], [this.tileX, this.tileY+1]];
-	this.img = new Image();
-	this.img.src = "img/umbrella.png";
-
+	
+	c.drawImage(bomb_img, this.drawArea[4][0] * tileSize+5, mapStartY + this.drawArea[4][1] * tileSize+5, 32, 32);
 	for (var i=0; i<6; i++) {
-		c.drawImage(this.img, this.drawArea[i][0] * tileSize, mapStartY+5 + this.drawArea[i][1] * tileSize+5, 32, 32);
+		c.drawImage(explode_img, this.drawArea[i][0] * tileSize+5, mapStartY + this.drawArea[i][1] * tileSize+5, 32, 32);
 	}
+
 
 	for(var i=0; i<6; i++) {
 		var affected_player_tool = grids[this.area[i]].occupant;

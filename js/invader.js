@@ -132,7 +132,7 @@ function middleAttackOrWalk(invader) {
 
         //-----------original code-----------
          //use bomb when there are more than 9 obstacle
-        if (obstacleCount > 5 && invader.numberOfBomb > 0) {
+        if (obstacleCount > 8 && invader.numberOfBomb > 0) {
             invader.useBomb();
         }
 
