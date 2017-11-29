@@ -35,6 +35,20 @@ function newGame() {
                 c.lineWidth = 2;
                 c.strokeRect(0, mapHeight + timerHeight, mapWidth, toolBarHeight);
 
+                /*Draw Level*/
+                var textLine=mapHeight+50;
+                c.textAlign = 'center';
+                c.fillStyle = '#ffd700';
+                c.fillRect(mapWidth-100, textLine,100,50);
+
+                var sample_text = "Level "+gameLevel;
+                var text = sample_text.split("").join("");
+                textLine+=30;
+                c.font = 'lighter italic 15pt Calibri';
+                c.textAlign = 'center';
+                c.fillStyle = '#000';
+                c.fillText(text, mapWidth-50, textLine);
+
                 if(!gameEnd)
                 /*Draw Boxes*/
                 drawAllBoxes();
@@ -48,26 +62,28 @@ function newGame() {
                     drawDragging();
                 }
 
-                /*Draw Invaders*/
-                drawAllInvaders();
+                if (timerMode == "attack") {
+                    /*Draw Invaders*/
+                    drawAllInvaders();
 
-                if (checkIfAnyInvadersArrived()) {
-                    gameEnd = true;
-                }
-                else if (secondCount == 0 && timer.started == true) { //1 second
-                    for (i = 0; i < invaders.length; i++) {
-                        if (grids[invaders[i].gridIndex].occupied == true) {
-                            if (grids[invaders[i].gridIndex].occupant.toString() == "glue")
-                                invaders[i].encounterGlue(grids[invaders[i].gridIndex].occupant);
+                    if (checkIfAnyInvadersArrived()) {
+                        win = false;
+                        gameEnd = true;
+                    }
+                    else if (secondCount == 1) { //1 second
+                        for (var i = 0; i < invaders.length; i++) {
+                            if (grids[invaders[i].gridIndex].occupied == true) {
+                                if (grids[invaders[i].gridIndex].occupant.toString() == "glue")
+                                    invaders[i].encounterGlue(grids[invaders[i].gridIndex].occupant);
 
-                            else if (grids[invaders[i].gridIndex].occupant.toString() == "sewage")
-                                invaders[i].encounterSewage(grids[invaders[i].gridIndex].occupant);
-                        } else {
-                            detectFront(invaders[i]);
+                                else if (grids[invaders[i].gridIndex].occupant.toString() == "sewage")
+                                    invaders[i].encounterSewage(grids[invaders[i].gridIndex].occupant);
+                            } else {
+                                detectFront(invaders[i]);
+                            }
                         }
                     }
                 }
-
                if (!gameEnd)
                     secondCount--;
             }
@@ -85,9 +101,14 @@ function newGame() {
                         // next lv
                         startNextLv();
                         replay = false;
+                        win= false;
                         gameEnd = false;
                     } else {
                         // retry this lv
+                        retryThisLv();
+                        replay = false;
+                        win= false;
+                        gameEnd = false;
                     }
                    // win=false;
                     //startNewGame();

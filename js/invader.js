@@ -177,10 +177,12 @@ function drawAllInvaders() {
 }
 
 function checkIfAnyInvadersArrived() {
+    if (invaders.length >0) {
     for (var i = 0; i < invaders.length; i++) {
         var invader = invaders[i]
         if (invader.gridIndex <10)
             return true;
+    }
     }
     return false;
 }

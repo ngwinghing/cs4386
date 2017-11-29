@@ -16,31 +16,36 @@ invaders = [];
 gameLevel = 1;
 
 function emptyGame() {
-
-   grids =[];
+   for (var i =0; i< grids.length; i++) {
+      var grid = grids[i];
+      if (grid.occupied) {
+          grid.occupied = false;
+          grid.occupant = "none";
+      }
+    }
+    resetMode();
    player_tools = [];
    invaders = [];
+    generateRandomTool("umbrella",Math.floor(Math.random()*(10-gameLevel))+1);
+    generateRandomTool("sewage",Math.floor(Math.random()*(10-gameLevel))+1);
 }
 
 function startNewGame() {
-    //emptyGame();
-    //timerMode = "setup";
-    // new pre time
-    // new grid
-    //clean police
-    // new police
-    //console.log("Generate new");
-    generateNewPolice(1);
+    generateRandomTool("umbrella",Math.floor(Math.random()*(10-gameLevel))+1);
+    generateRandomTool("sewage",Math.floor(Math.random()*(10-gameLevel))+1);
+    generateNewPolice(gameLevel);
     firstStart = false;
 }
 
 function startNextLv() {
     emptyGame();
-    generateNewPolice(2);
+    gameLevel++;
+    generateNewPolice(gameLevel);
 }
 
 function retryThisLv() {
-
+    emptyGame();
+    generateNewPolice(gameLevel);
 }
 
 Up=1;

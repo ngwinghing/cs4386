@@ -116,6 +116,8 @@ function gameStartAnimation() {
         if (mouse.y<(textLine+50) && mouse.y>textLine) {
             if (lastX<(mapStartX+middle+75) && lastX>(mapStartX+middle-175)){
                 if (lastY<(textLine+50) && lastY>textLine) {
+                    upX=0;
+                    upY=0;
                     welcome=false;
                     soundPlay("click");
                 }
@@ -171,10 +173,14 @@ function gameEndAnimation() {
         textLine-=30;
         if (mouse.x<(mapStartX+middle+75) && mouse.x>(mapStartX+middle-175)) {
             if (mouse.y<(textLine+50) && mouse.y>textLine) {
-                if (lastX<(mapStartX+middle+75) && lastX>(mapStartX+middle-175)){
-                    if (lastY<(textLine+50) && lastY>textLine) {
-                        //replay = true;
-                        //soundPlay("click");
+
+                if (upX<(mapStartX+middle+75) && upX>(mapStartX+middle-175)){
+                    if (upY<(textLine+50) && upY>textLine) {
+                        upX = 0;
+                        upY = 0;
+                        replay = true;
+                        soundPlay("click");
+                        console.log("Lose Click");
                     }
                 }
                 c.textAlign = 'center';
@@ -221,6 +227,8 @@ function gameEndAnimation() {
 
                 if (upX<(mapStartX+middle+75) && upX>(mapStartX+middle-175)){
                     if (upY<(textLine+50) && upY>textLine) {
+                        upX = 0;
+                        upY = 0;
                         replay = true;
                         soundPlay("click");
                         console.log("Win Click");
