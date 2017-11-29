@@ -11,7 +11,7 @@ function soundPlay(type) {
         soundBackground.src = soundPreBg;
     }
     else if (type == "attack_bg") {
-        setHalfVolume(0.3);
+        setHalfVolume(0.2);
         soundBackground.src = soundAttackBg;
 }
 }
