@@ -1,5 +1,15 @@
-secondCount = 0;
+var init = false;
+function startNewGame() {
+    timerMode = "setup";
+    // new pre time
+    // new grid
+    //clean police
+    // new police
+    generateNewPolice(1);
+    init = true;
+}
 function newGame() {
+    var secondCount = 0;
     setInterval(
         function() {
             c.clearRect(0, 0, innerWidth, innerHeight);
@@ -7,6 +17,9 @@ function newGame() {
                 gameStartAnimation();
             }
             else {
+                if (init == false)
+                    startNewGame();
+
                 /*Draw Timer*/
                 timer.draw();
                 if (secondCount == 0) { //1 second
@@ -31,6 +44,7 @@ function newGame() {
                 c.lineWidth = 2;
                 c.strokeRect(0, mapHeight + timerHeight, mapWidth, toolBarHeight);
 
+                if(!gameEnd)
                 /*Draw Boxes*/
                 drawAllBoxes();
 
@@ -46,7 +60,6 @@ function newGame() {
                 drawAllInvaders();
 
                 if (checkIfAnyInvadersArrived()) {
-                    c.fillRect(100, 100, 100, 100);
                     gameEnd = true;
                 }
                 else if (secondCount == 20 && timer.started == true) { //1 second
@@ -66,7 +79,22 @@ function newGame() {
                 if (!gameEnd)
                     secondCount--;
             }
-
+            if (timer.remainingTime==-1 && timerMode=="attack") {
+                if (!checkIfAnyInvadersArrived())
+                    win=true;
+                gameEnd = true;
+            }
+            if (gameEnd) {
+                gameEndAnimation();
+                // determined to replay
+                if (gameStart==true) {
+                    //replay
+                    gameEnd=false;
+                    win=false;
+                    init = false;
+                    startNewGame();
+                }
+            }
         }
     , 50);
 }

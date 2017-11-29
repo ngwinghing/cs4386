@@ -29,9 +29,9 @@ function handleMouseUp(e){
     mouse.y=e.y;
     // clear the drag flag
     isDragging=false;
+    upX=e.x;
+    upY=e.y;
     if (draggingObject!="") {
-        upX=e.x;
-        upY=e.y;
         upObject= draggingObject;
         draggingObject = "";
     }
