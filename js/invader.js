@@ -114,6 +114,43 @@ function middleAttackOrWalk(invader) {
     //front has an obstacle
     //both grids occupied, use weapon
     var obstacleCount = 0;
+    if (grids[invader.gridIndex-9].occupied && grids[invader.gridIndex-11].occupied ||
+        grids[invader.gridIndex-1].occupied && grids[invader.gridIndex+1].occupied) {
+        for(i=0;i<10;i++)
+            //retrieve front col from top to bottom
+            if (grids[(Math.floor(invader.gridIndex/10)*10)+i].occupied)
+                obstacleCount++;
+
+         //use bomb when there are more than 9 obstacle
+         if (obstacleCount >= 5 && invader.numberOfBomb > 0)
+            invader.useBomb();
+         //obstacleCount is 1 to 8
+         else invader.useRod();
+        
+        
+    }
+
+    //both 1 grid up and downward are empty
+    else if (!grids[invader.gridIndex-9].occupied && !grids[invader.gridIndex-11].occupied) {
+        if (invader.tileY < 5 && !grids[invader.gridIndex+1].occupied) //more space downwards and path is available
+            invader.walk(Down);
+
+        else if (!grids[invader.gridIndex-1].occupied)
+            invader.walk(Up);
+        else invader.useRod();
+    }
+    //1 grid upward is empty
+    else if (!grids[invader.gridIndex-11].occupied && !grids[invader.gridIndex-1].occupied)
+        invader.walk(Up);
+
+    //1 grid upward is empty
+    else invader.useRod();
+}
+
+/*function middleAttackOrWalk(invader) {
+    //front has an obstacle
+    //both grids occupied, use weapon
+    var obstacleCount = 0;
     var occupiedGirdCount = 0;
 
     if (grids[invader.gridIndex-9].occupied) occupiedGirdCount++;
@@ -167,14 +204,14 @@ function middleAttackOrWalk(invader) {
             invader.walk(Up);
     }
 
-/*    //1 grid downward is empty
-    else if (!grids[invader.gridIndex-11].occupied && !grids[invader.gridIndex+1].occupied)
-        invader.walk(Up);
+    // //1 grid downward is empty
+    // else if (!grids[invader.gridIndex-11].occupied && !grids[invader.gridIndex+1].occupied)
+    //     invader.walk(Up);
 
-    //1 grid upward is empty
-    else
-        invader.walk(Down);*/
-}
+    // //1 grid upward is empty
+    // else
+    //     invader.walk(Down);
+}*/
 
 function detectFront(invader) {
     //walk if grid in front is empty
