@@ -30,8 +30,8 @@ function emptyGame() {
     }
     resetMode();
     resetAllBoxes();
-   player_tools = [];
-   invaders = [];
+    player_tools = [];
+    invaders = [];
     generateRandomTool("umbrella",Math.floor(Math.random()*(10-gameLevel))+1);
     generateRandomTool("sewage",Math.floor(Math.random()*(10-gameLevel))+1);
 }
@@ -63,6 +63,7 @@ function grid(gridIndex) {
 	this.x = (Math.floor(gridIndex/10)+2)*tileSize;
 	this.y = gridIndex%10*tileSize;
 	this.occupied = false; //for both player_tools & police
+	this.detectable = false;
 
 	/*must have 2 separate variable to check if they are overlapped in gameFrame.js*/
 	this.occupant = "none"; //only for player_tool
@@ -123,13 +124,14 @@ function Sewage(gridIndex) {
 	this.tileX = Math.floor(gridIndex/10)+2;
 	this.tileY = gridIndex%10;
     this.currentFrames = [3];
-    this.detectable = false;
+    //this.detectable = false;
 
     this.sprite = new Sprite("img/sewage.png", 5, 4);
 
 
     grids[gridIndex].occupied = true;
     grids[gridIndex].occupant = this;
+	grids[gridIndex].detectable = false;
 
 /*	this.open = function() {
         this.currentFrames = [1];
@@ -155,13 +157,14 @@ function Barrier(gridIndex) {
 	this.tileX = Math.floor(gridIndex/10)+2;
 	this.tileY = gridIndex%10;
 	this.life = 3;
-	this.detectable = true;
+	//this.detectable = true;
 
     this.img = new Image()
     this.img.src = "img/barrier.png";
 
     grids[gridIndex].occupied = true;
     grids[gridIndex].occupant = this;
+	grids[gridIndex].detectable = true;
 
 	this.beingAttacked = function() {
 		this.life--;
@@ -188,12 +191,13 @@ function Glue(gridIndex) {
 	this.tileX = Math.floor(gridIndex/10)+2;
 	this.tileY = gridIndex%10;
 	this.life = 3;
-	this.detectable = false;
+	//this.detectable = false;
     this.img = new Image();
     this.img.src = "img/glue.png";
 
     grids[gridIndex].occupied = true;
     grids[gridIndex].occupant = this;
+	grids[gridIndex].detectable = false;
 
 	this.beingAttacked = function() {
 		this.life--;
@@ -221,13 +225,14 @@ function Umbrella(gridIndex) {
 	this.tileX = Math.floor(gridIndex/10)+2;
 	this.tileY = gridIndex%10;
 	this.life = 1;
-	this.detectable = true;
+	//this.detectable = true;
 
     this.img = new Image();
 	this.img.src = "img/umbrella.png";
 
     grids[gridIndex].occupied = true;
     grids[gridIndex].occupant = this;
+	grids[gridIndex].detectable = true;
 
 	this.beingAttacked = function() {
 		var index = player_tools.indexOf(this);

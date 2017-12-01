@@ -114,12 +114,15 @@ function middleAttackOrWalk(invader) {
     //front has an obstacle
     //both grids occupied, use weapon
     var obstacleCount = 0;
-    if (grids[invader.gridIndex-9].occupied && grids[invader.gridIndex-11].occupied ||
-        grids[invader.gridIndex-1].occupied && grids[invader.gridIndex+1].occupied) {
+    if ((grids[invader.gridIndex-9].detectable && grids[invader.gridIndex-11].detectable) ||
+		(grids[invader.gridIndex-1].detectable && grids[invader.gridIndex+1].detectable)){
+		console.log("blocked");
         for(i=0;i<10;i++)
             //retrieve front col from top to bottom
-            if (grids[(Math.floor(invader.gridIndex/10)*10-10)+i].occupied)
-                obstacleCount++;
+            if (grids[(Math.floor(invader.gridIndex/10)*10-10)+i].occupied){
+                console.log((Math.floor(invader.gridIndex/10)*10-10)+i);
+				obstacleCount++;
+			}
         console.log(obstacleCount);
 
         var random=Math.floor(10*Math.random()); //Random number for below probability calculation.
@@ -136,24 +139,34 @@ function middleAttackOrWalk(invader) {
     }
 
     //both 1 grid up and downward are empty
-    else if (!grids[invader.gridIndex-9].occupied && !grids[invader.gridIndex-11].occupied) {
-        if (invader.tileY < 5 && !grids[invader.gridIndex+1].occupied)
-            if (!grids[invader.gridIndex+1].occupant.detectable) //more space downwards and path is available
-                invader.walk(Down);
-
-        else if (!grids[invader.gridIndex-1].occupied)
-            if(!grids[invader.gridIndex-1].occupant.detectable)
-            invader.walk(Up);
-
-        else invader.useRod();
+    else if (!grids[invader.gridIndex-9].detectable && !grids[invader.gridIndex-11].detectable) {
+        if (invader.tileY < 5 && !grids[invader.gridIndex+1].detectable){
+            //if (!grids[invader.gridIndex+1].occupant.detectable) {//more space downwards and path is available
+                console.log("down detected");
+				invader.walk(Down);
+			
+		}
+        else if (!grids[invader.gridIndex-1].detectable){
+            //if(!grids[invader.gridIndex-1].occupant.detectable){
+				console.log("up detected");
+				invader.walk(Up);
+			
+		}
+        else {console.log("else1");invader.useRod();}
     }
     //1 grid upward is empty
-    else if (!grids[invader.gridIndex-11].occupied && !grids[invader.gridIndex-1].occupied)
-        if (!grids[invader.gridIndex-1].occupant.detectable)
-        invader.walk(Up);
-
-    //1 grid upward is empty
-    else invader.useRod();
+    else if (!grids[invader.gridIndex-11].detectable && !grids[invader.gridIndex-1].detectable){
+		console.log("up detected2");
+        //if (!grids[invader.gridIndex-1].detectable)
+			invader.walk(Up);
+	}
+    //1 grid downward is empty
+	else if (!grids[invader.gridIndex-9].detectable && !grids[invader.gridIndex+1].detectable){
+		console.log("down detected2");
+        //if (!grids[invader.gridIndex+1].detectable)
+			invader.walk(Down);
+	}
+    else {console.log("else2");invader.useRod();}
 }
 
 /*function middleAttackOrWalk(invader) {
@@ -230,17 +243,18 @@ function detectFront(invader) {
     if (!frontGrid.occupied)
         invader.walk(Front);
 
-    else if (frontGrid.occupied)
-        if (!frontGrid.occupant.detectable)
-            invader.walk(Front);
-
-    //check if top or bottom row
-    else if (invader.tileY == 0 || invader.tileY == 9)
-        topBotAttackOrWalk(invader);
-
-    //middle rows
-    else
-        middleAttackOrWalk(invader);
+    else if (frontGrid.occupied){
+        if (!frontGrid.detectable)
+			invader.walk(Front);
+	
+		//check if top or bottom row
+		else if (invader.tileY == 0 || invader.tileY == 9)
+			topBotAttackOrWalk(invader);
+		
+		//middle rows
+		else
+			middleAttackOrWalk(invader);
+	}
 }
 
 function drawAllInvaders() {
