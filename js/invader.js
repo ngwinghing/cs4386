@@ -132,7 +132,9 @@ function middleAttackOrWalk(invader) {
 
         //-----------original code-----------
          //use bomb when there are more than 9 obstacle
-        if (obstacleCount > 8 && invader.numberOfBomb > 0) {
+        var random=Math.floor(10*Math.random());
+
+        if ((obstacleCount > 8 && invader.numberOfBomb > 0)&& random<6) { //Match specific requirement + 60% 0-6/10 probability.
             invader.useBomb();
         }
 

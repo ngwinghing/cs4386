@@ -2,3 +2,6 @@
 .idea/workspace.xml
 .idea/vcs.xml
 *.DS_Store
+.idea/cs4386.iml
+.idea/modules.xml
+game.html
