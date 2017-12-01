@@ -14,7 +14,10 @@ function newGame() {
     setInterval(
         function() {
             c.clearRect(0, 0, innerWidth, innerHeight);
-            if (howToPlay == true) {
+            if (gameLevel==5) {
+                gameWinAnimation();
+            }
+            else if (howToPlay == true) {
                 gameHowToPlayAnimation();
             } else if (welcome) {
                 gameStartAnimation();

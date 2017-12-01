@@ -298,4 +298,62 @@ function gameEndAnimation() {
         }
     }
 
+
+}
+
+function gameWinAnimation() {
+    var middle = 400;
+
+    /*Draw rgba*/
+    c.fillStyle = "rgba(255, 255, 255, 0.8)";
+    c.fillRect(0, 0, canvas.height, canvas.height);
+
+    //win
+    var sample_text = "— Democracy always wins! —";
+    var text = sample_text.split("").join("  ");
+    var textLine = 300;
+    c.font = 'lighter italic 15pt Calibri';
+    c.textAlign = 'center';
+    c.fillStyle = '#2fab0c';
+    c.fillText(text, middle, textLine);
+
+    // replay or next level btn
+    textLine+=60;
+    c.textAlign = 'center';
+    c.fillStyle = '#2fab0c';
+    c.fillRect(middle-75, textLine,150,50);
+
+    var sample_text = "Next";
+    var text = sample_text.split("").join(" ");
+    textLine+=30;
+    c.font = 'lighter italic 15pt Calibri';
+    c.textAlign = 'center';
+    c.fillStyle = '#000';
+    c.fillText(text, middle, textLine);
+
+    textLine-=30;
+    if (mouse.x<(mapStartX+middle+75) && mouse.x>(mapStartX+middle-175)) {
+        if (mouse.y<(textLine+50) && mouse.y>textLine) {
+
+            if (upX<(mapStartX+middle+75) && upX>(mapStartX+middle-175)){
+                if (upY<(textLine+50) && upY>textLine) {
+                    upX = 0;
+                    upY = 0;
+                    replay = true;
+                    soundPlay("click");
+                }
+            }
+            c.textAlign = 'center';
+            c.fillStyle = '#ffd700';
+            c.fillRect(middle-75, textLine,150,50);
+
+            var sample_text = "Be the Hope.";
+            var text = sample_text.split("").join(" ");
+            textLine+=30;
+            c.font = 'lighter italic 15pt Calibri';
+            c.textAlign = 'center';
+            c.fillStyle = '#fff';
+            c.fillText(text, middle, textLine);
+        }
+    }
 }

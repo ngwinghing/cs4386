@@ -118,29 +118,38 @@ function middleAttackOrWalk(invader) {
         grids[invader.gridIndex-1].occupied && grids[invader.gridIndex+1].occupied) {
         for(i=0;i<10;i++)
             //retrieve front col from top to bottom
-            if (grids[(Math.floor(invader.gridIndex/10)*10)+i].occupied)
+            if (grids[(Math.floor(invader.gridIndex/10)*10-10)+i].occupied)
                 obstacleCount++;
+        console.log(obstacleCount);
 
-         //use bomb when there are more than 9 obstacle
-         if (obstacleCount >= 5 && invader.numberOfBomb > 0)
+        var random=Math.floor(10*Math.random()); //Random number for below probability calculation.
+        var random2=Math.floor(10*Math.random());
+
+        //use bomb when there are more than 9 obstacle
+         if ((obstacleCount >= 5 && invader.numberOfBomb > 0)) { //Match specific requirement + 60% (0-5/10) probability.
             invader.useBomb();
+            console.log("bomb");
+         }
          //obstacleCount is 1 to 8
-         else invader.useRod();
-        
-        
+         else if(random2<8){invader.useRod();}  //80% probability of using rod.
+
     }
 
     //both 1 grid up and downward are empty
     else if (!grids[invader.gridIndex-9].occupied && !grids[invader.gridIndex-11].occupied) {
-        if (invader.tileY < 5 && !grids[invader.gridIndex+1].occupied) //more space downwards and path is available
-            invader.walk(Down);
+        if (invader.tileY < 5 && !grids[invader.gridIndex+1].occupied)
+            if (!grids[invader.gridIndex+1].occupant.detectable) //more space downwards and path is available
+                invader.walk(Down);
 
         else if (!grids[invader.gridIndex-1].occupied)
+            if(!grids[invader.gridIndex-1].occupant.detectable)
             invader.walk(Up);
+
         else invader.useRod();
     }
     //1 grid upward is empty
     else if (!grids[invader.gridIndex-11].occupied && !grids[invader.gridIndex-1].occupied)
+        if (!grids[invader.gridIndex-1].occupant.detectable)
         invader.walk(Up);
 
     //1 grid upward is empty

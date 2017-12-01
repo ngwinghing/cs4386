@@ -29,12 +29,12 @@ function Timer() {
 function changeMode() {
     if (timerMode == "setup") {
         timerMode = "attack";
-        timer.basicTime = 40;
+        timer.basicTime = 20;
         timer.remainingTime = timer.basicTime;
         soundPlay("attack_bg");
     } else {
         timerMode = "setup";
-        timer.basicTime = 10;
+        timer.basicTime = 5;
         timer.remainingTime = timer.basicTime;
         soundPlay("pre_bg");
     }
