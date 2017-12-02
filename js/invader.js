@@ -114,6 +114,9 @@ function middleAttackOrWalk(invader) {
     //front has an obstacle
     //both grids occupied, use weapon
     var obstacleCount = 0;
+    var bomb_probability = 4;       //Bomb probability constrain: 1-4/10 [40%]
+    var rod_probability = 8;        //Rod  probability constrain: 1-8/10 [80%]
+
     if ((grids[invader.gridIndex-9].detectable && grids[invader.gridIndex-11].detectable) ||
 		(grids[invader.gridIndex-1].detectable && grids[invader.gridIndex+1].detectable)){
 		console.log("blocked");
@@ -125,16 +128,16 @@ function middleAttackOrWalk(invader) {
 			}
         console.log(obstacleCount);
 
-        var random=Math.floor(10*Math.random()); //Random number for below probability calculation.
-        var random2=Math.floor(10*Math.random());
+        var random1=Math.floor(1+Math.random()*10);    //Random number 1-10 for bomb probability.
+        var random2=Math.floor(1+Math.random()*10);    //Random number 1-10 for rod probability.
 
         //use bomb when there are more than 9 obstacle
-         if ((obstacleCount >= 5 && invader.numberOfBomb > 0)) { //Match specific requirement + 60% (0-5/10) probability.
+         if ((obstacleCount >= 5 && invader.numberOfBomb > 0) && (random1<=bomb_probability)) {
             invader.useBomb();
             console.log("bomb");
          }
          //obstacleCount is 1 to 8
-         else if(random2<8){invader.useRod();}  //80% probability of using rod.
+         else if(random2<rod_probability){  invader.useRod();  }
 
     }
 

@@ -1,0 +1,43 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+<meta charset="UTF-8" />
+<title>Game</title>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+    <link rel="stylesheet" type="text/css" href="css/game.css">
+</head>
+
+
+<body>
+<canvas id="map"></canvas>
+<audio id="soundBackground" src="./mp3/pretime_background.mp3" style="display: none;" autoplay="true" onload="setHalfVolume(0.5)"></audio>
+<audio id="soundEffect" src="" style="display: none;"></audio>
+
+
+<script src="js/canvas.js"></script>
+<script src="js/sound.js"></script>
+<script src="js/mouse.js"></script>
+<script src="js/timer.js"></script>
+<script src="js/toolbar.js"></script>
+<script src="js/sprite.js"></script>
+<script src="js/gameStartEndAnimation.js"></script>
+<script src="js/utility.js"></script>
+<script src="js/invader.js"></script>
+<!-- for constructors & tools -->
+<script src="js/gameFrame.js"></script> <!--contains  init() -->
+
+
+<!--Testing Code
+
+<script>
+    for (var i=90; i<100; i++){
+        player_tools.push(new Umbrella(i));
+    }
+</script>
+
+-->
+
+</body>
+
+</html>

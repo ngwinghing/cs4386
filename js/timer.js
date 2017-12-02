@@ -2,7 +2,7 @@ var timer = new Timer();
 
 var timerMode = "setup";
 function Timer() {
-    this.basicTime = 10;
+    this.basicTime = 10;  //Prep time period.
 
     this.remainingTime = this.basicTime;
     this.started = false;
@@ -29,12 +29,12 @@ function Timer() {
 function changeMode() {
     if (timerMode == "setup") {
         timerMode = "attack";
-        timer.basicTime = 20;
+        timer.basicTime = 30;                     //Attack time period.
         timer.remainingTime = timer.basicTime;
         soundPlay("attack_bg");
     } else {
         timerMode = "setup";
-        timer.basicTime = 5;
+        timer.basicTime = 10;
         timer.remainingTime = timer.basicTime;
         soundPlay("pre_bg");
     }
