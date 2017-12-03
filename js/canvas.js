@@ -18,7 +18,7 @@ var map = new Image();
 map.src= "img/tmp_bg.jpg";
 
 var howToPlayImg = new Image();
-howToPlayImg.src= "img/howToPlay_30sAttack.png";
+howToPlayImg.src= "img/howToPlay_final.png";
 
 //soundBackground
 var soundBackground = document.getElementById("soundBackground");;
